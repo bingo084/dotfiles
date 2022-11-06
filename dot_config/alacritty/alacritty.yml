@@ -1,0 +1,35 @@
+live_config_reload: true
+import:
+  - ~/.config/alacritty/colorscheme/themes/dracula.yaml
+env:
+  TERM: xterm-256color
+window:
+  padding:
+    x: 10
+    y: 10
+  decorations: buttonless
+  opacity: 0.85
+scrolling:
+  history: 10000
+  multiplier: 3
+font:
+  normal:
+    family: JetBrainsMono Nerd Font 
+    style: Thin
+  bold:
+    family: JetBrainsMono Nerd Font  
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+  size: 14.0
+  use_thin_strokes: true
+draw_bold_text_with_bright_colors: true
+key_bindings:
+  - { key: Back, action:  ReceiveChar}
+shell:
+  program: /bin/zsh
+  args: 
+    - -l
+    - -c
+    - "tmux attach || tmux"

@@ -1,0 +1,56 @@
+# load scripting addition
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# mission-control desktop labels
+yabai -m space 1 --label code
+yabai -m space 2 --label web
+yabai -m space 3 --label chat
+yabai -m space 4 --label notes
+yabai -m space 5 --label remote
+
+# window rules
+yabai -m rule --add app="^(Safari|Microsoft Edge|Google Chrome)$" space=^web
+yabai -m rule --add app="^(Obsidian|Typora|备忘录|Notion)$" space=^notes
+yabai -m rule --add app="^(IntelliJ IDEA|iTerm|Apifox)$" space=^code
+yabai -m rule --add app="^(信息|微信|Mi Home)$" space=^chat
+yabai -m rule --add app="^(Microsoft Remote Desktop|向日葵控制端|远程|TeamViewer|RustDesk)$" space=^remote
+
+# specific space settings
+yabai -m config --space chat layout float
+yabai -m config --space remote layout float
+
+# space settings
+yabai -m config layout bsp
+yabai -m config top_padding    05
+yabai -m config bottom_padding 05
+yabai -m config left_padding   05
+yabai -m config right_padding  05
+yabai -m config window_gap     05
+
+# window settings
+yabai -m config window_border                off
+yabai -m config window_border_width          1
+yabai -m config active_window_border_color   0xff3385ff 
+yabai -m config normal_window_border_color   0xffb4b1a4
+yabai -m config insert_feedback_color        0xaad75f5f
+yabai -m config window_opacity               off
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.8
+
+# on or off (default: off)
+yabai -m config auto_balance off
+
+SPACEBAR_HEIGHT=$(sketchybar --query bar|jq '.height')
+yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
+
+# ignore app
+otherApp='^(IINA|访达|音乐|Calendar|日历|System Preferences|Alfred Preferences|RustDesk|系统偏好设置|Karabiner-Elements|Karabiner-EventViewer|Tencent Lemon|Mail|WeChat|QQ|Visual Studio Code)$'
+yabai -m rule --add app="${otherApp}" manage=off
+yabai -m rule --add app="^IntelliJ IDEA$" title!="( – )" manage=off
+
+  # sketchybar events
+yabai -m signal --add event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
+yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
+
+echo "yabai configuration loaded.."

@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+source $HOME/.config/sketchybar/colors.sh
+source $HOME/.config/sketchybar/icons.sh
+source $HOME/.config/sketchybar/events.sh
+
+ITEM_DIR="$HOME/.config/sketchybar/items"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+FONT="SF Pro"
+SPACE_CLICK_SCRIPT="yabai -m space --focus \$SID 2>/dev/null" # The script that is run for clicking on space components
+
+PADDINGS=3
+BLUR_RADIUS=50
+HEIGHT=30
+
+POPUP_BORDER_WIDTH=2
+POPUP_CORNER_RADIUS=7
+
+SHADOW=on
+
+BACKGROUND_HEIGHT=30
+BACKGROUND_BORDER_WIDTH=1
+CORNER_RADIUS=5
+
+sketchybar  --bar       color=$BAR_COLOR                                        \
+                        height=$HEIGHT                                          \
+                        blur_radius=$BLUR_RADIUS                                \
+                        shadow=$SHADOW                                          \
+                        padding_left=10                                         \
+                        padding_right=10                                        \
+            --default   updates=when_shown                                      \
+                        icon.color=$ICON_COLOR                                  \
+                        icon.font="$FONT:Bold:14.0"                             \
+                        icon.padding_left=$PADDINGS                             \
+                        icon.padding_right=$PADDINGS                            \
+                        label.color=$LABEL_COLOR                                \
+                        label.font="$FONT:Semibold:14.0"                        \
+                        label.padding_left=$PADDINGS                            \
+                        label.padding_right=$PADDINGS                           \
+                        background.padding_left=$PADDINGS                       \
+                        background.padding_right=$PADDINGS                      \
+                        popup.blur_radius=$BLUR_RADIUS                          \
+                        popup.background.corner_radius=$POPUP_CORNER_RADIUS     \
+                        popup.background.color=$BAR_COLOR                       \
+                        popup.background.shadow.drawing=$SHADOW                 \
+
+# Left
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/space.sh"
+source "$ITEM_DIR/yabai_mode.sh"
+source "$ITEM_DIR/title.sh"
+source "$ITEM_DIR/animator.sh"
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/music.sh"
+source "$ITEM_DIR/messages.sh"
+source "$ITEM_DIR/reminders.sh"
+source "$ITEM_DIR/vpn.sh"
+source "$ITEM_DIR/input.sh"
+source "$ITEM_DIR/weather.sh"
+source "$ITEM_DIR/network.sh"
+source "$ITEM_DIR/ram.sh"
+source "$ITEM_DIR/cpu.sh"
+
+sketchybar --update
+
+echo "sketchybar configuration loaded.."
+

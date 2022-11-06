@@ -1,0 +1,64 @@
+{
+  "title": "shift + Esc Tilde to ~, command + Esc Tilde to `",
+  "rules": [
+    {
+      "description": "command + grave_accent_and_tilde, Tilde to `",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "shift + grave_accent_and_tilde, Tilde to ~",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["shift"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "grave_accent_and_tilde to esc",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "grave_accent_and_tilde"
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

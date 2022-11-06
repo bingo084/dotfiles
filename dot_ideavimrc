@@ -1,0 +1,105 @@
+" appearance
+set showcmd
+set number relativenumber
+set scrolloff=5
+set ideajoin
+set idearefactormode=keep
+" search
+set showmatch
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+" clipboard
+set clipboard=unnamed
+" keymap
+let mapleader=" "
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
+inoremap jk <esc>
+nnoremap <leader>nh :nohlsearch<CR>
+nnoremap <leader>c :tabc<CR>
+nnoremap <leader>o :tabo<CR>
+" 标签页切换
+nnoremap <S-j> gT
+nnoremap <S-k> gt
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+" NERDTree
+nnoremap <leader>e :NERDTreeFocus<CR>
+" easymotion
+nmap ss <Plug>(easymotion-s2)
+" which-key
+set notimeout
+set timeoutlen = 5000
+" highlightedyank
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+" plugins
+set NERDTree
+set surround
+set easymotion
+set commentary
+set argtextobj
+set multiple-cursors
+let context_aware=1
+set keep-english-in-normal-restore-in-insert
+set which-key
+set highlightedyank
+
+" idea action
+nnoremap <leader>nc :action NewClass<CR>
+nnoremap <leader>d :action JRebel Debug<CR>
+nnoremap <leader>s :action SelectInProjectView<CR>
+nnoremap <leader>rf :action ExternalSystem.ProjectRefreshAction<CR>
+" nnoremap <leader>cl :action CommentByLineComment<CR>
+" vnoremap <leader>cl :action CommentByLineComment<CR>
+" nnoremap <leader>cb :action CommentByBlockComment<CR>
+" vnoremap <leader>cb :action CommentByBlockComment<CR>
+" git action
+nnoremap <leader>gm :action Git.Menu<CR>
+nnoremap <leader>rb :action Vcs.RollbackChangedLines<CR>
+" code action
+nnoremap <leader>rn :action RenameElement<CR>
+nnoremap <leader>li :action GotoImplementation<CR>
+nnoremap <leader>ld :action GotoDeclarationOnly<CR>
+nnoremap <leader>lr :action ShowUsages<CR>
+nnoremap gj :action Back<CR>
+nnoremap gk :action Forward<CR>
+nnoremap <leader>im :action ImplementMethods<CR>
+nnoremap <leader>fs :action FileStructurePopup<CR>
+nnoremap <leader>lf :action ReformatCode<CR>
+vnoremap <leader>dl :action EditorDeleteLine<CR>
+vnoremap <leader>rl :action EditorDuplicateLines<CR>
+" ideavimrc action
+nnoremap <leader>ov :e ~/.ideavimrc<CR>
+nnoremap <leader>rv :action IdeaVim.ReloadVimRc.reload <CR>
+" find action
+nnoremap <leader>ff :action SearchEverywhere<CR>
+vnoremap <leader>ff :action SearchEverywhere<CR>
+nnoremap <leader>ft :action FindInPath<CR>
+vnoremap <leader>ft :action FindInPath<CR>
+nnoremap <leader>rr :action ReplaceInPath<CR>
+vnoremap <leader>rr :action ReplaceInPath<CR>
+" move action
+nnoremap <C-A-j> :action MoveLineDown<CR>
+nnoremap <C-A-k> :action MoveLineUp<CR>
+vnoremap <C-A-j> :action MoveLineDown<CR>
+vnoremap <C-A-k> :action MoveLineUp<CR>
+inoremap <C-A-j> <esc> :action MoveLineDown<CR> hi
+inoremap <C-A-k> <esc> :action MoveLineUp<CR> hi
+" run action
+nnoremap <leader>rc :action ChooseRunConfiguration<CR>
+" window action
+nnoremap <leader>at :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>as :action ActivateServicesToolWindow<CR>
+nnoremap <leader>hw :action HideActiveWindow<CR>
+nnoremap <leader>ha :action HideAllWindows<CR>

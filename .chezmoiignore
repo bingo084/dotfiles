@@ -6,4 +6,5 @@ README.md
 .config/sketchybar/
 .config/skhd/
 .config/yabai/
+.config/kitty/macos-launch-services-cmdline
 {{- end }}

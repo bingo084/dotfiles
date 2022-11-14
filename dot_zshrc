@@ -130,8 +130,7 @@ export _ZO_ECHO='1'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source $HOME/.config/fzf/config
-source $HOME/.config/fzf/script
+source $HOME/.config/fzf/config.sh
 
 # powerlevel10k
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme

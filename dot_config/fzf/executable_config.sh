@@ -10,7 +10,7 @@ export FZF_ALT_C_COMMAND='fd --type d . --color=always --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 alias bi="$HOME/.config/fzf/brew_interactive.sh"
-source ./fzf-tab/fzf-tab.plugin.zsh
+source $HOME/.config/fzf/fzf-tab/fzf-tab.plugin.zsh
 
 server(){
     local servers

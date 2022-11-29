@@ -19,7 +19,7 @@ nnoremap L $
 vnoremap H ^
 vnoremap L $
 inoremap jk <esc>
-nnoremap <leader>nh :nohlsearch<CR>
+nnoremap <CR> :nohlsearch<CR><CR>
 nnoremap <leader>c :tabc<CR>
 nnoremap <leader>o :tabo<CR>
 " 标签页切换

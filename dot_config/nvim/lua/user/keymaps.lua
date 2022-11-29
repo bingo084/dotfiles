@@ -5,7 +5,7 @@ local keymap = vim.api.nvim_set_keymap
 vim.g.mapleader = ' '
 keymap('', '<Space>', '<Nop>', opts)
 -- clear hlight search
-keymap('n', '<Leader>nh', ':nohlsearch<CR>', opts)
+keymap('n', '<CR>', ':nohlsearch<CR><CR>', opts)
 -- tab
 -- keymap('n', '<leader>c', ':tabc<CR>', opts)
 -- keymap('n', '<leader>o', ':tabo<CR>', opts)

@@ -119,24 +119,6 @@ local mappings = {
     ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
     ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 
-    p = {
-        name = "Packer",
-        c = { "<cmd>PackerCompile<cr>", "Compile" },
-        i = { "<cmd>PackerInstall<cr>", "Install" },
-        s = { "<cmd>PackerSync<cr>", "Sync" },
-        S = { "<cmd>PackerStatus<cr>", "Status" },
-        u = { "<cmd>PackerUpdate<cr>", "Update" },
-    },
-
-    o = {
-        name = "Options",
-        w = { '<cmd>lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
-        r = { '<cmd>lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
-        l = { '<cmd>lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
-        s = { '<cmd>lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
-        t = { '<cmd>lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
-    },
-
     d = {
         name = "Debug",
         b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
@@ -172,22 +154,6 @@ local mappings = {
         R = { "<cmd>Telescope registers<cr>", "Registers" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
-    },
-
-    s = {
-        name = "Session",
-        s = { "<cmd>SaveSession<cr>", "Save" },
-        r = { "<cmd>RestoreSession<cr>", "Restore" },
-        x = { "<cmd>DeleteSession<cr>", "Delete" },
-        f = { "<cmd>SearchSession<cr>", "Find" },
-        d = { "<cmd>Autosession delete<cr>", "Find Delete" },
-    },
-
-    r = {
-        name = "Replace",
-        r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-        w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-        f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
     },
 
     g = {
@@ -258,15 +224,39 @@ local mappings = {
         u = { "<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
     },
 
-    -- s = {
-    --   name = "Surround",
-    --   ["."] = { "<cmd>lua require('surround').repeat_last()<cr>", "Repeat" },
-    --   a = { "<cmd>lua require('surround').surround_add(true)<cr>", "Add" },
-    --   d = { "<cmd>lua require('surround').surround_delete()<cr>", "Delete" },
-    --   r = { "<cmd>lua require('surround').surround_replace()<cr>", "Replace" },
-    --   q = { "<cmd>lua require('surround').toggle_quotes()<cr>", "Quotes" },
-    --   b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Brackets" },
-    -- },
+    o = {
+        name = "Options",
+        w = { '<cmd>lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
+        r = { '<cmd>lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
+        l = { '<cmd>lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
+        s = { '<cmd>lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
+        t = { '<cmd>lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
+    },
+
+    p = {
+        name = "Packer",
+        c = { "<cmd>PackerCompile<cr>", "Compile" },
+        i = { "<cmd>PackerInstall<cr>", "Install" },
+        s = { "<cmd>PackerSync<cr>", "Sync" },
+        S = { "<cmd>PackerStatus<cr>", "Status" },
+        u = { "<cmd>PackerUpdate<cr>", "Update" },
+    },
+
+    r = {
+        name = "Replace",
+        r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+        w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+        f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+    },
+
+    s = {
+        name = "Session",
+        s = { "<cmd>SaveSession<cr>", "Save" },
+        r = { "<cmd>RestoreSession<cr>", "Restore" },
+        x = { "<cmd>DeleteSession<cr>", "Delete" },
+        f = { "<cmd>SearchSession<cr>", "Find" },
+        d = { "<cmd>Autosession delete<cr>", "Find Delete" },
+    },
 
     t = {
         name = "Terminal",
@@ -300,7 +290,7 @@ local vopts = {
     nowait = true, -- use `nowait` when creating keymaps
 }
 local vmappings = {
-    ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+    ["/"] = { '<esc><cmd>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<cr>', "Comment" },
     s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 

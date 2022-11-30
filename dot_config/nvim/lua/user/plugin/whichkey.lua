@@ -116,7 +116,7 @@ local mappings = {
     ["-"] = { "<cmd>split<cr>", "Split" },
     ["w"] = { "<cmd>w<CR>", "Write" },
     ["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
-    ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+    ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
     ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 
     p = {

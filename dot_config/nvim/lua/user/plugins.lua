@@ -62,8 +62,8 @@ return require('packer').startup(function(use)
     use 'goolord/alpha-nvim'
     use 'folke/which-key.nvim'
     -- Session
-    use "rmagatti/auto-session"
-    use "rmagatti/session-lens"
+    use 'rmagatti/auto-session'
+    use 'rmagatti/session-lens'
 
     -- LSP
     -- Configurations for Nvim LSP

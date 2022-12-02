@@ -100,11 +100,6 @@ cmp.setup {
                 vim_item.kind_hl_group = "CmpItemKindEmoji"
             end
 
-            if entry.source.name == "crates" then
-                vim_item.kind = icons.misc.Package
-                vim_item.kind_hl_group = "CmpItemKindCrate"
-            end
-
             -- NOTE: order matters
             vim_item.menu = ({
                 nvim_lsp = "Lsp",
@@ -118,7 +113,6 @@ cmp.setup {
         end,
     },
     sources = {
-        { name = "crates", group_index = 1 },
         { name = "nvim_lsp", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "luasnip", group_index = 2 },

@@ -34,20 +34,20 @@ cmp.setup {
     },
 
     mapping = cmp.mapping.preset.insert {
-        ["<C-k>"] = cmp.mapping(cmp.select_prev_item(), { "i", "c" }),
-        ["<C-j>"] = cmp.mapping(cmp.select_next_item(), { "i", "c" }),
-        ["<C-b>"] = cmp.mapping(cmp.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.scroll_docs(1), { "i", "c" }),
-        ["<C-Space>"] = cmp.mapping(cmp.complete(), { "i", "c" }),
+        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ["<C-c>"] = cmp.mapping {
-            i = cmp.abort(),
-            c = cmp.close(),
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
         },
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.confirm { select = true },
-        ["<Right>"] = cmp.confirm { select = true },
+        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<Right>"] = cmp.mapping.confirm { select = true },
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()

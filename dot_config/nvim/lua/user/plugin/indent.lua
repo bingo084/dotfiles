@@ -1,73 +1,55 @@
-local status_ok, indent_blankline = pcall(require, "indent_blankline")
+local status_ok, indent_blankline = pcall(require, 'indent_blankline')
 if not status_ok then
     vim.notify('indent_blankline is not found!')
     return
 end
 
-vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-vim.g.indent_blankline_filetype_exclude = {
-    "help",
-    "startify",
-    "dashboard",
-    "packer",
-    "neogitstatus",
-    "NvimTree",
-    "Trouble",
-    "text"
-}
-vim.g.indentLine_enabled = true
--- vim.g.indent_blankline_char = "│"
-vim.g.indent_blankline_char = "▏"
--- vim.g.indent_blankline_char = "▎"
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = true
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_use_treesitter_scope = true
-vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_context_patterns = {
-    "class",
-    "return",
-    "function",
-    "method",
-    "^if",
-    "^while",
-    "jsx_element",
-    "^for",
-    "^object",
-    "^table",
-    "block",
-    "arguments",
-    "if_statement",
-    "else_clause",
-    "jsx_element",
-    "jsx_self_closing_element",
-    "try_statement",
-    "catch_clause",
-    "import_statement",
-    "operation_type",
-}
+vim.cmd [[highlight IndentBlanklineChar1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineChar2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineChar3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineChar4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineChar5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineChar6 guifg=#C678DD gui=nocombine]]
 
--- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
--- vim.opt.list = true
--- vim.opt.listchars:append "space:⋅"
--- vim.opt.listchars:append "space:"
--- vim.opt.listchars:append "eol:↴"
+vim.cmd [[highlight IndentBlanklineContextChar1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar6 guifg=#C678DD gui=nocombine]]
 
 indent_blankline.setup {
-    -- show_end_of_line = true,
-    -- space_char_blankline = " ",
+    char = '▏',
+    -- context_char = '▎',
+    -- char = ' ',
+    -- context_char = '▏',
     show_current_context = true,
-    -- show_current_context_start = true,
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+    use_treesitter = true,
+    use_treesitter_scope = false,
+    filetype_exclude = {
+        'help',
+        'startify',
+        'dashboard',
+        'packer',
+        'neogitstatus',
+        'nvimtree',
+        'trouble',
+        'text',
+    },
     -- char_highlight_list = {
-    --   "IndentBlanklineIndent1",
-    --   "IndentBlanklineIndent2",
-    --   "IndentBlanklineIndent3",
-    --   "IndentBlanklineIndent4",
-    --   "IndentBlanklineIndent5",
+    --     'IndentBlanklineChar1',
+    --     'IndentBlanklineChar2',
+    --     'IndentBlanklineChar3',
+    --     'IndentBlanklineChar4',
+    --     'IndentBlanklineChar5',
     -- },
+    -- context_highlight_list = {
+    --     'IndentBlanklineContextChar1',
+    --     'IndentBlanklineContextChar2',
+    --     'IndentBlanklineContextChar3',
+    --     'IndentBlanklineContextChar4',
+    --     'IndentBlanklineContextChar5',
+    -- }
 }

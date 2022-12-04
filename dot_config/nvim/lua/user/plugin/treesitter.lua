@@ -22,7 +22,7 @@ configs.setup {
     autopairs = {
         enable = true,
     },
-    indent = { enable = true, disable = { "python", "css", "rust" } },
+    indent = { enable = true, disable = { "python", "css", "rust", "java" } },
     context_commentstring = {
         enable = true,
         enable_autocmd = false,

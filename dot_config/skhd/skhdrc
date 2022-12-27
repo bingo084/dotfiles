@@ -33,6 +33,9 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 # 设置/取消窗口 space
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
+# Change current window to stack
+alt - s : yabai -m window --insert stack 
+
 # 挂起窗口至屏幕中央/取消挂起窗口
 alt - t : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
@@ -80,7 +83,7 @@ alt - 8 : yabai -m space --focus 8
 alt - 9 : yabai -m space --focus 9
 
 # 聚焦到上次桌面
-alt - s : yabai -m space --focus recent
+alt - q : yabai -m space --focus recent
 alt - a : yabai -m space --focus prev
 alt - d : yabai -m space --focus next
 

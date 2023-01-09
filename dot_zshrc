@@ -140,3 +140,8 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # alias ssh for kitty
 alias s="kitty +kitten ssh"
+
+# alias chrome
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window"
+
+alias lg="lazygit"

@@ -145,3 +145,4 @@ alias s="kitty +kitten ssh"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window"
 
 alias lg="lazygit"
+alias ld="lazydocker"

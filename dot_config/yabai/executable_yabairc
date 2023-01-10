@@ -37,6 +37,8 @@ yabai -m config insert_feedback_color        0xaad75f5f
 yabai -m config window_opacity               off
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.8
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse          autoraise
 
 # on or off (default: off)
 yabai -m config auto_balance off

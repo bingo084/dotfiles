@@ -20,11 +20,11 @@ vnoremap H ^
 vnoremap L $
 inoremap jk <esc>
 nnoremap <CR> :nohlsearch<CR><CR>
-nnoremap <leader>c :tabc<CR>
-nnoremap <leader>o :tabo<CR>
+nnoremap <leader>bc :tabc<CR>
+nnoremap <leader>bo :tabo<CR>
 " 标签页切换
-nnoremap <S-j> gT
-nnoremap <S-k> gt
+nnoremap <leader>j gT
+nnoremap <leader>k gt
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt

@@ -121,8 +121,17 @@ source ~/.bash_profile
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias v='nvim'
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export EDITOR='nvim'
+
+# Java config
+export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
+export JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
+# config alias
+alias jdk8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
+alias jdk17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
+# config default jdk
+export JAVA_HOME=$JAVA_17_HOME
+export PATH="$JAVA_HOME:$PATH"
 
 # zoxide
 eval "$(zoxide init zsh)"

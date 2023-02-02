@@ -136,6 +136,7 @@ export PATH="$JAVA_HOME:$PATH"
 # zoxide
 eval "$(zoxide init zsh)"
 export _ZO_ECHO='1'
+alias cd="z"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -9,7 +9,9 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND='fd --type d . --color=always --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
+{{ if eq .chezmoi.os "darwin" -}}
 alias bi="$HOME/.config/fzf/brew_interactive.sh"
+{{- end }}
 source $HOME/.config/fzf/fzf-tab/fzf-tab.plugin.zsh
 
 server(){

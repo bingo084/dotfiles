@@ -6,4 +6,5 @@ README.md
 .config/skhd/
 .config/yabai/
 .config/kitty/macos-launch-services-cmdline
+.config/fzf/executable_brew_interactive.sh
 {{- end }}

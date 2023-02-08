@@ -123,6 +123,7 @@ source ~/.bash_profile
 alias v='nvim'
 export EDITOR='nvim'
 
+{{ if eq .chezmoi.os "darwin" -}}
 # Java config
 export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
 export JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
@@ -132,6 +133,7 @@ alias jdk17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH
 # config default jdk
 export JAVA_HOME=$JAVA_17_HOME
 export PATH="$JAVA_HOME:$PATH"
+{{- end }}
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -142,8 +144,10 @@ alias cd="z"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $HOME/.config/fzf/config.sh
 
+{{ if eq .chezmoi.os "darwin" -}}
 # powerlevel10k
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+{{- end }}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -151,8 +155,10 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 # alias ssh for kitty
 alias s="kitty +kitten ssh"
 
+{{ if eq .chezmoi.os "darwin" -}}
 # alias chrome
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window"
+{{- end }}
 
 alias lg="lazygit"
 alias ld="lazydocker"

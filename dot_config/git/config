@@ -1,0 +1,5 @@
+[user]
+	name = 王斌
+	email = bingo084@outlook.com
+[core]
+	autocrlf = input

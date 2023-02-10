@@ -148,7 +148,10 @@ source $HOME/.config/fzf/config.sh
 # powerlevel10k
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 {{- end }}
-
+{{ if eq .chezmoi.os "linux" -}}
+# powerlevel10k
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+{{- end }}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

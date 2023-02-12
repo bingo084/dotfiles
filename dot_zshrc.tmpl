@@ -142,7 +142,13 @@ export _ZO_ECHO='1'
 alias cd="z"
 
 # fzf
+{{ if eq .chezmoi.os "darwin" -}}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+{{- end }}
+{{ if eq .chezmoi.os "linux" -}}
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh 
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh 
+{{- end }}
 source $HOME/.config/fzf/config.sh
 
 {{ if eq .chezmoi.os "darwin" -}}

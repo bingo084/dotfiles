@@ -6,3 +6,7 @@
     type = "git-repo"
     url = "https://github.com/bingo084/nvim-config.git"
     refreshPeriod = "168h"
+["bin"]
+    type = "git-repo"
+    url = "git@github.com:bingo084/script.git"
+    refreshPeriod = "168h"

@@ -71,7 +71,7 @@ nnoremap <leader>rf :action ExternalSystem.ProjectRefreshAction<CR>
 nnoremap <leader>gm :action Git.Menu<CR>
 nnoremap <leader>rb :action Vcs.RollbackChangedLines<CR>
 " code action
-nnoremap <leader>rn :action RenameElement<CR>
+nnoremap <leader>lr :action RenameElement<CR>
 nnoremap <leader>li :action GotoImplementation<CR>
 nnoremap <leader>ld :action GotoDeclarationOnly<CR>
 nnoremap <leader>lr :action ShowUsages<CR>

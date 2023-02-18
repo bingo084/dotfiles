@@ -39,8 +39,8 @@ nnoremap <leader>e :NERDTreeFocus<CR>
 " easymotion
 nmap s <Plug>(easymotion-f2)
 nmap S <Plug>(easymotion-F2)
-nmap f <Plug>(easymotion-fl2)
-nmap F <Plug>(easymotion-Fl2)
+" nmap f <Plug>(easymotion-fl2)
+" nmap F <Plug>(easymotion-Fl2)
 " which-key
 set notimeout
 set timeoutlen = 5000

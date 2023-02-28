@@ -54,7 +54,6 @@ set commentary
 set argtextobj
 set multiple-cursors
 let context_aware=1
-set keep-english-in-normal-and-restore-in-insert
 set which-key
 set highlightedyank
 

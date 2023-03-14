@@ -12,4 +12,5 @@ README.md
 # ignore linux special configuration file on other machine
 {{- if ne .chezmoi.os "linux" }}
 .config/gtk-3.0/
+.config/chrome-flags.conf
 {{- end }}

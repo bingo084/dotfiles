@@ -8,3 +8,8 @@ README.md
 .config/kitty/macos-launch-services-cmdline
 .config/fzf/executable_brew_interactive.sh
 {{- end }}
+
+# ignore linux special configuration file on other machine
+{{- if ne .chezmoi.os "linux" }}
+.config/gtk-3.0/
+{{- end }}

@@ -121,16 +121,13 @@ source ~/.bash_profile
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias v='nvim'
 export EDITOR='nvim'
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
+
 # Java config
 export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
 export JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
-# config alias
-alias jdk8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
-alias jdk17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
 # config default jdk
 export JAVA_HOME=$JAVA_17_HOME
 export PATH="$JAVA_HOME:$PATH"
@@ -139,37 +136,36 @@ export PATH="$JAVA_HOME:$PATH"
 # zoxide
 eval "$(zoxide init zsh)"
 export _ZO_ECHO='1'
-alias cd="z"
 
 # fzf
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 {{- end }}
-{{ if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" }}
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh 
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh 
 {{- end }}
 source $HOME/.config/fzf/config.sh
 
-{{ if eq .chezmoi.os "darwin" -}}
 # powerlevel10k
+{{- if eq .chezmoi.os "darwin" }}
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 {{- end }}
-{{ if eq .chezmoi.os "linux" -}}
-# powerlevel10k
+{{- if eq .chezmoi.os "linux" }}
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 {{- end }}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# alias ssh for kitty
-alias s="kitty +kitten ssh"
-
-{{ if eq .chezmoi.os "darwin" -}}
-# alias chrome
+# alias
+alias cd="z"
+{{- if eq .chezmoi.os "darwin" }}
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window"
+alias j8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
+alias j17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
 {{- end }}
-
+alias s="kitty +kitten ssh"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias ra="ranger"
+alias v='nvim'

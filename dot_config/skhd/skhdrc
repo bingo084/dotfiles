@@ -1,8 +1,8 @@
 # 窗口聚焦
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
 # focus the next window in a stack
 alt - n : yabai -m window --focus stack.next
 # focus the prev window in a stack
@@ -28,7 +28,7 @@ shift + cmd - l : yabai -m window --warp east
 alt - r : yabai -m space --rotate 270
 
 # 全屏
-alt - f : yabai -m window --toggle zoom-fullscreen
+cmd - f : yabai -m window --toggle zoom-fullscreen
 
 # 设置/取消窗口 space
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
@@ -37,50 +37,50 @@ alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 alt - s : yabai -m window --insert stack 
 
 # 挂起窗口至屏幕中央/取消挂起窗口
-alt - t : yabai -m window --toggle float;\
+cmd - t : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # 开启画中画
-alt - p : yabai -m window --toggle border && \
+cmd - p : yabai -m window --toggle border && \
           yabai -m window --toggle pip
 
 # 修改窗口切分方式
 alt - e : yabai -m window --toggle split
 
 # toggle topmost (keep above other windows)
-alt - o : yabai -m window --toggle topmost
+cmd - o : yabai -m window --toggle topmost
 
 # 重置窗口布局
 shift + alt - 0 : yabai -m space --balance
 # change layout of desktop
 # \
-alt - 0x2A : yabai -m space --layout bsp
+cmd - 0x2A : yabai -m space --layout bsp
 # -
-alt - 0x1B : yabai -m space --layout float
+cmd - 0x1B : yabai -m space --layout float
 # =
-alt - 0x18 : yabai -m space --layout stack
+cmd - 0x18 : yabai -m space --layout stack
 
 # 移动窗口至特定桌面
-shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
-shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
-shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
-shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
-shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
-shift + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
-shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
-shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
-shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
+shift + cmd - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + cmd - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + cmd - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + cmd - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + cmd - 5 : yabai -m window --space 5; yabai -m space --focus 5
+shift + cmd - 6 : yabai -m window --space 6; yabai -m space --focus 6
+shift + cmd - 7 : yabai -m window --space 7; yabai -m space --focus 7
+shift + cmd - 8 : yabai -m window --space 8; yabai -m space --focus 8
+shift + cmd - 9 : yabai -m window --space 9; yabai -m space --focus 9
 
 # 聚焦到特定桌面
-alt - 1 : yabai -m space --focus 1
-alt - 2 : yabai -m space --focus 2
-alt - 3 : yabai -m space --focus 3
-alt - 4 : yabai -m space --focus 4
-alt - 5 : yabai -m space --focus 5
-alt - 6 : yabai -m space --focus 6
-alt - 7 : yabai -m space --focus 7
-alt - 8 : yabai -m space --focus 8
-alt - 9 : yabai -m space --focus 9
+cmd - 1 : yabai -m space --focus 1
+cmd - 2 : yabai -m space --focus 2
+cmd - 3 : yabai -m space --focus 3
+cmd - 4 : yabai -m space --focus 4
+cmd - 5 : yabai -m space --focus 5
+cmd - 6 : yabai -m space --focus 6
+cmd - 7 : yabai -m space --focus 7
+cmd - 8 : yabai -m space --focus 8
+cmd - 9 : yabai -m space --focus 9
 
 # 聚焦到上次桌面
 alt - q : yabai -m space --focus recent

@@ -40,6 +40,8 @@ export EDITOR='nvim'
 # Java config
 export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
 export JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
+alias j8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
+alias j17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
 # config default jdk
 export JAVA_HOME=$JAVA_17_HOME
 export PATH="$JAVA_HOME:$PATH"
@@ -73,8 +75,6 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 alias cd="z"
 {{- if eq .chezmoi.os "darwin" }}
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window"
-alias j8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
-alias j17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
 {{- end }}
 alias s="kitty +kitten ssh"
 alias lg="lazygit"

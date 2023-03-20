@@ -1,16 +1,14 @@
 # 窗口聚焦
-cmd - h : yabai -m window --focus west
-cmd - j : yabai -m window --focus south
-cmd - k : yabai -m window --focus north
-cmd - l : yabai -m window --focus east
+# cmd - j : yabai -m window --focus next
+# cmd - k : yabai -m window --focus prev
 # focus the next window in a stack
 alt - n : yabai -m window --focus stack.next
 # focus the prev window in a stack
 alt - m : yabai -m window --focus stack.prev
-# cycle all windows on space backwards by coordinate
-alt - tab : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | reverse | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
-# cycle all windows on space backwards by coordinate
-shift + alt - tab : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+# cycle through all windows sorted by: coordinates -> space index -> display index
+cmd - j : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+cmd - k : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+# cycle through all visible windows sorted by: coordinates -> display index
 
 # 交换窗口
 shift + alt - h : yabai -m window --swap west
@@ -83,7 +81,7 @@ cmd - 8 : yabai -m space --focus 8
 cmd - 9 : yabai -m space --focus 9
 
 # 聚焦到上次桌面
-alt - q : yabai -m space --focus recent
+cmd - r : yabai -m space --focus recent
 alt - a : yabai -m space --focus prev
 alt - d : yabai -m space --focus next
 

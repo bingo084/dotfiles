@@ -38,8 +38,8 @@ export EDITOR='nvim'
 {{- if eq .chezmoi.os "darwin" }}
 
 # Java config
-export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
-export JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
+JAVA_8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
+JAVA_17_HOME="/opt/homebrew/opt/openjdk@17/bin"
 alias j8="export JAVA_HOME=$JAVA_8_HOME && export PATH=\"$JAVA_8_HOME:$PATH\""
 alias j17="export JAVA_HOME=$JAVA_17_HOME && export PATH=\"$JAVA_17_HOME:$PATH\""
 # config default jdk
@@ -97,3 +97,9 @@ alias dcdu="docker-compose down && docker-compose up"
 alias dcdud="docker-compose down && docker-compose up -d"
 alias dcl="docker-compose logs"
 alias dclf="docker-compose logs -f"
+# alias chezmoi
+alias cha="chezmoi apply"
+alias chc="cd ~/.local/share/chezmoi"
+alias chd="chezmoi diff"
+alias che="chezmoi edit --watch"
+alias chg="cd ~/.local/share/chezmoi && lazygit && cd -"

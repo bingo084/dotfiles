@@ -1,0 +1,55 @@
+modmap:
+  - name: Smart Ctrl/Esc
+    remap:
+      leftctrl:
+        held: leftctrl
+        alone: esc
+        alone_timeout_millis: 1000
+keymap:
+  - name: Copy/Paste
+    remap:
+      SUPER-c: C-c
+      SUPER-v: C-v
+    application:
+      not: kitty
+  - name: Chrome
+    remap:
+      # Cursor
+      C-p: { with_mark: up }
+      C-n: { with_mark: down }
+      # Newline
+      C-m: enter
+      C-j: enter
+      C-o: [enter, left]
+      # Cancel
+      C-g: [esc, { set_mark: false }]
+    application:
+      only: Google-chrome
+  - name: Emacs
+    remap:
+      # Cursor
+      C-b: { with_mark: left }
+      C-f: { with_mark: right }
+      C-p: { with_mark: up }
+      C-n: { with_mark: down }
+      # Forward/Backward word
+      M-b: { with_mark: C-left }
+      M-f: { with_mark: C-right }
+      # Beginning/End of line
+      C-a: { with_mark: home }
+      C-e: { with_mark: end }
+      # Newline
+      C-m: enter
+      C-j: enter
+      C-o: [enter, left]
+      # Delete
+      C-d: [delete, { set_mark: false }]
+      M-d: [C-delete, { set_mark: false }]
+      C-h: [backspace, { set_mark: false }]
+      # Kill line
+      C-k: [Shift-end, C-x, { set_mark: false }]
+      C-u: [end, Shift-home, C-x, { set_mark: false }]
+      # Cancel
+      C-g: [esc, { set_mark: false }]
+    application:
+      not: [kitty, Google-chrome]

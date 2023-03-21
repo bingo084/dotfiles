@@ -13,4 +13,5 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 .config/gtk-3.0/
 .config/chrome-flags.conf
+.config/xremap/config.yml
 {{- end }}

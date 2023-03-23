@@ -18,3 +18,7 @@
     type = "git-repo"
     url = "https://github.com/jchook/ranger-zoxide.git"
     refreshPeriod = "168h"
+[".config/rime"]
+    type = "git-repo"
+    url = "https://github.com/bingo084/rime.git"
+    refreshPeriod = "168h"

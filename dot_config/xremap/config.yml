@@ -6,10 +6,11 @@ modmap:
         alone: esc
         alone_timeout_millis: 1000
 keymap:
-  - name: Copy/Paste
+  - name: Copy/Paste/ChooseAll
     remap:
       SUPER-c: C-c
       SUPER-v: C-v
+      SUPER-a: C-a
     application:
       not: kitty
   - name: Chrome

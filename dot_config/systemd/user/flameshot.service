@@ -1,0 +1,10 @@
+[Unit]
+Description=flameshot
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=flameshot
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,13 @@
+# edit and save this file to /usr/lib/systemd/system/clash.service
+[Unit]
+Description=clash
+After=network.target
+
+[Service]
+WorkingDirectory=/home/bingo/.config/clash
+ExecStart=/home/bingo/bin/clash/start-clash.sh
+ExecStop=/home/bingo/bin/clash/stop-clash.sh
+EnvironmentFile=/home/bingo/.config/systemd/user/clash-service.conf
+
+[Install]
+WantedBy=default.target

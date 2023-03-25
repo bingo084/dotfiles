@@ -8,9 +8,10 @@ modmap:
 keymap:
   - name: Copy/Paste/ChooseAll
     remap:
+      SUPER-a: [end, Shift-home, { set_mark: false }] 
       SUPER-c: C-c
       SUPER-v: C-v
-      SUPER-a: C-a
+      SUPER-z: C-z
     application:
       not: kitty
   - name: Chrome

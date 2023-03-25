@@ -4,7 +4,7 @@
     refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"
-    url = "https://github.com/bingo084/nvim-config.git"
+    url = "git@github.com:bingo084/nvim-config.git"
     refreshPeriod = "168h"
 ["bin"]
     type = "git-repo"
@@ -20,5 +20,5 @@
     refreshPeriod = "168h"
 [".config/rime"]
     type = "git-repo"
-    url = "https://github.com/bingo084/rime.git"
+    url = "git@github.com:bingo084/rime.git"
     refreshPeriod = "168h"

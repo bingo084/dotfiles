@@ -1,6 +1,7 @@
-encryption = "gpg"
-[gpg]
-    recipient = "bingo"
+encryption = "age"
+[age]
+    identity = "{{ .chezmoi.sourceDir }}/key.txt"
+    recipient = "age1ehpm5wfmvrt74y2smnwyxh9efanmgsxmcrxyt6y4wxvlrh3x6ejqrexkss"
 [merge]
     args = ["-d"]
     command = "nvim"

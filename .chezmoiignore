@@ -16,3 +16,6 @@ README.md
 .config/xremap/config.yml
 .config/fontconfig/
 {{- end }}
+
+key.txt.age
+key.txt

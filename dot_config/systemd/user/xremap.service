@@ -4,7 +4,7 @@ Description=xremap
 [Service]
 Type=simple
 Restart=always
-ExecStart=xremap /home/bingo/.config/xremap/config.yml --watch
+ExecStart=xremap /home/bingo/.config/xremap/config.yml --watch=device,config
 
 [Install]
 WantedBy=default.target

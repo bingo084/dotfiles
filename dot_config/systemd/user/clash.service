@@ -7,7 +7,6 @@ After=network.target
 WorkingDirectory=/home/bingo/.config/clash
 ExecStart=/home/bingo/bin/clash/start-clash.sh
 ExecStop=/home/bingo/bin/clash/stop-clash.sh
-EnvironmentFile=/home/bingo/.config/systemd/user/clash-service.conf
 
 [Install]
 WantedBy=default.target

@@ -20,6 +20,7 @@ README.md
 .config/dunst/
 dwm
 dwmblocks
+.xinitrc
 {{- end }}
 
 key.txt.age

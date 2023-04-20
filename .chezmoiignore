@@ -17,6 +17,7 @@ README.md
 .config/fontconfig/
 .config/systemd
 .config/environment.d
+.config/dunst/
 {{- end }}
 
 key.txt.age

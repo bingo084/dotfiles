@@ -22,3 +22,11 @@
     type = "git-repo"
     url = "git@github.com:bingo084/rime.git"
     refreshPeriod = "168h"
+["dwm"]
+    type = "git-repo"
+    url = "git@github.com:bingo084/dwm.git"
+    refreshPeriod = "168h"
+["dwmblocks"]
+    type = "git-repo"
+    url = "git@github.com:bingo084/dwmblocks.git"
+    refreshPeriod = "168h"

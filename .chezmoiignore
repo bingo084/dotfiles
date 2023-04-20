@@ -18,6 +18,8 @@ README.md
 .config/systemd
 .config/environment.d
 .config/dunst/
+dwm
+dwmblocks
 {{- end }}
 
 key.txt.age

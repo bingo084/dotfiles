@@ -1,4 +1,5 @@
 xrandr --output DP-0 --mode 1920x1080 --rate 144 --output eDP-1-1 --off
+wmname LG3D
 wp-change &
 fcitx5 -d
 picom -b

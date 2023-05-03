@@ -5,3 +5,5 @@ export PATH="$HOME/bin/statusbar:$PATH"
 
 export TERMINAL='kitty'
 export EDITOR='nvim'
+
+export LIBVA_DRIVER_NAME='iHD'

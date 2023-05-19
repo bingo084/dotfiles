@@ -79,6 +79,8 @@ nnoremap gk :action Forward<CR>
 nnoremap <leader>im :action ImplementMethods<CR>
 nnoremap <leader>fs :action FileStructurePopup<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
+nnoremap <leader>lj :action GotoNextError<CR>
+nnoremap <leader>lk :action GotoPreviousError<CR>
 vnoremap <leader>dl :action EditorDeleteLine<CR>
 vnoremap <leader>rl :action EditorDuplicateLines<CR>
 " ideavimrc action

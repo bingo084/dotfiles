@@ -8,7 +8,6 @@ alt - m : yabai -m window --focus stack.prev
 # cycle through all windows sorted by: coordinates -> space index -> display index
 cmd - j : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
 cmd - k : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
-# cycle through all visible windows sorted by: coordinates -> display index
 
 # 交换窗口
 shift + alt - h : yabai -m window --swap west

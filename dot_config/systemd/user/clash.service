@@ -5,8 +5,8 @@ After=network.target
 
 [Service]
 WorkingDirectory=/home/bingo/.config/clash
-ExecStart=/home/bingo/bin/clash/start-clash.sh
-ExecStop=/home/bingo/bin/clash/stop-clash.sh
+ExecStart=/home/bingo/bin/clash/clash-start
+ExecStop=/home/bingo/bin/clash/clash-stop
 
 [Install]
 WantedBy=default.target

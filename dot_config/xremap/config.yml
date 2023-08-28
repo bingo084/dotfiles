@@ -25,6 +25,8 @@ keymap:
       C-o: [enter, left]
       # Cancel
       C-g: [esc, { set_mark: false }]
+      C-apostrophe: C-tab
+      C-semicolon: C-SHIFT-tab
     application:
       only: Google-chrome
   - name: Emacs

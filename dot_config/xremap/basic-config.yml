@@ -8,7 +8,7 @@ modmap:
 keymap:
   - name: Copy/Paste/ChooseAll
     remap:
-      SUPER-a: [end, Shift-home, { set_mark: false }] 
+      SUPER-a: [end, Shift-home, { set_mark: false }]
       SUPER-c: C-c
       SUPER-v: C-v
       SUPER-z: C-z

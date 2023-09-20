@@ -1,0 +1,229 @@
+/* -----------------------------------------------------
+ * Import Pywal colors
+ * ----------------------------------------------------- */
+@import '../../.cache/wal/colors-waybar.css';
+
+/* -----------------------------------------------------
+ * General
+ * ----------------------------------------------------- */
+
+* {
+    font-family: "Noto Sans CJK SC", "Font Awesome 6 Free Solid";
+    font-size: 16px;
+    border: none;
+    border-radius: 0px;
+}
+
+window#waybar {
+    background-color: rgba(0,0,0,0.8);
+    background: transparent;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.empty #window {
+    background-color:transparent;
+}
+
+/* -----------------------------------------------------
+ * Style1
+ * ----------------------------------------------------- */
+
+#custom-exit,
+#quicklinks,
+#clock,
+#tray {
+    background-color: @color10;
+    color: #FFFFFF;
+    border-radius: 14px;
+    padding: 0px 10px;
+    opacity: 0.8;
+    /* border: 2px solid #FFFFFF; */
+}
+
+/* -----------------------------------------------------
+ * Style2
+ * ----------------------------------------------------- */
+
+#custom-appmenu,
+#taskbar,
+#network,
+#pulseaudio,
+#backlight,
+#battery {
+    background-color: @color11;
+    color: #FFFFFF;
+    border-radius: 14px;
+    padding: 0px 10px;
+    opacity: 0.8;
+    font-weight: bold;
+ }
+
+/* -----------------------------------------------------
+ * Style3
+ * ----------------------------------------------------- */
+
+#window,
+#custom-updates,
+#hardware {
+    background: #FFFFFF;
+    padding: 0px 10px;
+    border-radius: 12px;
+    color: @background;
+    opacity: 0.8;
+}
+
+
+/* -----------------------------------------------------
+ * Workspaces
+ * ----------------------------------------------------- */
+
+#workspaces {
+    background: #FFFFFF;
+    padding: 4px 1px;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 3px;
+    border-radius: 12px;
+    background-color: @color11;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+}
+
+#workspaces button.active {
+    background-color: @color11;
+    border-radius: 10px;
+    min-width: 30px;
+    transition: all 0.3s ease-in-out;
+    opacity: 1.0;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: shade(@color11, 1.25);
+    border-radius: 10px;
+    min-width: 30px;
+}
+
+/* -----------------------------------------------------
+ * Tooltips
+ * ----------------------------------------------------- */
+
+tooltip {
+    border-radius: 10px;
+    /* background-color: @foreground; */
+    padding: 20px;
+    text-shadow: inherit;
+}
+
+tooltip label {
+    /* color: @background; */
+}
+
+/* -----------------------------------------------------
+ * Modules
+ * ----------------------------------------------------- */
+
+#taskbar {
+    padding: 2px 5px;
+}
+
+#taskbar button {
+    border-radius: 12px;
+    padding: 0px 5px;
+}
+
+#taskbar button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 2px #FFFFFF;
+}
+
+#taskbar button.active {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 2px shade(@color11, 0.7);
+}
+
+#custom-chrome, #custom-outlook, #custom-chatgpt {
+    padding: 0 5px;
+}
+
+#custom-updates.green {
+    background-color: #FFFFFF;
+}
+
+#custom-updates.yellow {
+    background-color: #ff9a3c;
+    color: #ffffff;
+}
+
+#custom-updates.red {
+    background-color: #dc2f2f;
+    color: #ffffff;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+    color: @background;
+    background-color: @foreground;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: #f0932b;
+}
+
+#cpu.critical,
+#memory.critical,
+#temperature.critical {
+    color: #dc2f2f;
+}
+
+@keyframes blink {
+    to {
+        opacity: 1;
+    }
+}
+
+#battery.charging, #battery.plugged {
+    background-color: #2ecc71;
+    opacity: 0.75;
+    animation-name: blink;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #f0932b;
+    opacity: 0.5;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #dc2f2f;
+    opacity: 0.25;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}

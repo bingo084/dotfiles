@@ -1,0 +1,57 @@
+{
+    // General Settings
+    // Position TOP
+    "layer": "top",
+    "margin-top": 10,
+    "margin-bottom": 2,
+    "margin-left": 15,
+    "margin-right": 15,
+    "height": 30,
+    "spacing": 10,
+    // Load Modules
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+    // Modules Left
+    "modules-left": [
+        "custom/exit",
+        "group/quicklinks",
+        "custom/appmenu",
+        "wlr/taskbar",
+        "hyprland/window"
+    ],
+    // Modules Center
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    // Modules Right    
+    "modules-right": [
+        "custom/updates",
+        "group/hardware",
+        "battery",
+        "backlight",
+        "pulseaudio",
+        "network",
+        "clock",
+        "tray"
+    ],
+    // Group Quicklinks
+    "group/quicklinks": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/outlook",
+            "custom/chrome",
+            "custom/chatgpt"
+        ]
+    },
+    // Group Hardware
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "disk",
+            "cpu",
+            "memory",
+            "temperature"
+        ]
+    }
+}

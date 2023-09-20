@@ -23,6 +23,7 @@ dwmblocks
 .xinitrc
 .config/waybar/
 .config/wal/
+.config/hypr/
 {{- end }}
 
 key.txt.age

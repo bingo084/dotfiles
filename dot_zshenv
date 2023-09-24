@@ -7,4 +7,6 @@ export PATH="$HOME/bin/rime:$PATH"
 export TERMINAL='kitty'
 export EDITOR='nvim'
 
-export LIBVA_DRIVER_NAME='iHD'
+export LIBVA_DRIVER_NAME='nvidia'
+# nvidia-vaapi-driver: disables the sandbox for the RDD process that the decoder runs in.
+export MOZ_DISABLE_RDD_SANDBOX=1

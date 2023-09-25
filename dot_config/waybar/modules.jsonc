@@ -31,12 +31,12 @@
         "return-type": "json",
         "exec": "updates",
         "restart-interval": 60,
-        "on-click-middle": "$TERMINAL -e installupdates",
+        "on-click-middle": "launch $TERMINAL -e installupdates",
         "tooltip": true
     },
     "custom/outlook": {
         "format": "",
-        "on-click": "google-chrome-stable --app=https://outlook.office.com/mail/",
+        "on-click": "launch firefox --new-window https://outlook.office.com/mail/",
         "tooltip": false
     },
     "custom/browser": {
@@ -46,12 +46,12 @@
     },
     "custom/chatgpt": {
         "format": "",
-        "on-click": "google-chrome-stable --app=https://chat.openai.com",
+        "on-click": "launch firefox --new-window https://chat.openai.com",
         "tooltip": false
     },
     "custom/appmenu": {
         "format": "",
-        "on-click": "sleep 0.1 && rofi -show",
+        "on-click": "sleep 0.1 && launch rofi -show",
         "tooltip": false
     },
     "custom/exit": {
@@ -93,7 +93,7 @@
             "warning": 50,
             "critical": 80
         },
-        "on-click-middle": "missioncenter"
+        "on-click-middle": "launch missioncenter"
     },
     "memory": {
         "interval": 2,
@@ -103,13 +103,13 @@
             "warning": 80,
             "critical": 90
         },
-        "on-click-middle": "missioncenter"
+        "on-click-middle": "launch missioncenter"
     },
     "disk": {
         "interval": 30,
         "format": " {percentage_used}% ",
         "path": "/",
-        "on-click-middle": "missioncenter"
+        "on-click-middle": "launch missioncenter"
     },
     "network": {
         "interval": 2,
@@ -120,7 +120,7 @@
         "format-disconnected": "", //An empty format will hide the module.
         "tooltip-format": "ifname: {ifname}\nessid: {essid}\nip: {ipaddr}/{cidr}\nspeed:  {bandwidthUpBytes} {bandwidthDownBytes}",
         "tooltip-format-disconnected": "",
-        "on-click-middle": "nm-applet"
+        "on-click-middle": "launch nm-applet"
     },
     "battery": {
         "states": {
@@ -161,7 +161,7 @@
             ]
         },
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-click-middle": "pavucontrol"
+        "on-click-middle": "launch pavucontrol"
     },
     "backlight": {
         "format": "{icon} {percent}%",
@@ -187,7 +187,7 @@
             "",
             ""
         ],
-        "on-click-middle": "missioncenter"
+        "on-click-middle": "launch missioncenter"
     },
     "user": {
         "format": "{user}",

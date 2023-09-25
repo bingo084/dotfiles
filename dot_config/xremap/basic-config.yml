@@ -29,6 +29,12 @@ keymap:
       C-semicolon: C-SHIFT-tab
     application:
       only: Google-chrome
+  - name: Firefox
+    remap:
+      C-apostrophe: C-tab
+      C-semicolon: C-SHIFT-tab
+    application:
+      only: firefox
   - name: Emacs
     remap:
       # Cursor

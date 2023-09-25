@@ -72,15 +72,17 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-{{- if eq .chezmoi.os "linux" }}
-
-# zsh-autosuggestions
-zsh_autosuggestions="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ -f $zsh_autosuggesions ] && source $zsh_autosuggestions
-# zsh-syntax-highlighting
-zsh_syntax_highlighting="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -f $zsh_syntax_highlighting ] && source $zsh_syntax_highlighting
+# zsh-autosuggestions & zsh-syntax-highlighting
+{{- if eq .chezmoi.os "darwin" }}
+zsh_autosuggestions="/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+zsh_syntax_highlighting="/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 {{- end }}
+{{- if eq .chezmoi.os "linux" }}
+zsh_autosuggestions="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+zsh_syntax_highlighting="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+{{- end }}
+[ -f $zsh_autosuggesions ] && source $zsh_autosuggestions
+[ -f $zsh_syntax_highlighting ] && source $zsh_syntax_highlighting
 
 # alias
 alias cd="z"

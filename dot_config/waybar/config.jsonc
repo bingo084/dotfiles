@@ -40,7 +40,7 @@
         "orientation": "horizontal",
         "modules": [
             "custom/outlook",
-            "custom/chrome",
+            "custom/browser",
             "custom/chatgpt"
         ]
     },

@@ -39,9 +39,9 @@
         "on-click": "google-chrome-stable --app=https://outlook.office.com/mail/",
         "tooltip": false
     },
-    "custom/chrome": {
-        "format": "",
-        "on-click": "google-chrome-stable",
+    "custom/browser": {
+        "format": "",
+        "on-click": "launch firefox",
         "tooltip": false
     },
     "custom/chatgpt": {

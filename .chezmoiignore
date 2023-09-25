@@ -24,6 +24,7 @@ dwmblocks
 .config/waybar/
 .config/wal/
 .config/hypr/
+.config/xremap/
 {{- end }}
 
 key.txt.age

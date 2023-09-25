@@ -23,8 +23,8 @@ nnoremap <CR> :nohlsearch<CR><CR>
 nnoremap <leader>bc :tabc<CR>
 nnoremap <leader>bo :tabo<CR>
 " 标签页切换
-nnoremap <leader>j gT
-nnoremap <leader>k gt
+nnoremap <C-;> gT
+nnoremap <C-'> gt
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -107,3 +107,9 @@ nnoremap <leader>at :action ActivateTerminalToolWindow<CR>
 nnoremap <leader>as :action ActivateServicesToolWindow<CR>
 nnoremap <leader>hw :action HideActiveWindow<CR>
 nnoremap <leader>ha :action HideAllWindows<CR>
+nnoremap <leader>\\ :action SplitVertically<CR>
+nnoremap <leader>- :action SplitHorizontally<CR>
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+noremap <A-l> <C-w>l

@@ -118,7 +118,7 @@
         "format-alt": " {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-ethernet": " {ipaddr}",
         "format-disconnected": "", //An empty format will hide the module.
-        "tooltip-format": "ifname: {ifname}\nessid: {essid}\nip: {ipaddr}/{cidr}\nspeed:  {bandwidthUpBytes} {bandwidthDownBytes}",
+        "tooltip-format": "ifname: {ifname}\nessid: {essid}\nip: {ipaddr}/{cidr}\nspeed:  {bandwidthUpBytes}  {bandwidthDownBytes}",
         "tooltip-format-disconnected": "",
         "on-click-middle": "launch nm-applet"
     },

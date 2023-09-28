@@ -93,7 +93,7 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --n
 alias s="kitty +kitten ssh"
 alias lg="lazygit"
 alias ld="lazydocker"
-alias ra="ranger"
+alias fm="yazi"
 alias v='nvim'
 # alias docker
 alias dp="docker ps"
@@ -116,8 +116,10 @@ alias cha="chezmoi apply"
 alias chc="cd ~/.local/share/chezmoi"
 alias chd="chezmoi diff"
 alias che="chezmoi edit --watch"
-alias chg="cd ~/.local/share/chezmoi && lazygit && cd -"
-alias chr="cd ~/.local/share/chezmoi && ranger && cd -"
+# alias chg="cd ~/.local/share/chezmoi && lazygit && cd -"
+# alias chf="cd ~/.local/share/chezmoi && yazi && cd -"
+alias chg="lazygit -p ~/.local/share/chezmoi"
+alias chf="yazi ~/.local/share/chezmoi"
 # alias systemctl
 alias sst="sudo systemctl start"
 alias sss="sudo systemctl status"

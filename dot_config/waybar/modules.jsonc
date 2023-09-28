@@ -22,7 +22,7 @@
             "(.*) - Google Chrome": " $1"
         },
         "separate-outputs": true,
-        "max-length": 40
+        "max-length": 65
     },
     "custom/updates": {
         "format": "  {}",

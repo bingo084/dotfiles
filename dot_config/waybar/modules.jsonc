@@ -19,7 +19,8 @@
     },
     "hyprland/window": {
         "rewrite": {
-            "(.*) - Google Chrome": " $1"
+            "(.*) - Google Chrome": " $1",
+            "(.*) — Mozilla Firefox": " $1"
         },
         "separate-outputs": true,
         "max-length": 65

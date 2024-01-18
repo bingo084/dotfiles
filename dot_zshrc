@@ -1,0 +1,101 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt extendedglob nomatch notify
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/bingo/.zshrc'
+
+if command -v brew &>/dev/null; then
+   fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+   fpath=($HOME/.config/zsh/completions $fpath)
+fi
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+# End of lines added by compinstall
+eval "$(starship init zsh)"
+
+source_if() {
+    [[ -f "$1" ]] && source "$1" "${@:2}"
+}
+
+# zsh-autosuggestions
+if command -v brew &>/dev/null; then
+    source_if "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+source_if "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+# zsh-syntax-highlighting
+if command -v brew &>/dev/null; then
+    source_if "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+source_if "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# fzf
+if [[ "$(uname)" == "Darwin" ]]; then
+    source_if "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+    source_if "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+elif [[ "$(uname)" == "Linux" ]]; then
+    source_if "/usr/share/fzf/completion.zsh"
+    source_if "/usr/share/fzf/key-bindings.zsh"
+fi
+source_if "$HOME/.config/fzf/config.sh"
+
+# zoxide
+eval "$(zoxide init --cmd j zsh)"
+export _ZO_ECHO="1"
+export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
+    --exact --no-sort --bind=ctrl-z:ignore --cycle --keep-right \
+    --preview='command eza {2..}' \
+    --preview-window=down,30%"
+
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
+export all_proxy="socks5://127.0.0.1:7890"
+
+# alias
+alias sudo="sudo "
+alias s="kitty +kitten ssh"
+alias lg="lazygit"
+alias ld="lazydocker"
+alias fm="yazi"
+alias v="nvim"
+# alias docker
+alias dp="docker ps"
+alias dpa="docker ps -a"
+alias dl="docker logs"
+alias dlf="docker logs -f"
+alias di="docker images"
+# alias docker-compose
+alias dcp="docker-compose ps"
+alias dcpa="docker-compose ps -a"
+alias dcd="docker-compose down"
+alias dcu="docker-compose up"
+alias dcud="docker-compose up -d"
+alias dcdu="docker-compose down && docker-compose up"
+alias dcdud="docker-compose down && docker-compose up -d"
+alias dcl="docker-compose logs"
+alias dclf="docker-compose logs -f"
+# alias chezmoi
+alias cha="chezmoi apply"
+alias chc="cd $HOME/.local/share/chezmoi"
+alias chd="chezmoi diff"
+alias che="chezmoi edit --watch"
+alias chg="lazygit -p $HOME/.local/share/chezmoi"
+alias chf="yazi $HOME/.local/share/chezmoi"
+# alias systemctl
+alias sst="sudo systemctl start"
+alias sss="sudo systemctl status"
+alias srt="sudo systemctl restart"
+alias ssp="sudo systemctl stop"
+alias see="sudo systemctl enable"
+alias sen="sudo systemctl enable --now"
+alias sust="systemctl --user start"
+alias suss="systemctl --user status"
+alias surt="systemctl --user restart"
+alias susp="systemctl --user stop"
+alias suee="systemctl --user enable"
+alias suen="systemctl --user enable --now"

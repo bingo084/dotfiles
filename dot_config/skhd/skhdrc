@@ -36,7 +36,7 @@ cmd - f : yabai -m window --toggle zoom-fullscreen
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
 # Change current window to stack
-alt - s : yabai -m window --insert stack 
+# alt - s : yabai -m window --insert stack 
 
 # 挂起窗口至屏幕中央/取消挂起窗口
 cmd - t : yabai -m window --toggle float;\
@@ -47,7 +47,7 @@ cmd - p : yabai -m window --toggle border && \
           yabai -m window --toggle pip
 
 # 修改窗口切分方式
-alt - e : yabai -m window --toggle split
+# alt - e : yabai -m window --toggle split
 
 # toggle topmost (keep above other windows)
 cmd - o : yabai -m window --toggle topmost
@@ -86,8 +86,8 @@ cmd - 9 : yabai -m space --focus 9
 
 # 聚焦到上次桌面
 cmd - r : yabai -m space --focus recent
-alt - a : yabai -m space --focus prev
-alt - d : yabai -m space --focus next
+# alt - a : yabai -m space --focus prev
+# alt - d : yabai -m space --focus next
 
 # increase window size
 shift + alt - a : yabai -m window --resize left:-20:0

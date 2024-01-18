@@ -1,0 +1,4 @@
+#!/bin/bash
+# bat themes hash: {{ joinPath .chezmoi.homeDir "/.config/bat/themes/*.tmTheme" | sha256sum }}
+echo "bat themes changed, rebuild cache..."
+bat cache --build

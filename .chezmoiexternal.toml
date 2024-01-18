@@ -34,3 +34,19 @@
     type = "file"
     url = "https://raw.githubusercontent.com/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
     refreshPeriod = "168h"
+[".config/bat/themes/Catppuccin-frappe.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-frappe.tmTheme"
+    refreshPeriod = "168h"
+[".config/bat/themes/Catppuccin-latte.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-latte.tmTheme"
+    refreshPeriod = "168h"
+[".config/bat/themes/Catppuccin-macchiato.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-macchiato.tmTheme"
+    refreshPeriod = "168h"
+[".config/bat/themes/Catppuccin-mocha.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme"
+    refreshPeriod = "168h"

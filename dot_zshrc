@@ -49,7 +49,7 @@ eval "$(zoxide init --cmd j zsh)"
 export _ZO_ECHO="1"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
     --exact --no-sort --bind=ctrl-z:ignore --cycle --keep-right \
-    --preview='command eza {2..}' \
+    --preview='command eza --color=always {2..}' \
     --preview-window=down,30%"
 
 export http_proxy="http://127.0.0.1:7890"

@@ -4,5 +4,6 @@ export PATH="$HOME/bin/dwm:$PATH"
 export PATH="$HOME/bin/statusbar:$PATH"
 export PATH="$HOME/bin/rime:$PATH"
 
-export TERMINAL='kitty'
-export EDITOR='nvim'
+export TERMINAL="kitty"
+export EDITOR="nvim"
+export PAGER="less"

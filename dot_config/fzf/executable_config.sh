@@ -11,7 +11,7 @@ export FZF_COMPLETION_TRIGGER='\'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview \
-    'bat --color=always --theme=Catppuccin-macchiato --style=numbers,changes --line-range :500 {}'"
+    'bat --theme=Catppuccin-macchiato --style=numbers,changes --line-range :500 {}'"
 
 export FZF_ALT_C_COMMAND='fd --type d . --color=always --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"

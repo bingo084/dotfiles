@@ -6,31 +6,26 @@ modmap:
         alone: esc
         alone_timeout_millis: 1000
 keymap:
-  - name: Copy/Paste/ChooseAll
+  - name: ChooseAll/Copy/Paste/Cut/Undo
     remap:
-      SUPER-a: [end, Shift-home, { set_mark: false }]
-      SUPER-c: C-c
-      SUPER-v: C-v
-      SUPER-z: C-z
+      SUPER-a: [C-home, C-a, { set_mark: true }] 
+      SUPER-c: [C-c, { set_mark: false }]
+      SUPER-v: [C-v, { set_mark: false }]
+      SUPER-x: [C-x, { set_mark: false }]
+      SUPER-z: [C-z, { set_mark: false }]
     application:
       not: kitty
   - name: Chrome
     remap:
-      # Cursor
-      C-p: { with_mark: up }
-      C-n: { with_mark: down }
-      # Newline
-      C-m: enter
-      C-j: enter
-      C-o: [enter, left]
-      # Cancel
-      C-g: [esc, { set_mark: false }]
       C-apostrophe: C-tab
       C-semicolon: C-SHIFT-tab
     application:
-      only: Google-chrome
+      only: google-chrome
   - name: Firefox
     remap:
+      # Cursor
+      C-p: { with_mark: up }
+      C-n: { with_mark: down }
       C-apostrophe: C-tab
       C-semicolon: C-SHIFT-tab
     application:
@@ -56,10 +51,11 @@ keymap:
       C-d: [delete, { set_mark: false }]
       M-d: [C-delete, { set_mark: false }]
       C-h: [backspace, { set_mark: false }]
+      C-w: [backspace, { set_mark: false }]
       # Kill line
       C-k: [Shift-end, C-x, { set_mark: false }]
       C-u: [end, Shift-home, C-x, { set_mark: false }]
       # Cancel
       C-g: [esc, { set_mark: false }]
     application:
-      not: [kitty, Google-chrome]
+      not: [kitty, firefox]

@@ -1,6 +1,6 @@
-[".config/fzf/fzf-tab"]
-    type = "git-repo"
-    url = "https://github.com/Aloxaf/fzf-tab.git"
+[".config/fzf/fzf-zsh-completion.sh"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
     refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"

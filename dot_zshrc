@@ -45,7 +45,7 @@ fi
 source_if "$HOME/.config/fzf/config.sh"
 
 # zoxide
-eval "$(zoxide init --cmd j zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 export _ZO_ECHO="1"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
     --exact --no-sort --bind=ctrl-z:ignore --cycle --keep-right \

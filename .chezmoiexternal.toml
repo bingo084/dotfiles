@@ -1,4 +1,4 @@
-[".config/fzf/fzf-zsh-completion.sh"]
+[".config/zsh/plugins/fzf-zsh-completion.sh"]
     type = "file"
     url = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
     refreshPeriod = "168h"

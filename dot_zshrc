@@ -42,7 +42,7 @@ elif [[ "$(uname)" == "Linux" ]]; then
     source_if "/usr/share/fzf/completion.zsh"
     source_if "/usr/share/fzf/key-bindings.zsh"
 fi
-source_if "$HOME/.config/fzf/config.sh"
+source_if "$HOME/.config/zsh/fzf-config.sh"
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"

@@ -16,7 +16,7 @@ export FZF_CTRL_T_OPTS="--preview \
 export FZF_ALT_C_COMMAND='fd --type d . --color=always --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-source $HOME/.config/fzf/fzf-zsh-completion.sh
+source $HOME/.config/zsh/plugins/fzf-zsh-completion.sh
 
 server() {
 	local servers

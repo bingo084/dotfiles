@@ -13,6 +13,7 @@ keymap:
       SUPER-v: [C-v, { set_mark: false }]
       SUPER-x: [C-x, { set_mark: false }]
       SUPER-z: [C-z, { set_mark: false }]
+      ESC: [ESC, { set_mark: false}]
     application:
       not: kitty
   - name: Chrome

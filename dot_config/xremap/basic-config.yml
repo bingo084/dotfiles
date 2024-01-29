@@ -43,6 +43,9 @@ keymap:
       # Beginning/End of line
       C-a: { with_mark: home }
       C-e: { with_mark: end }
+      # Page up/down
+      M-v: { with_mark: pageup }
+      C-v: { with_mark: pagedown }
       # Newline
       C-m: enter
       C-j: enter
@@ -51,11 +54,23 @@ keymap:
       C-d: [delete, { set_mark: false }]
       M-d: [C-delete, { set_mark: false }]
       C-h: [backspace, { set_mark: false }]
-      C-w: [backspace, { set_mark: false }]
+      C-w: [C-backspace, { set_mark: false }]
       # Kill line
       C-k: [Shift-end, C-x, { set_mark: false }]
       C-u: [end, Shift-home, C-x, { set_mark: false }]
+      # Search
+      C-s: C-f
       # Cancel
       C-g: [esc, { set_mark: false }]
+      C-x:
+        remap:
+          # C-x C-f (open)
+          C-f: C-o
+          # C-x C-s (save)
+          C-s: C-s
+          # C-x k (kill tab)
+          k: C-f4
+          # C-x C-c (exit)
+          C-c: C-q
     application:
       not: [kitty, firefox]

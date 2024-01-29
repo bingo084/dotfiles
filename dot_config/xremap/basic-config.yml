@@ -16,21 +16,12 @@ keymap:
       ESC: [ESC, { set_mark: false}]
     application:
       not: kitty
-  - name: Chrome
+  - name: Browser
     remap:
       C-apostrophe: C-tab
       C-semicolon: C-SHIFT-tab
     application:
-      only: google-chrome
-  - name: Firefox
-    remap:
-      # Cursor
-      C-p: { with_mark: up }
-      C-n: { with_mark: down }
-      C-apostrophe: C-tab
-      C-semicolon: C-SHIFT-tab
-    application:
-      only: firefox
+      only: [google-chrome, firefox]
   - name: Emacs
     remap:
       # Cursor
@@ -74,4 +65,4 @@ keymap:
           # C-x C-c (exit)
           C-c: C-q
     application:
-      not: [kitty, firefox]
+      not: kitty

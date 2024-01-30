@@ -17,6 +17,7 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 # End of lines added by compinstall
 eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
 source_if() {
     [[ -f "$1" ]] && source "$1" "${@:2}"

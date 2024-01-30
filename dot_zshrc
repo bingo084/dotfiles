@@ -13,15 +13,14 @@ if command -v brew &>/dev/null; then
    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 fpath=($HOME/.config/zsh/completions $fpath)
+fpath=($HOME/.config/zsh/functions $fpath)
+autoload -Uz $fpath[1]/*(.:t)
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 # End of lines added by compinstall
+
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
-
-source_if() {
-    [[ -f "$1" ]] && source "$1" "${@:2}"
-}
 
 # zsh-autosuggestions
 if command -v brew &>/dev/null; then

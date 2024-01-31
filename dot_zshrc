@@ -38,6 +38,15 @@ if command -v brew &>/dev/null; then
     source_if "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 fi
 source_if "/usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
+# zsh-history-substring-search
+if command -v brew &>/dev/null; then
+    source_if "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+fi
+source_if "/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=black,bold"
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
 # fzf
 if [[ "$(uname)" == "Darwin" ]]; then

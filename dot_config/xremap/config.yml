@@ -1,5 +1,19 @@
 keypress_delay_ms: 20
 modmap:
+  - name: HHKB
+    remap:
+      capslock:
+        held: leftctrl
+        alone: esc
+        alone_timeout_millis: 1000
+      leftmeta: leftalt
+      leftalt: leftmeta
+      esc: grave
+      grave: esc
+      backspace: backslash
+      backslash: backspace
+    device:
+      only: ['AT Translated Set 2 keyboard']
   - name: Smart Ctrl/Esc
     remap:
       leftctrl:

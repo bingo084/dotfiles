@@ -65,10 +65,10 @@ alias fm="yazi"
 alias v="nvim"
 if command -v eza &>/dev/null; then
     alias ls="eza"
-    alias ll="eza -l"
     alias tree="eza --tree"
 fi
 alias lsa="ls -a"
+alias ll="ls -l"
 alias lla="ll -a"
 if command -v bat &>/dev/null; then
     alias cat="bat --theme=Catppuccin-macchiato --style=numbers,changes"

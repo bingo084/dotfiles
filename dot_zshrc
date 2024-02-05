@@ -1,13 +1,9 @@
-# Lines configured by zsh-newuser-install
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt extendedglob nomatch notify
 unsetopt beep
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/bingo/.zshrc'
 
 os="$(uname)"
 if [[ "$os" == "Darwin" ]]; then
@@ -15,16 +11,6 @@ if [[ "$os" == "Darwin" ]]; then
 elif [[ "$os" == "Linux" ]]; then
     zsh_plugins="/usr/share/zsh/plugins"
 fi
-
-if [[ "$os" == "Darwin" ]]; then
-    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-fi
-fpath=($HOME/.config/zsh/completions $fpath)
-fpath=($HOME/.config/zsh/functions $fpath)
-autoload -Uz $fpath[1]/*(.:t)
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
-# End of lines added by compinstall
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
@@ -139,3 +125,13 @@ if [[ "$os" == "Linux" ]]; then
     alias suee="systemctl --user enable"
     alias suen="systemctl --user enable --now"
 fi
+
+zstyle :compinstall filename "$HOME/.zshrc"
+if [[ "$os" == "Darwin" ]]; then
+    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fi
+fpath=($HOME/.config/zsh/completions $fpath)
+fpath=($HOME/.config/zsh/functions $fpath)
+autoload -Uz $fpath[1]/*(.:t)
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'

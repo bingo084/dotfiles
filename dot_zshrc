@@ -9,8 +9,15 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/bingo/.zshrc'
 
-if command -v brew &>/dev/null; then
-   fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+os="$(uname)"
+if [[ "$os" == "Darwin" ]]; then
+    zsh_plugins="/opt/homebrew/share"
+elif [[ "$os" == "Linux" ]]; then
+    zsh_plugins="/usr/share/zsh/plugins"
+fi
+
+if [[ "$os" == "Darwin" ]]; then
+    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 fi
 fpath=($HOME/.config/zsh/completions $fpath)
 fpath=($HOME/.config/zsh/functions $fpath)
@@ -23,43 +30,31 @@ eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
 # zsh-autosuggestions
-if command -v brew &>/dev/null; then
-    source_if "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
-source_if "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 # zsh-syntax-highlighting
-if command -v brew &>/dev/null; then
-    source_if "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-source_if "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # zsh-you-should-use
-if command -v brew &>/dev/null; then
-    source_if "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
-fi
-source_if "/usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
+source "$zsh_plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 # zsh-history-substring-search
-if command -v brew &>/dev/null; then
-    source_if "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-fi
-source_if "/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+source "$zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=black,bold"
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 # zsh-auto-notify
-source_if "$HOME/.config/zsh/plugins/auto-notify.plugin.zsh"
+source "$HOME/.config/zsh/plugins/auto-notify.plugin.zsh"
 AUTO_NOTIFY_IGNORE+=("btop" "chezmoi" "lazygit" "yazi")
 
 # fzf
-if [[ "$(uname)" == "Darwin" ]]; then
-    source_if "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-    source_if "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-elif [[ "$(uname)" == "Linux" ]]; then
-    source_if "/usr/share/fzf/completion.zsh"
-    source_if "/usr/share/fzf/key-bindings.zsh"
+if [[ "$os" == "Darwin" ]]; then
+    source "/opt/homebrew/opt/fzf/shell/completion.zsh"
+    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+elif [[ "$os" == "Linux" ]]; then
+    source "/usr/share/fzf/completion.zsh"
+    source "/usr/share/fzf/key-bindings.zsh"
 fi
-source_if "$HOME/.config/zsh/fzf-config.sh"
+source "$HOME/.config/zsh/fzf-config.sh"
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
@@ -91,21 +86,25 @@ if command -v bat &>/dev/null; then
     alias cat="bat --theme=Catppuccin-macchiato --style=numbers,changes"
 fi
 # alias docker
-alias dp="docker ps"
-alias dpa="docker ps -a"
-alias dl="docker logs"
-alias dlf="docker logs -f"
-alias di="docker images"
+if command -v docker &>/dev/null; then
+    alias dp="docker ps"
+    alias dpa="docker ps -a"
+    alias dl="docker logs"
+    alias dlf="docker logs -f"
+    alias di="docker images"
+fi
 # alias docker-compose
-alias dcp="docker-compose ps"
-alias dcpa="docker-compose ps -a"
-alias dcd="docker-compose down"
-alias dcu="docker-compose up"
-alias dcud="docker-compose up -d"
-alias dcdu="docker-compose down && docker-compose up"
-alias dcdud="docker-compose down && docker-compose up -d"
-alias dcl="docker-compose logs"
-alias dclf="docker-compose logs -f"
+if command -v docker-compose &>/dev/null; then
+    alias dcp="docker-compose ps"
+    alias dcpa="docker-compose ps -a"
+    alias dcd="docker-compose down"
+    alias dcu="docker-compose up"
+    alias dcud="docker-compose up -d"
+    alias dcdu="docker-compose down && docker-compose up"
+    alias dcdud="docker-compose down && docker-compose up -d"
+    alias dcl="docker-compose logs"
+    alias dclf="docker-compose logs -f"
+fi
 # alias chezmoi
 if command -v chezmoi &>/dev/null; then
     alias cha="chezmoi add"
@@ -126,15 +125,17 @@ if command -v chezmoi &>/dev/null; then
     alias chu="chezmoi update -v"
 fi
 # alias systemctl
-alias sst="sudo systemctl start"
-alias sss="sudo systemctl status"
-alias srt="sudo systemctl restart"
-alias ssp="sudo systemctl stop"
-alias see="sudo systemctl enable"
-alias sen="sudo systemctl enable --now"
-alias sust="systemctl --user start"
-alias suss="systemctl --user status"
-alias surt="systemctl --user restart"
-alias susp="systemctl --user stop"
-alias suee="systemctl --user enable"
-alias suen="systemctl --user enable --now"
+if [[ "$os" == "Linux" ]]; then
+    alias sst="sudo systemctl start"
+    alias sss="sudo systemctl status"
+    alias srt="sudo systemctl restart"
+    alias ssp="sudo systemctl stop"
+    alias see="sudo systemctl enable"
+    alias sen="sudo systemctl enable --now"
+    alias sust="systemctl --user start"
+    alias suss="systemctl --user status"
+    alias surt="systemctl --user restart"
+    alias susp="systemctl --user stop"
+    alias suee="systemctl --user enable"
+    alias suen="systemctl --user enable --now"
+fi

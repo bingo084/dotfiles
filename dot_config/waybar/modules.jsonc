@@ -23,7 +23,7 @@
             "(.*) — Mozilla Firefox": " $1"
         },
         "separate-outputs": true,
-        "max-length": 65
+        "max-length": 50
     },
     "custom/updates": {
         "format": "  {}",

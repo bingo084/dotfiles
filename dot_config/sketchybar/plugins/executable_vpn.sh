@@ -1,7 +1,7 @@
 #!/bin/bash
 
 switch(){
-    osascript -e "tell application \"ClashX\" to proxyMode \"$1\""
+    osascript -e "tell application \"ClashX Meta\" to proxyMode \"$1\""
 }
 
 popup(){
@@ -11,8 +11,9 @@ popup(){
 update(){
     source $HOME/.config/sketchybar/colors.sh
 
-    MODE=$(defaults read com.west2online.ClashX 'selectOutBoundMode')
-    ENABLE=$(defaults read com.west2online.ClashX 'proxyPortAutoSet')
+    CONFIGS=$(curl -s "http://127.0.0.1:9090/configs")
+    MODE=$(echo "$CONFIGS" | jq -r .mode)
+    ENABLE=$(defaults read com.metacubex.ClashX.meta 'proxyPortAutoSet')
     if [[ $ENABLE == 0 ]]; then
         COLOR="$GRAY"
     else
@@ -33,7 +34,7 @@ update(){
 
 toggleProxy(){
     if [[ $NAME == vpn ]]; then
-        osascript -e "tell application \"ClashX\" to toggleProxy"
+        osascript -e "tell application \"ClashX Meta\" to toggleProxy"
     elif [[ $NAME == vpn.global ]]; then
         switch global
     elif [[ $NAME == vpn.rule ]]; then

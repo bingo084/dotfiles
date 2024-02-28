@@ -1,0 +1,113 @@
+@import '../../.cache/wal/colors-waybar.css';
+/* Base */
+@define-color cc-bg rgba(239, 241, 245, 0.95);
+/* Surface1 */
+@define-color cc-clear-bg rgb(188, 192, 204);
+/* Maroon */
+@define-color cc-clear-bg-hover rgb(230, 69, 83);
+/* Red */
+@define-color cc-clear-bg-active rgb(210, 15, 57);
+
+/* Surface0 */
+@define-color switch-bg rgba(204, 208, 218, 1);
+/* Surface1 */
+@define-color switch-slider-bg rgb(188, 192, 204);
+
+@define-color theme-color @color11;
+
+@define-color noti-border-color rgba(255, 255, 255, 0.15);
+@define-color noti-bg rgb(17, 17, 27);
+@define-color noti-bg-darker rgb(43, 43, 57);
+@define-color noti-bg-hover rgb(27, 27, 43);
+@define-color noti-bg-focus rgba(27, 27, 27, 0.6);
+@define-color noti-close-bg rgba(255, 255, 255, 0.1);
+@define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
+@define-color text-color rgba(76, 79, 105, 1);
+@define-color text-color-disabled rgb(150, 150, 150);
+@define-color bg-selected rgb(0, 128, 255);
+
+* {
+  font-family: "Noto Sans CJK SC", "Font Awesome 6 Free Solid";
+  font-weight: bold;
+}
+
+.control-center {
+  background-color: @cc-bg;
+  color: @text-color;
+  box-shadow: 0 0 8px 0 shade(@cc-bg, 0.4), inset 0 0 0 1px shade(@cc-bg, 0.8);
+  border-radius: 10px;
+}
+
+/* .control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  opacity: 0.5;
+} */
+
+/* .control-center .notification-row:focus, */
+/* .control-center .notification-row:hover { */
+/*   opacity: 1; */
+/*   background: @cc-bg; */
+/* } */
+
+/* .notification-row { */
+/*   outline: none; */
+/*   margin: 10px; */
+/*   padding: 0; */
+/* } */
+/**/
+/* .notification { */
+/*   background: transparent; */
+/*   padding: 0; */
+/*   margin: 0px; */
+/* } */
+/**/
+/* .notification-content { */
+/*   background: @cc-bg; */
+/*   padding: 10px; */
+/*   border-radius: 5px; */
+/*   border: 2px solid #34548a; */
+/*   margin: 0; */
+/* } */
+
+/*** Widgets ***/
+/* Title widget */
+.widget-title > button {
+  background-color: @cc-clear-bg;
+  box-shadow: 0 0 2px 0 shade(@cc-clear-bg, 0.4);
+}
+
+.widget-title > button:hover{
+  background-color: @cc-clear-bg-hover;
+  color: @cc-bg;
+  box-shadow: 0 0 4px 0 shade(@cc-clear-bg-hover, 0.4);
+}
+
+.widget-title > button:active{
+  background-color: @cc-clear-bg-active;
+  box-shadow: 0 0 2px 0 shade(@cc-clear-bg-active, 0.4);
+}
+
+/* DND widget */
+.widget-dnd {
+  font-size: 1.1rem;
+}
+
+.widget-dnd > switch {
+  font-size: initial;
+  background: @switch-bg;
+  box-shadow: inset 0 0 0 2px shade(@switch-bg, 0.9);
+}
+
+.widget-dnd > switch:checked {
+  background: @theme-color;
+  box-shadow: inset 0 0 0 2px shade(@theme-color, 0.9);
+}
+
+.widget-dnd > switch slider {
+  background: @switch-slider-bg;
+  box-shadow: 0 0 2px 0 shade(@switch-slider-bg, 0.4);
+  border: 0;
+}

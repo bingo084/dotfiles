@@ -12,6 +12,7 @@
     "include": [
         "~/.config/waybar/modules.jsonc"
     ],
+    "reload_style_on_change": true,
     // Modules Left
     "modules-left": [
         "custom/exit",
@@ -33,7 +34,8 @@
         "pulseaudio",
         "network",
         "clock",
-        "tray"
+        "tray",
+        "custom/notification"
     ],
     // Group Quicklinks
     "group/quicklinks": {

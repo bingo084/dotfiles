@@ -1,0 +1,37 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "layer": "top",
+  "layer-shell": true,
+  "control-center-margin-top": 8,
+  "control-center-margin-bottom": 8,
+  "control-center-margin-right": 8,
+  "control-center-margin-left": 8,
+  "control-center-layer": "top",
+  "notification-inline-replies": true,
+  "widgets": [
+    "inhibitors",
+    "title",
+    "mpris",
+    "dnd",
+    "notifications"
+  ],
+  "widget-config": {
+    "inhibitors": {
+      "text": "Inhibitors",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
+    "title": {
+      "text": " Notifications",
+      "clear-all-button": true,
+      "button-text": " Clear All"
+    },
+    "dnd": {
+      "text": " Do Not Disturb"
+    },
+    "mpris": {
+      "image-size": 96,
+      "image-radius": 12
+    }
+  }
+}

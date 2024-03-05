@@ -4,16 +4,18 @@
     width = 400
     notification_limit = 0
     offset = 8x8
+    progress_bar_max_width = 400
     separator_height = 2
     frame_width = 2
     background = "#ffffffe6"
     foreground = "#000000b3"
+    highlight = "@color11"
     frame_color = "@color11"
     gap_size = 4
     separator_color = auto
     idle_threshold = 120
-    font = JetBrainsMono Nerd Font Mono 13
-    format = "<b>%a</b>\n<b>%s</b>\n%b"
+    font = Noto Sans CJK SC, Font Awesome 6 Free Solid 13
+    format = "<b>%s</b>\n%b"
     icon_theme = "Adwaita"
     enable_recursive_icon_lookup = true
     dmenu = rofi -dmenu -p dunst:
@@ -31,3 +33,7 @@
 [urgency_critical]
     frame_color = "#d20f39"
     timeout = 10
+
+[osd]
+    stack_tag = "osd"
+    history_ignore = true

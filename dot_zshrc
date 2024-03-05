@@ -68,7 +68,7 @@ alias lsa="ls -a"
 alias ll="ls -l"
 alias lla="ll -a"
 if command -v bat &>/dev/null; then
-    alias cat="bat --theme=Catppuccin-macchiato --style=numbers,changes"
+    alias cat="bat --theme='Catppuccin Macchiato' --style=numbers,changes"
 fi
 # alias docker
 if command -v docker &>/dev/null; then

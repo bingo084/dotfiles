@@ -38,19 +38,19 @@
     type = "file"
     url = "https://raw.githubusercontent.com/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
     refreshPeriod = "168h"
-[".config/bat/themes/Catppuccin-frappe.tmTheme"]
+[".config/bat/themes/Catppuccin Frappe.tmTheme"]
     type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-frappe.tmTheme"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin Frappe.tmTheme"
     refreshPeriod = "168h"
-[".config/bat/themes/Catppuccin-latte.tmTheme"]
+[".config/bat/themes/Catppuccin Latte.tmTheme"]
     type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-latte.tmTheme"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin Latte.tmTheme"
     refreshPeriod = "168h"
-[".config/bat/themes/Catppuccin-macchiato.tmTheme"]
+[".config/bat/themes/Catppuccin Macchiato.tmTheme"]
     type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-macchiato.tmTheme"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin Macchiato.tmTheme"
     refreshPeriod = "168h"
-[".config/bat/themes/Catppuccin-mocha.tmTheme"]
+[".config/bat/themes/Catppuccin Mocha.tmTheme"]
     type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin Mocha.tmTheme"
     refreshPeriod = "168h"

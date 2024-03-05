@@ -30,7 +30,7 @@ keymap:
       SUPER-z: [C-z, { set_mark: false }]
       ESC: [ESC, { set_mark: false}]
     application:
-      not: kitty
+      not: [kitty, wezterm]
   - name: Browser
     remap:
       C-apostrophe: C-tab
@@ -80,4 +80,4 @@ keymap:
           # C-x C-c (exit)
           C-c: C-q
     application:
-      not: kitty
+      not: [kitty, wezterm]

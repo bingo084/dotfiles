@@ -19,9 +19,6 @@ README.md
 .config/environment.d
 .config/dunst/
 .config/swaync/
-dwm
-dwmblocks
-.xinitrc
 .config/waybar/
 .config/wal/
 .config/hypr/

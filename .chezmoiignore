@@ -18,6 +18,7 @@ README.md
 .config/systemd
 .config/environment.d
 .config/dunst/
+.config/swaync/
 dwm
 dwmblocks
 .xinitrc

@@ -1,7 +1,7 @@
 v() {
   if [[ "$#" -ne 1 ]]; then
     nvim "$@"
-  elif chezmoi source-path "$1" >/dev/null 2>&1; then 
+  elif chezmoi source-path "$1" >/dev/null 2>&1; then
     chezmoi edit --watch "$1"
   else
     nvim "$@"

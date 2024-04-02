@@ -28,3 +28,11 @@
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"
+{{ $version := (gitHubLatestRelease "MetaCubeX/mihomo").TagName -}}
+[".config/mihomo/mihomo"]
+    type = "file"
+    url = "https://github.com/MetaCubeX/mihomo/releases/download/{{ $version }}/mihomo-{{ .chezmoi.os }}-{{ .chezmoi.arch }}-{{ $version }}.gz"
+    executable = true
+    filter.command = "gzip"
+    filter.args = ["-d"]
+    refreshPeriod = "168h"

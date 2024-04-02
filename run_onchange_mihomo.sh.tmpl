@@ -1,0 +1,4 @@
+#!/bin/bash
+# mihomo hash: {{ include (joinPath .chezmoi.homeDir "/.config/mihomo/mihomo") | sha256sum }}
+echo "mihomo has changed, restarting service..."
+sudo launchctl kickstart -k system/com.metacubex.mihomo

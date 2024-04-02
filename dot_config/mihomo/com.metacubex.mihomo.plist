@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.metacubex.mihomo</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/bingo/.config/mihomo/mihomo</string>
+        <string>-d</string>
+        <string>/Users/bingo/.config/mihomo</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

@@ -106,7 +106,7 @@ if command -v chezmoi &>/dev/null; then
     alias chrm="chezmoi remove"
     alias chs="chezmoi status"
     alias cht="chezmoi execute-template"
-    alias chu="chezmoi update -v"
+    alias chu="chezmoi update"
 fi
 # alias systemctl
 if [[ "$os" == "Linux" ]]; then

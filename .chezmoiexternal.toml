@@ -8,15 +8,27 @@
     refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"
+{{- if not (has "init" .chezmoi.args) }}
     url = "git@github.com:bingo084/nvim-config.git"
+{{- else }}
+    url = "https://github.com/bingo084/nvim-config.git"
+{{- end }}
     refreshPeriod = "168h"
 ["bin"]
     type = "git-repo"
+{{- if not (has "init" .chezmoi.args) }}
     url = "git@github.com:bingo084/script.git"
+{{- else }}
+    url = "https://github.com/bingo084/script.git"
+{{- end }}
     refreshPeriod = "168h"
 [".config/rime"]
     type = "git-repo"
+{{- if not (has "init" .chezmoi.args) }}
     url = "git@github.com:bingo084/rime.git"
+{{- else }}
+    url = "https://github.com/bingo084/rime.git"
+{{- end }}
     refreshPeriod = "168h"
 [".config/zsh/completions/_fzf"]
     type = "file"

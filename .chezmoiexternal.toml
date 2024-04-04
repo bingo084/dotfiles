@@ -7,18 +7,12 @@
     url = "https://raw.githubusercontent.com/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
     refreshPeriod = "168h"
 {{- if not (has "init" .chezmoi.args) }}
-[".config/nvim"]
+{{- range .privateRepo }}
+["{{ .target }}"]
     type = "git-repo"
-    url = "git@github.com:bingo084/nvim-config.git"
+    url = "git@github.com:bingo084/{{ .name }}.git"
     refreshPeriod = "168h"
-["bin"]
-    type = "git-repo"
-    url = "git@github.com:bingo084/script.git"
-    refreshPeriod = "168h"
-[".config/rime"]
-    type = "git-repo"
-    url = "git@github.com:bingo084/rime.git"
-    refreshPeriod = "168h"
+{{- end }}
 {{- end }}
 [".config/zsh/completions/_fzf"]
     type = "file"

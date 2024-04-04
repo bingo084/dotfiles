@@ -1,0 +1,9 @@
+[[privateRepo]]
+    name = "nvim-config"
+    target = ".config/nvim"
+[[privateRepo]]
+    name = "script"
+    target = "bin"
+[[privateRepo]]
+    name = "rime"
+    target = ".config/rime"

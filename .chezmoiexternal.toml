@@ -6,7 +6,7 @@
     type = "file"
     url = "https://raw.githubusercontent.com/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
     refreshPeriod = "168h"
-{{- if not (has "init" .chezmoi.args) }}
+{{- if stat (joinPath .chezmoi.homeDir ".ssh/id_rsa") }}
 {{- range .privateRepo }}
 ["{{ .target }}"]
     type = "git-repo"

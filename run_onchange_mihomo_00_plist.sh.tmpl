@@ -1,0 +1,11 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+{{- $plist := "com.metacubex.mihomo.plist" }}
+{{- $source := joinPath .chezmoi.homeDir "/.config/mihomo" $plist }}
+{{- $target := joinPath "/Library/LaunchDaemons" $plist }}
+# mihomo plist hash: {{ include $source | sha256sum }}
+echo "mihomo plist has changed, reload service..."
+sudo cp {{ $source }} {{ $target }}
+sudo launchctl unload {{ $target }}
+sudo launchctl load {{ $target }}
+{{- end }}

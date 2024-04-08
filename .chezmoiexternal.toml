@@ -1,10 +1,10 @@
 [".config/zsh/plugins/fzf-zsh-completion.sh"]
     type = "file"
-    url = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
+    url = "{{ .githubRaw }}/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
     refreshPeriod = "168h"
 [".config/zsh/plugins/auto-notify.plugin.zsh"]
     type = "file"
-    url = "https://raw.githubusercontent.com/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
+    url = "{{ .githubRaw }}/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
     refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"
@@ -20,18 +20,18 @@
     refreshPeriod = "168h"
 [".config/zsh/completions/_fzf"]
     type = "file"
-    url = "https://raw.githubusercontent.com/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
+    url = "{{ .githubRaw }}/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
     refreshPeriod = "168h"
 [".config/bat/themes"]
     type = "archive"
-    url = "https://github.com/catppuccin/bat/archive/main.zip"
+    url = "{{ .github }}/catppuccin/bat/archive/main.zip"
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"
 {{ $version := (gitHubLatestRelease "MetaCubeX/mihomo").TagName -}}
 [".config/mihomo/mihomo"]
     type = "file"
-    url = "https://github.com/MetaCubeX/mihomo/releases/download/{{ $version }}/mihomo-{{ .chezmoi.os }}-{{ .chezmoi.arch }}-{{ $version }}.gz"
+    url = "{{ .github }}/MetaCubeX/mihomo/releases/download/{{ $version }}/mihomo-{{ .chezmoi.os }}-{{ .chezmoi.arch }}-{{ $version }}.gz"
     executable = true
     filter.command = "gzip"
     filter.args = ["-d"]

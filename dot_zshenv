@@ -6,4 +6,4 @@ export PATH="$HOME/bin/rime:$PATH"
 
 export TERMINAL="kitty"
 export EDITOR="nvim"
-export PAGER="less"
+export PAGER="less -R"

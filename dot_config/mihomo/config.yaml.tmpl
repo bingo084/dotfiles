@@ -1,0 +1,202 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: warning
+ipv6: false
+external-controller: 127.0.0.1:9090
+geox-url:
+  geoip: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb"
+  asn: "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+pp: &proxy-provider
+  type: http
+  interval: 172800
+  health-check:
+    enable: true
+    url: https://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5000
+    expected-status: 204
+
+proxy-providers:
+  bocchi:
+    <<: *proxy-provider
+    url: {{ (rbwFields "Subscribe").BocchiProvider.value | quote }}
+  infiniport:
+    <<: *proxy-provider
+    url: {{ (rbwFields "Subscribe").InfiniPortProvider.value | quote }}
+  miaona:
+    <<: *proxy-provider
+    url: {{ (rbwFields "Subscribe").MiaonaProvider.value | quote }}
+
+rp: &rule-provider
+  type: http
+  behavior: classical
+  format: yaml
+  interval: 86400
+
+rule-providers:
+  local-area-network:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
+  un-ban:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
+  ad:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
+  program-ad:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
+  easy-list:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
+  easy-list-china:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
+  easy-privacy:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
+  fcm:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
+  googlecn:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
+  steamcn:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
+  microsoft:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
+  openai:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml"
+  epic:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
+  origin:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
+  sony:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+  steam:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
+  nintendo:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
+  gfw:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml"
+  china-domain:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml"
+  china-company-ip:
+    <<: *rule-provider
+    behavior: ipcidr
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml"
+  download:
+    <<: *rule-provider
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
+
+ut: &url-test
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+
+dg: &direct-group
+  type: select
+  proxies:
+    - DIRECT
+    - 🚀 节点选择
+
+rg: &reject-group
+  type: select
+  proxies:
+    - REJECT
+    - DIRECT
+
+pg: &proxy-group
+  type: select
+  proxies:
+    - 🚀 节点选择
+    - DIRECT
+
+ag: &all-group
+  type: select
+  use:
+    - bocchi
+    - miaona
+    - infiniport
+
+proxy-groups:
+  - name: 🚀 节点选择
+    <<: *all-group
+    proxies:
+      - Bocchi
+      - InfiniPort
+      - Miaona
+      - DIRECT
+  - name: Bocchi
+    <<: *url-test
+    icon: https://bocchi.ooo/img/favicon.ico
+    use:
+      - bocchi
+  - name: InfiniPort
+    <<: *url-test
+    icon: https://infiniport.xyz/assets/images/favicon.svg
+    use:
+      - infiniport
+  - name: Miaona
+    <<: *url-test
+    icon: https://miaona.info/favicon.ico
+    use:
+      - miaona
+  - name: 💬 OpenAi
+    <<: *all-group
+  - name: 📢 谷歌FCM
+    <<: *direct-group
+  - name: Ⓜ️ 微软服务
+    <<: *direct-group
+  - name: 🎮 游戏平台
+    <<: *direct-group
+  - name: 🛑 广告拦截
+    <<: *reject-group
+  - name: 🍃 应用净化
+    <<: *reject-group
+  - name: 🆎 AdBlock
+    <<: *reject-group
+  - name: 🛡️ 隐私防护 
+    <<: *reject-group
+  - name: 🐟 漏网之鱼
+    <<: *proxy-group
+
+rules:
+  - RULE-SET,local-area-network,DIRECT
+  - RULE-SET,un-ban,DIRECT
+  - RULE-SET,ad,🛑 广告拦截
+  - RULE-SET,program-ad,🍃 应用净化
+  - RULE-SET,easy-list,🆎 AdBlock
+  - RULE-SET,easy-list-china,🆎 AdBlock
+  - RULE-SET,easy-privacy,🛡️ 隐私防护
+  - RULE-SET,fcm,📢 谷歌FCM
+  - RULE-SET,googlecn,DIRECT
+  - RULE-SET,steamcn,DIRECT
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  - RULE-SET,openai,💬 OpenAi
+  - RULE-SET,epic,🎮 游戏平台
+  - RULE-SET,origin,🎮 游戏平台
+  - RULE-SET,sony,🎮 游戏平台
+  - RULE-SET,steam,🎮 游戏平台
+  - RULE-SET,nintendo,🎮 游戏平台
+  - RULE-SET,gfw,🚀 节点选择
+  - RULE-SET,china-domain,DIRECT
+  - RULE-SET,china-company-ip,DIRECT
+  - RULE-SET,download,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🐟 漏网之鱼

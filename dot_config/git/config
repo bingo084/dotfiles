@@ -11,3 +11,5 @@
 	rebase = true
 [rebase]
 	autoStash = true
+[url "git@github.com:bingo084"]
+  pushInsteadOf = https://github.com/bingo084

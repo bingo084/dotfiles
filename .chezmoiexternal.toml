@@ -6,14 +6,18 @@
     type = "file"
     url = "https://raw.githubusercontent.com/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
     refreshPeriod = "168h"
-{{- if stat (joinPath .chezmoi.homeDir ".ssh/id_rsa") }}
-{{- range .privateRepo }}
-["{{ .target }}"]
+[".config/nvim"]
     type = "git-repo"
-    url = "git@github.com:bingo084/{{ .name }}.git"
+    url = "https://github.com/bingo084/nvim-config.git"
+    refreshPeriod = "12h"
+[".config/rime"]
+    type = "git-repo"
+    url = "https://github.com/bingo084/rime.git"
     refreshPeriod = "168h"
-{{- end }}
-{{- end }}
+["bin"]
+    type = "git-repo"
+    url = "https://github.com/bingo084/script.git"
+    refreshPeriod = "168h"
 [".config/zsh/completions/_fzf"]
     type = "file"
     url = "https://raw.githubusercontent.com/lmburns/dotfiles/master/.config/zsh/completions/_fzf"

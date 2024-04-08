@@ -5,10 +5,10 @@ log-level: warning
 ipv6: false
 external-controller: 127.0.0.1:9090
 geox-url:
-  geoip: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
-  geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb"
-  asn: "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+  geoip: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  geosite: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb"
+  asn: "{{ .github }}/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 
 pp: &proxy-provider
   type: http
@@ -40,68 +40,68 @@ rp: &rule-provider
 rule-providers:
   local-area-network:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
   un-ban:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
   ad:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
   program-ad:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
   easy-list:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
   easy-list-china:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
   easy-privacy:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
   fcm:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
   googlecn:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
   steamcn:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
   microsoft:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
   openai:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml"
   epic:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
   origin:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
   sony:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
   steam:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
   nintendo:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
   gfw:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml"
   china-domain:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml"
   china-company-ip:
     <<: *rule-provider
     behavior: ipcidr
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml"
   download:
     <<: *rule-provider
-    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
+    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
 
 ut: &url-test
   type: url-test

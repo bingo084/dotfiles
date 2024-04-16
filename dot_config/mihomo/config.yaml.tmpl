@@ -12,11 +12,12 @@ geox-url:
 
 pp: &proxy-provider
   type: http
-  interval: 172800
+  interval: 86400
+  proxy: DIRECT
   health-check:
     enable: true
     url: https://www.gstatic.com/generate_204
-    interval: 600
+    interval: 300
     timeout: 5000
     expected-status: 204
 

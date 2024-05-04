@@ -44,7 +44,6 @@ source "$HOME/.config/zsh/fzf-config.sh"
 
 # atuin
 eval "$(atuin init zsh)"
-bindkey '^P' atuin-up-search
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"

@@ -60,9 +60,6 @@ rule-providers:
   easy-privacy:
     <<: *rule-provider
     url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
-  fcm:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
   googlecn:
     <<: *rule-provider
     url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
@@ -158,21 +155,13 @@ proxy-groups:
     icon: https://miaona.info/favicon.ico
     use:
       - miaona
-  - name: 💬 OpenAi
+  - name: 💬 OpenAI
     <<: *all-group
-  - name: 📢 谷歌FCM
-    <<: *direct-group
   - name: Ⓜ️ 微软服务
     <<: *direct-group
   - name: 🎮 游戏平台
     <<: *direct-group
   - name: 🛑 广告拦截
-    <<: *reject-group
-  - name: 🍃 应用净化
-    <<: *reject-group
-  - name: 🆎 AdBlock
-    <<: *reject-group
-  - name: 🛡️ 隐私防护 
     <<: *reject-group
   - name: 🐟 漏网之鱼
     <<: *proxy-group
@@ -181,15 +170,14 @@ rules:
   - RULE-SET,local-area-network,DIRECT
   - RULE-SET,un-ban,DIRECT
   - RULE-SET,ad,🛑 广告拦截
-  - RULE-SET,program-ad,🍃 应用净化
-  - RULE-SET,easy-list,🆎 AdBlock
-  - RULE-SET,easy-list-china,🆎 AdBlock
-  - RULE-SET,easy-privacy,🛡️ 隐私防护
-  - RULE-SET,fcm,📢 谷歌FCM
+  - RULE-SET,program-ad,🛑 广告拦截
+  - RULE-SET,easy-list,🛑 广告拦截
+  - RULE-SET,easy-list-china,🛑 广告拦截
+  - RULE-SET,easy-privacy,🛑 广告拦截
   - RULE-SET,googlecn,DIRECT
   - RULE-SET,steamcn,DIRECT
   - RULE-SET,microsoft,Ⓜ️ 微软服务
-  - RULE-SET,openai,💬 OpenAi
+  - RULE-SET,openai,💬 OpenAI
   - RULE-SET,epic,🎮 游戏平台
   - RULE-SET,origin,🎮 游戏平台
   - RULE-SET,sony,🎮 游戏平台

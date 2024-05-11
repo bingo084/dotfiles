@@ -28,9 +28,6 @@ export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=black,bold"
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
-# zsh-auto-notify
-source "$HOME/.config/zsh/plugins/auto-notify.plugin.zsh"
-AUTO_NOTIFY_IGNORE+=("btop" "chezmoi" "lazygit" "yazi")
 
 # fzf
 if [[ "$os" == "Darwin" ]]; then

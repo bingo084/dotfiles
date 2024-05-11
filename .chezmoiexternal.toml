@@ -2,10 +2,6 @@
     type = "file"
     url = "{{ .githubRaw }}/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
     refreshPeriod = "168h"
-[".config/zsh/plugins/auto-notify.plugin.zsh"]
-    type = "file"
-    url = "{{ .githubRaw }}/MichaelAquilina/zsh-auto-notify/master/auto-notify.plugin.zsh"
-    refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"
     url = "https://github.com/bingo084/nvim-config.git"

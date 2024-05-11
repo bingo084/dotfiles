@@ -53,10 +53,6 @@ export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
     --preview='command eza --color=always {2..}' \
     --preview-window=down,30%"
 
-export http_proxy="http://127.0.0.1:7890"
-export https_proxy="http://127.0.0.1:7890"
-export all_proxy="socks5://127.0.0.1:7890"
-
 # alias
 alias sudo="sudo "
 alias s="kitty +kitten ssh"

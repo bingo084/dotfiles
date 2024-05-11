@@ -3,10 +3,6 @@
 	email = bingo084@outlook.com
 [core]
 	autocrlf = input
-[http]
-	proxy = http://127.0.0.1:7890
-[https]
-	proxy = http://127.0.0.1:7890
 [pull]
 	rebase = true
 [rebase]

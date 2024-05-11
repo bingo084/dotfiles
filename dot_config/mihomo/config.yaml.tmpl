@@ -1,14 +1,47 @@
 mixed-port: 7890
-allow-lan: true
-mode: rule
 log-level: warning
-ipv6: false
 external-controller: 127.0.0.1:9090
 geox-url:
   geoip: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
   geosite: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
   mmdb: "{{ .github }}/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb"
   asn: "{{ .github }}/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    # 局域网内域名
+    - "*.lan"
+    # QQ 快速登录
+    - localhost.ptlogin2.qq.com
+    # Windows 网络状态检测
+    - "*.msftconnecttest.com"
+    - "+.msftncsi.com"
+    # Arch Linux 网络状态检测
+    - "ping.archlinux.org"
+  default-nameserver:
+    - 223.5.5.5
+  nameserver-policy:
+    "geosite:cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+  nameserver:
+    - https://8.8.8.8/dns-query
+    - https://1.1.1.1/dns-query
+
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
 
 pp: &proxy-provider
   type: http

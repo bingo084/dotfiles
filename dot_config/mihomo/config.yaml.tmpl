@@ -43,7 +43,7 @@ tun:
     - any:53
     - tcp://any:53
 
-pp: &proxy-provider
+pp: &pp
   type: http
   interval: 86400
   proxy: DIRECT
@@ -55,149 +55,26 @@ pp: &proxy-provider
     expected-status: 204
 
 proxy-providers:
-  bocchi:
-    <<: *proxy-provider
-    url: {{ (rbwFields "Subscribe").BocchiProvider.value | quote }}
-  infiniport:
-    <<: *proxy-provider
-    url: {{ (rbwFields "Subscribe").InfiniPortProvider.value | quote }}
-  miaona:
-    <<: *proxy-provider
-    url: {{ (rbwFields "Subscribe").MiaonaProvider.value | quote }}
+  bocchi: {<<: *pp, url: {{ (rbwFields "Subscribe").BocchiProvider.value | quote }}}
+  infiniport: {<<: *pp, url: {{ (rbwFields "Subscribe").InfiniPortProvider.value | quote }}}
+  miaona: {<<: *pp, url: {{ (rbwFields "Subscribe").MiaonaProvider.value | quote }}}
 
-rp: &rule-provider
-  type: http
-  behavior: classical
-  format: yaml
-  interval: 86400
-
-rule-providers:
-  local-area-network:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
-  un-ban:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
-  ad:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
-  program-ad:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
-  easy-list:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
-  easy-list-china:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
-  easy-privacy:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
-  googlecn:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
-  steamcn:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
-  microsoft:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
-  openai:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml"
-  epic:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
-  origin:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
-  sony:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
-  steam:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
-  nintendo:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
-  gfw:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml"
-  china-domain:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml"
-  china-company-ip:
-    <<: *rule-provider
-    behavior: ipcidr
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml"
-  download:
-    <<: *rule-provider
-    url: "{{ .githubRaw }}/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
-
-ut: &url-test
-  type: url-test
-  url: http://www.gstatic.com/generate_204
-  interval: 300
-  tolerance: 50
-
-dg: &direct-group
-  type: select
-  proxies:
-    - DIRECT
-    - 🚀 节点选择
-
-rg: &reject-group
-  type: select
-  proxies:
-    - REJECT
-    - DIRECT
-
-pg: &proxy-group
-  type: select
-  proxies:
-    - 🚀 节点选择
-    - DIRECT
-
-ag: &all-group
-  type: select
-  use:
-    - bocchi
-    - miaona
-    - infiniport
+group-anchor:
+  test: &test {type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 50}
+  direct: &direct {type: select, proxies: [DIRECT, 🚀 节点选择]}
+  proxy: &proxy {type: select, proxies: [🚀 节点选择, DIRECT]}
+  reject: &reject {type: select, proxies: [REJECT, DIRECT]}
 
 proxy-groups:
-  - name: 🚀 节点选择
-    <<: *all-group
-    proxies:
-      - Bocchi
-      - InfiniPort
-      - Miaona
-      - DIRECT
-  - name: Bocchi
-    <<: *url-test
-    icon: https://bocchi.ooo/img/favicon.ico
-    use:
-      - bocchi
-  - name: InfiniPort
-    <<: *url-test
-    icon: https://infiniport.xyz/assets/images/favicon.svg
-    use:
-      - infiniport
-  - name: Miaona
-    <<: *url-test
-    icon: https://miaona.info/favicon.ico
-    use:
-      - miaona
-  - name: 💬 OpenAI
-    <<: *all-group
-  - name: Ⓜ️ 微软服务
-    <<: *direct-group
-  - name: 🎮 游戏平台
-    <<: *direct-group
-  - name: 🛑 广告拦截
-    <<: *reject-group
-  - name: 🐟 漏网之鱼
-    <<: *proxy-group
+  - {name: 🚀 节点选择, type: select, proxies: [Bocchi, InfiniPort, Miaona, DIRECT], include-all-providers: true}
+  - {name: Bocchi, <<: *test, icon: https://bocchi.ooo/img/favicon.ico, use: [bocchi]}
+  - {name: InfiniPort, <<: *test, icon: https://infiniport.xyz/assets/images/favicon.svg, use: [infiniport]}
+  - {name: Miaona, <<: *test, icon: https://miaona.info/favicon.ico, use: [miaona]}
+  - {name: 💬 OpenAI, <<: *test, include-all-providers: true, filter: "日本|Japan|美国|United States"}
+  - {name: Ⓜ️ 微软服务, <<: *direct}
+  - {name: 🎮 游戏平台, <<: *direct}
+  - {name: 🛑 广告拦截, <<: *reject}
+  - {name: 🐟 漏网之鱼, <<: *proxy}
 
 rules:
   - RULE-SET,local-area-network,DIRECT
@@ -222,3 +99,27 @@ rules:
   - RULE-SET,download,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,🐟 漏网之鱼
+
+rp: &rp {type: http, interval: 86400, proxy: DIRECT, behavior: classical, format: yaml}
+
+rule-providers:
+  local-area-network: {<<: *rp, url: "{{ .provider }}/LocalAreaNetwork.yaml"}
+  un-ban: {<<: *rp, url: "{{ .provider }}/UnBan.yaml"}
+  ad: {<<: *rp, url: "{{ .provider }}/BanAD.yaml"}
+  program-ad: {<<: *rp, url: "{{ .provider }}/BanProgramAD.yaml"}
+  easy-list: {<<: *rp, url: "{{ .provider }}/BanEasyList.yaml"}
+  easy-list-china: {<<: *rp, url: "{{ .provider }}/BanEasyListChina.yaml"}
+  easy-privacy: {<<: *rp, url: "{{ .provider }}/BanEasyPrivacy.yaml"}
+  googlecn: {<<: *rp, url: "{{ .provider }}/Ruleset/GoogleCN.yaml"}
+  steamcn: {<<: *rp, url: "{{ .provider }}/Ruleset/SteamCN.yaml"}
+  microsoft: {<<: *rp, url: "{{ .provider }}/Ruleset/Microsoft.yaml"}
+  openai: {<<: *rp, url: "{{ .provider }}/Ruleset/OpenAi.yaml"}
+  epic: {<<: *rp, url: "{{ .provider }}/Ruleset/Epic.yaml"}
+  origin: {<<: *rp, url: "{{ .provider }}/Ruleset/Origin.yaml"}
+  sony: {<<: *rp, url: "{{ .provider }}/Ruleset/Sony.yaml"}
+  steam: {<<: *rp, url: "{{ .provider }}/Ruleset/Steam.yaml"}
+  nintendo: {<<: *rp, url: "{{ .provider }}/Ruleset/Nintendo.yaml"}
+  gfw: {<<: *rp, url: "{{ .provider }}/ProxyGFWlist.yaml"}
+  china-domain: {<<: *rp, url: "{{ .provider }}/ChinaDomain.yaml"}
+  china-company-ip: { <<: *rp, behavior: ipcidr, url: "{{ .provider }}/ChinaCompanyIp.yaml"}
+  download: {<<: *rp, url: "{{ .provider }}/Download.yaml"}

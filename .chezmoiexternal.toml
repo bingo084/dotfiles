@@ -34,3 +34,7 @@
     filter.args = ["-d"]
     refreshPeriod = "168h"
 {{- end }}
+[".config/mihomo/config.yaml"]
+    type = "file"
+    url = {{ (rbwFields "Subscribe").MihomoConfig.value | quote }}
+    refreshPeriod = "168h"

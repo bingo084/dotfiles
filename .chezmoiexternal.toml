@@ -24,7 +24,7 @@
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"
-{{- if ne .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 {{ $version := (gitHubLatestRelease "MetaCubeX/mihomo").TagName -}}
 [".config/mihomo/mihomo"]
     type = "file"

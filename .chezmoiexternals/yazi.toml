@@ -1,0 +1,12 @@
+[".config/yazi/plugins/glow.yazi"]
+    type = "git-repo"
+    url = "https://github.com/Reledia/glow.yazi"
+    refreshPeriod = "168h"
+[".config/yazi/plugins/ouch.yazi"]
+    type = "git-repo"
+    url = "https://github.com/ndtoan96/ouch.yazi"
+    refreshPeriod = "168h"
+[".config/yazi/plugins/starship.yazi"]
+    type = "git-repo"
+    url = "https://github.com/Rolv-Apneseth/starship.yazi"
+    refreshPeriod = "168h"

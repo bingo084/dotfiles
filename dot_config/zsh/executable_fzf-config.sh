@@ -6,13 +6,12 @@ FZF_THEME=" \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 export FZF_DEFAULT_OPTS="$FZF_THEME --height ~50% --reverse --border --inline-info --ansi \
     --bind=alt-d:preview-half-page-down,alt-u:preview-half-page-up \
+    --preview 'bat --color=always --line-range :500 {}' \
     --select-1 --exit-0"
 
 export FZF_COMPLETION_TRIGGER='\'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview \
-    'bat --theme=Catppuccin-macchiato --style=numbers,changes --line-range :500 {}'"
 
 export FZF_ALT_C_COMMAND='fd --type d . --color=always --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"

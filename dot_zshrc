@@ -7,13 +7,10 @@ bindkey -e
 
 os="$(uname)"
 if [[ "$os" == "Darwin" ]]; then
-    zsh_plugins="/opt/homebrew/share"
+	zsh_plugins="/opt/homebrew/share"
 elif [[ "$os" == "Linux" ]]; then
-    zsh_plugins="/usr/share/zsh/plugins"
+	zsh_plugins="/usr/share/zsh/plugins"
 fi
-
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
 # zsh-autosuggestions
 source "$zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -29,14 +26,11 @@ export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=black,bold"
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
+
 # fzf
-if [[ "$os" == "Darwin" ]]; then
-    source "/opt/homebrew/opt/fzf/shell/completion.zsh"
-    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-elif [[ "$os" == "Linux" ]]; then
-    source "/usr/share/fzf/completion.zsh"
-    source "/usr/share/fzf/key-bindings.zsh"
-fi
+source <(fzf --zsh)
 source "$HOME/.config/zsh/fzf-config.sh"
 
 # atuin
@@ -56,73 +50,53 @@ alias s="kitty +kitten ssh"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias fm="yazi"
+# alias eza
 if command -v eza &>/dev/null; then
-    alias ls="eza"
-    alias tree="eza --tree"
+	alias ls="eza"
+	alias tree="eza --tree"
 fi
-alias lsa="ls -a"
-alias ll="ls -l"
-alias lla="ll -a"
+alias lsa="eza -a"
+alias ll="eza -l"
+alias lla="eza -la"
 if command -v bat &>/dev/null; then
-    alias cat="bat"
-fi
-# alias docker
-if command -v docker &>/dev/null; then
-    alias dp="docker ps"
-    alias dpa="docker ps -a"
-    alias dl="docker logs"
-    alias dlf="docker logs -f"
-    alias di="docker images"
-fi
-# alias docker-compose
-if command -v docker-compose &>/dev/null; then
-    alias dcp="docker-compose ps"
-    alias dcpa="docker-compose ps -a"
-    alias dcd="docker-compose down"
-    alias dcu="docker-compose up"
-    alias dcud="docker-compose up -d"
-    alias dcdu="docker-compose down && docker-compose up"
-    alias dcdud="docker-compose down && docker-compose up -d"
-    alias dcl="docker-compose logs"
-    alias dclf="docker-compose logs -f"
+	alias cat="bat"
 fi
 # alias chezmoi
-if command -v chezmoi &>/dev/null; then
-    alias cha="chezmoi add"
-    alias chc="cd $(chezmoi source-path)"
-    alias chd="chezmoi diff"
-    alias chf="yazi $HOME/.local/share/chezmoi"
-    alias chfg="chezmoi forget"
-    alias chg="lazygit -p $HOME/.local/share/chezmoi"
-    alias chh="chezmoi help | $PAGER"
-    alias chm="chezmoi merge"
-    alias chma="chezmoi merge-all"
-    alias chp="chezmoi apply"
-    alias chra="chezmoi re-add"
-    alias chrm="chezmoi remove"
-    alias chs="chezmoi status"
-    alias cht="chezmoi execute-template"
-    alias chu="chezmoi update"
-fi
+chezmoi_path=$(chezmoi source-path)
+alias cha="chezmoi add"
+alias chc="cd $chezmoi_path"
+alias chd="chezmoi diff"
+alias chf="yazi $chezmoi_path"
+alias chfg="chezmoi forget"
+alias chg="lazygit -p $chezmoi_path"
+alias chh="chezmoi help | $PAGER"
+alias chm="chezmoi merge"
+alias chma="chezmoi merge-all"
+alias chp="chezmoi apply"
+alias chra="chezmoi re-add"
+alias chrm="chezmoi remove"
+alias chs="chezmoi status"
+alias cht="chezmoi execute-template"
+alias chu="chezmoi update"
 # alias systemctl
 if [[ "$os" == "Linux" ]]; then
-    alias sst="sudo systemctl start"
-    alias sss="sudo systemctl status"
-    alias srt="sudo systemctl restart"
-    alias ssp="sudo systemctl stop"
-    alias see="sudo systemctl enable"
-    alias sen="sudo systemctl enable --now"
-    alias sust="systemctl --user start"
-    alias suss="systemctl --user status"
-    alias surt="systemctl --user restart"
-    alias susp="systemctl --user stop"
-    alias suee="systemctl --user enable"
-    alias suen="systemctl --user enable --now"
+	alias sst="sudo systemctl start"
+	alias sss="sudo systemctl status"
+	alias srt="sudo systemctl restart"
+	alias ssp="sudo systemctl stop"
+	alias see="sudo systemctl enable"
+	alias sen="sudo systemctl enable --now"
+	alias sust="systemctl --user start"
+	alias suss="systemctl --user status"
+	alias surt="systemctl --user restart"
+	alias susp="systemctl --user stop"
+	alias suee="systemctl --user enable"
+	alias suen="systemctl --user enable --now"
 fi
 
 zstyle :compinstall filename "$HOME/.zshrc"
 if [[ "$os" == "Darwin" ]]; then
-    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+	fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 fi
 fpath=($HOME/.config/zsh/completions $fpath)
 fpath=($HOME/.config/zsh/functions $fpath)

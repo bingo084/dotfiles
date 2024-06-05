@@ -6,7 +6,7 @@
     <string>com.metacubex.mihomo</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/bingo/.config/mihomo/mihomo</string>
+        <string>/opt/homebrew/bin/mihomo</string>
         <string>-d</string>
         <string>/Users/bingo/.config/mihomo</string>
     </array>

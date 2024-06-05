@@ -24,16 +24,6 @@
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"
-{{- if eq .chezmoi.os "darwin" }}
-{{ $version := (gitHubLatestRelease "MetaCubeX/mihomo").TagName -}}
-[".config/mihomo/mihomo"]
-    type = "file"
-    url = "{{ .github }}/MetaCubeX/mihomo/releases/download/{{ $version }}/mihomo-{{ .chezmoi.os }}-{{ .chezmoi.arch }}-{{ $version }}.gz"
-    executable = true
-    filter.command = "gzip"
-    filter.args = ["-d"]
-    refreshPeriod = "168h"
-{{- end }}
 [".config/mihomo/config.yaml"]
     type = "file"
     url = {{ (rbwFields "Subscribe").MihomoConfig.value | quote }}

@@ -56,7 +56,7 @@ if status is-interactive
   abbr -a ll "eza -l"
   abbr -a lla "eza -la"
   # alias chezmoi
-  set chezmoi_path $(chezmoi source-path)
+  set chezmoi_path $HOME/.local/share/chezmoi
   abbr -a cha "chezmoi add"
   abbr -a chc "cd $chezmoi_path"
   abbr -a chd "chezmoi diff"

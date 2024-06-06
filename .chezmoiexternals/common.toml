@@ -1,7 +1,3 @@
-[".config/zsh/plugins/fzf-zsh-completion.sh"]
-    type = "file"
-    url = "{{ .githubRaw }}/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
-    refreshPeriod = "168h"
 [".config/nvim"]
     type = "git-repo"
     url = "https://github.com/bingo084/nvim-config.git"
@@ -13,10 +9,6 @@
 ["bin"]
     type = "git-repo"
     url = "https://github.com/bingo084/script.git"
-    refreshPeriod = "168h"
-[".config/zsh/completions/_fzf"]
-    type = "file"
-    url = "{{ .githubRaw }}/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
     refreshPeriod = "168h"
 [".config/bat/themes"]
     type = "archive"

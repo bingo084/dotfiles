@@ -1,43 +1,73 @@
-HISTFILE=$HOME/.zsh_history
+HISTFILE=.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt extendedglob nomatch notify
+# Disable beep on error.
 unsetopt beep
+# Do not enter command lines into the history list if they are duplicates of the previous event.
+setopt hist_ignore_dups
+# Remove command lines from the history list when the first character on the line is a space.
+setopt hist_ignore_space
+# Share history between sessions immediately.
+setopt share_history
+# Make cd push the old directory onto the directory stack.
+setopt auto_pushd
+# Don’t push multiple copies of the same directory onto the directory stack.
+setopt pushd_ignore_dups
+# Exchanges the meanings of ‘+’ and ‘-’ when used with a number to specify a directory in the stack.
+setopt pushd_minus
+# Switch to Emacs mode.
 bindkey -e
 
-os="$(uname)"
-if [[ "$os" == "Darwin" ]]; then
-	zsh_plugins="/opt/homebrew/share"
-elif [[ "$os" == "Linux" ]]; then
-	zsh_plugins="/usr/share/zsh/plugins"
-fi
+# Control-x-e to open current line in $EDITOR, awesome when writting functions or editing multiline commands.
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
+if command -v brew &> /dev/null; then
+	fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fi
+fpath=($HOME/.config/zsh/completions $fpath)
+fpath=($HOME/.config/zsh/functions $fpath)
+autoload -Uz $fpath[1]/*(.:t)
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Set environment.
+export TERMINAL="kitty"
+export EDITOR="nvim"
+export PAGER="less -R"
+
+plugins=(
+  zsh-autosuggestions.zsh
+  fsh/fast-syntax-highlighting.plugin.zsh
+  zsh-history-substring-search.zsh
+  fzf-tab/fzf-tab.plugin.zsh
+)
+for plugin in "${plugins[@]}"; do
+  source $HOME/.config/zsh/plugins/$plugin
+done
 # zsh-autosuggestions
-source "$zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
-# zsh-syntax-highlighting
-source "$zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-# zsh-you-should-use
-source "$zsh_plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 # zsh-history-substring-search
-source "$zsh_plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=black,bold"
+export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+# starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
 # fzf
 source <(fzf --zsh)
-source "$HOME/.config/zsh/fzf-config.sh"
+source "$HOME/.config/zsh/fzf.sh"
 
 # atuin
 eval "$(atuin init zsh)"
 
 # zoxide
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd j zsh)"
 export _ZO_ECHO="1"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
     --exact --no-sort --bind=ctrl-z:ignore --cycle --keep-right \
@@ -46,27 +76,29 @@ export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
 
 # alias
 alias sudo="sudo "
+alias v="nvim"
 alias s="kitty +kitten ssh"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias fm="yazi"
 # alias eza
 if command -v eza &>/dev/null; then
-	alias ls="eza"
+	alias ls="eza --icons=auto"
 	alias tree="eza --tree"
 fi
-alias lsa="eza -a"
-alias ll="eza -l"
-alias lla="eza -la"
+alias lsa="ls -a"
+alias ll="ls -l"
+alias lla="ll -a"
 if command -v bat &>/dev/null; then
 	alias cat="bat"
 fi
 # alias chezmoi
-chezmoi_path=$(chezmoi source-path)
+chezmoi_path=$HOME/.local/share/chezmoi
 alias cha="chezmoi add"
 alias chc="cd $chezmoi_path"
 alias chd="chezmoi diff"
-alias chf="yazi $chezmoi_path"
+alias che="chezmoi edit"
+alias chf="fm $chezmoi_path"
 alias chfg="chezmoi forget"
 alias chg="lazygit -p $chezmoi_path"
 alias chh="chezmoi help | $PAGER"
@@ -79,7 +111,7 @@ alias chs="chezmoi status"
 alias cht="chezmoi execute-template"
 alias chu="chezmoi update"
 # alias systemctl
-if [[ "$os" == "Linux" ]]; then
+if command -v systemctl &> /dev/null; then
 	alias sst="sudo systemctl start"
 	alias sss="sudo systemctl status"
 	alias srt="sudo systemctl restart"
@@ -93,13 +125,3 @@ if [[ "$os" == "Linux" ]]; then
 	alias suee="systemctl --user enable"
 	alias suen="systemctl --user enable --now"
 fi
-
-zstyle :compinstall filename "$HOME/.zshrc"
-if [[ "$os" == "Darwin" ]]; then
-	fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-fi
-fpath=($HOME/.config/zsh/completions $fpath)
-fpath=($HOME/.config/zsh/functions $fpath)
-autoload -Uz $fpath[1]/*(.:t)
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'

@@ -1,9 +1,4 @@
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/bin/clash:$PATH"
-export PATH="$HOME/bin/dwm:$PATH"
-export PATH="$HOME/bin/statusbar:$PATH"
-export PATH="$HOME/bin/rime:$PATH"
+typeset -U path
+path=( ~/bin ~/bin/statusbar ~/bin/rime $path)
 
-export TERMINAL="kitty"
-export EDITOR="nvim"
-export PAGER="less -R"
+ZDOTDIR=$HOME/.config/zsh

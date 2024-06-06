@@ -1,0 +1,30 @@
+[".config/zsh/plugins/fzf-zsh-completion.sh"]
+    type = "file"
+    url = "{{ .githubRaw }}/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
+    refreshPeriod = "168h"
+[".config/zsh/plugins/zsh-autosuggestions.zsh"]
+    type = "file"
+    url = "{{ .githubRaw }}/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
+    refreshPeriod = "168h"
+[".config/zsh/plugins/fsh"]
+    type = "git-repo"
+    url = "{{ .github }}/zdharma-continuum/fast-syntax-highlighting.git"
+    refreshPeriod = "168h"
+[".config/zsh/plugins/fsh-themes"]
+    type = "archive"
+    url = "https://github.com/catppuccin/zsh-fsh/archive/main.zip"
+    stripComponents = 2
+    include = ["*/themes/*"]
+    refreshPeriod = "168h"
+[".config/zsh/plugins/zsh-history-substring-search.zsh"]
+    type = "file"
+    url = "{{ .githubRaw }}/zsh-users/zsh-history-substring-search/master/zsh-history-substring-search.zsh"
+    refreshPeriod = "168h"
+[".config/zsh/plugins/fzf-tab"]
+    type = "git-repo"
+    url = "{{ .github }}/Aloxaf/fzf-tab.git"
+    refreshPeriod = "168h"
+[".config/zsh/completions/_fzf"]
+    type = "file"
+    url = "{{ .githubRaw }}/lmburns/dotfiles/master/.config/zsh/completions/_fzf"
+    refreshPeriod = "168h"

@@ -52,7 +52,7 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	*) git log --color=always $word ;;
 	esac'
 # homebrew
-zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info|list):*-argument-rest' fzf-preview 'brew info $word'
 # pacman and paru
 zstyle ':fzf-tab:complete:pacman:*' fzf-preview \
   '(out=$(pacman -Qi $word) 2>/dev/null && echo $out) || (out=$(pacman -Si $word) 2>/dev/null && echo $out) || echo "$word"'

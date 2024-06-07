@@ -7,9 +7,9 @@
 [interactive]
   diffFilter = delta --color-only
 [include]
-  path = ~/.config/git/themes.gitconfig
+  path = ~/.config/git/themes/catppuccin.gitconfig
 [delta]
-  features = arctic-fo
+  features = catppuccin-macchiato
   navigate = true
 [merge]
   conflictstyle = diff3

@@ -20,3 +20,7 @@
     type = "file"
     url = {{ (rbwFields "Subscribe").MihomoConfig.value | quote }}
     refreshPeriod = "168h"
+[".config/git/themes.gitconfig"]
+    type = "file"
+    url = "{{ .githubRaw }}/dandavison/delta/master/themes.gitconfig"
+    refreshPeriod = "168h"

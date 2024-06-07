@@ -3,6 +3,18 @@
 	email = bingo084@outlook.com
 [core]
 	autocrlf = input
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[include]
+  path = ~/.config/git/themes.gitconfig
+[delta]
+  features = arctic-fo
+  navigate = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
 [pull]
 	rebase = true
 [rebase]

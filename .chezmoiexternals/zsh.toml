@@ -1,7 +1,3 @@
-[".config/zsh/plugins/fzf-zsh-completion.sh"]
-    type = "file"
-    url = "{{ .githubRaw }}/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
-    refreshPeriod = "168h"
 [".config/zsh/plugins/zsh-autosuggestions.zsh"]
     type = "file"
     url = "{{ .githubRaw }}/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
@@ -12,7 +8,7 @@
     refreshPeriod = "168h"
 [".config/zsh/plugins/fsh-themes"]
     type = "archive"
-    url = "https://github.com/catppuccin/zsh-fsh/archive/main.zip"
+    url = "{{ .github }}/catppuccin/zsh-fsh/archive/main.zip"
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"

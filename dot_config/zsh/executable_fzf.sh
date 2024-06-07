@@ -6,10 +6,9 @@ FZF_THEME=" \
 
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --hidden"
 export FZF_DEFAULT_OPTS="$FZF_THEME \
-  --height 50% --reverse --border --inline-info --ansi \
+  --height 25 --reverse --inline-info --ansi --select-1 --exit-0 \
   --bind=alt-d:preview-half-page-down,alt-u:preview-half-page-up \
-  --bind=ctrl-d:half-page-down,ctrl-u:half-page-up \
-  --select-1 --exit-0"
+  --bind=ctrl-d:half-page-down,ctrl-u:half-page-up"
 
 # fzf-tab
 # set descriptions format to enable group support
@@ -24,7 +23,7 @@ zstyle ':fzf-tab:*' prefix ''
 # give a preview of commandline arguments when completing `kill`
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
-  '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+	'[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 # show systemd unit status
 zstyle ':fzf-tab:complete:systemctl-(status|(re|)start|(dis|en)able):*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
@@ -55,17 +54,17 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info|list):*-argument-rest' fzf-preview 'brew info $word'
 # pacman and paru
 zstyle ':fzf-tab:complete:pacman:*' fzf-preview \
-  '(out=$(pacman -Qi $word) 2>/dev/null && echo $out) || (out=$(pacman -Si $word) 2>/dev/null && echo $out) || echo "$word"'
+	'(out=$(pacman -Qi $word) 2>/dev/null && echo $out) || (out=$(pacman -Si $word) 2>/dev/null && echo $out) || echo "$word"'
 zstyle ':fzf-tab:complete:paru:*' fzf-preview \
-  '(out=$(paru -Qi $word) 2>/dev/null && echo $out) || (out=$(paru -Si $word) 2>/dev/null && echo $out) || echo "$word"'
+	'(out=$(paru -Qi $word) 2>/dev/null && echo $out) || (out=$(paru -Si $word) 2>/dev/null && echo $out) || echo "$word"'
 # tldr
 zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
 # commands
 zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-  '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+	'(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 # run-help and man
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bash ~/.config/zsh/file_preview.sh ${(Q)realpath}'
-zstyle ':fzf-tab:complete:*:*' fzf-flags --height=50%
+zstyle ':fzf-tab:complete:*:*' fzf-flags --height=25

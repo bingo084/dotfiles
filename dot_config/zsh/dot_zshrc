@@ -9,12 +9,6 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 # Share history between sessions immediately.
 setopt share_history
-# Make cd push the old directory onto the directory stack.
-setopt auto_pushd
-# Don’t push multiple copies of the same directory onto the directory stack.
-setopt pushd_ignore_dups
-# Exchanges the meanings of ‘+’ and ‘-’ when used with a number to specify a directory in the stack.
-setopt pushd_minus
 # Switch to Emacs mode.
 bindkey -e
 
@@ -67,7 +61,7 @@ source "$HOME/.config/zsh/fzf.sh"
 eval "$(atuin init zsh)"
 
 # zoxide
-eval "$(zoxide init --cmd j zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 export _ZO_ECHO="1"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS \
     --exact --no-sort --bind=ctrl-z:ignore --cycle --keep-right \

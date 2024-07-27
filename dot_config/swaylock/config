@@ -1,0 +1,42 @@
+# options
+ignore-empty-password
+show-failed-attempts
+fade-in=1
+grace=5
+# apperance
+indicator
+clock
+datestr=%a, %b %e
+screenshots
+font=JetBrainsMono NF SemiBold
+indicator-radius=160
+indicator-thickness=7
+indicator-y-position=370
+indicator-image=/home/bingo/.face
+effect-blur=8x6
+effect-vignette=0.8:0.8
+# inside color
+inside-color=#00000030
+inside-ver-color=#00000030
+inside-wrong-color=#00000030
+inside-clear-color=#00000030
+# line color
+line-color=#00000000
+line-ver-color=#00000000
+line-wrong-color=#00000000
+line-clear-color=#00000000
+# ring color
+ring-color=#00000000
+ring-ver-color=#00000000
+ring-wrong-color=#00000000
+ring-clear-color=#00000000
+# text color
+text-color=#ffffffd0
+text-caps-lock-color=#fab387
+text-ver-color=#89b4fa
+text-wrong-color=#f38ba8
+text-clear-color=#eba0ac
+# other color
+separator-color=#00000000
+key-hl-color=#a6e3a1
+bs-hl-color=#eba0ac

@@ -24,6 +24,7 @@ README.md
 .config/wal/
 .config/hypr/
 .config/xremap/
+.config/swaylock/
 {{- end }}
 
 key.txt.age

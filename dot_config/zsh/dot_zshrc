@@ -74,7 +74,6 @@ alias v="nvim"
 alias s="kitty +kitten ssh"
 alias lg="lazygit"
 alias ld="lazydocker"
-alias fm="yazi"
 # alias eza
 if command -v eza &>/dev/null; then
 	alias ls="eza --icons=auto"

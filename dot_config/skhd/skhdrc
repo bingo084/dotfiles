@@ -15,10 +15,10 @@ alt - m : yabai -m window --focus stack.prev
 # cmd - k : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
 
 # 交换窗口
-shift + alt - h : yabai -m window --swap west
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - l : yabai -m window --swap east
+# shift + alt - h : yabai -m window --swap west
+# shift + alt - j : yabai -m window --swap south
+# shift + alt - k : yabai -m window --swap north
+# shift + alt - l : yabai -m window --swap east
 
 # 移动窗口
 shift + cmd - h : yabai -m window --warp west
@@ -27,7 +27,7 @@ shift + cmd - k : yabai -m window --warp north
 shift + cmd - l : yabai -m window --warp east
 
 # 旋转窗口布局
-alt - r : yabai -m space --rotate 270
+# alt - r : yabai -m space --rotate 270
 
 # 全屏
 cmd - f : yabai -m window --toggle zoom-fullscreen

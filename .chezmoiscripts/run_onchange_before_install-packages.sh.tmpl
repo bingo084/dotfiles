@@ -57,7 +57,7 @@
 {{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
 #!/bin/bash
 echo ":: Updating system"
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 {{ $params := dict "packages" .packages.arch "group" "Arch packages"}}
 {{- template "process_packages" $params -}}
 {{- end -}}

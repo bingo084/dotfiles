@@ -2,7 +2,7 @@
   {{- $archPkg := list -}} {{- $archDeps := list -}} {{- $aurPkg := list -}} {{- $aurDeps := list -}}
   {{- $deps := get . "deps" -}} {{- $aur := get . "aur" -}} {{- $group := get . "group" -}}
 
-  echo "Starting installation of [{{ .group }}]" {{- "\n" -}}
+  echo ":: Starting installation of [{{ .group }}]" {{- "\n" -}}
   {{- range .packages -}}
     {{- if kindIs "string" . -}}
       {{- if and $deps $aur -}}
@@ -43,7 +43,7 @@
     {{- end -}}
   {{- end -}}
 
-  echo "Finished installation of [{{ .group }}]" {{- "\n" -}}
+  echo ":: Finished installation of [{{ .group }}]" {{- "\n" -}}
 {{- end -}}
 
 {{- define "install_packages" -}}
@@ -56,7 +56,7 @@
 
 {{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
 #!/bin/bash
-echo "Updating system"
+echo ":: Updating system"
 sudo pacman -Syu
 {{ $params := dict "packages" .packages.arch "group" "Arch packages"}}
 {{- template "process_packages" $params -}}

@@ -51,7 +51,7 @@ keymap:
       C-a: { with_mark: home }
       C-e: { with_mark: end }
       # Page up/down
-      M-v: { with_mark: pageup }
+      # M-v: { with_mark: pageup }
       C-v: { with_mark: pagedown }
       # Newline
       C-m: enter

@@ -13,6 +13,7 @@ arch = [
   ] },
   { group = "Desktop environment", packages = [
     "blueman", # Bluetooth
+    "cliphist", # Clipboard history
     "dunst", # Notification
     "mission-center",
     "mpv",

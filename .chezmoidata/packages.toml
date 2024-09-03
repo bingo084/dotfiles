@@ -1,0 +1,127 @@
+[packages]
+arch = [
+  { group = "Package manager", packages = [
+    "chezmoi",
+    "pacman-contrib", # Contributed scripts and tools for pacman systems (pactree, checkupdates, etc.)
+    "paru",
+    "pkgstats",
+  ] },
+
+  { group = "Android", packages = [
+    "android-tools", # ADB command (adb, fastboot, etc.)
+    "android-udev",  # Mount device
+  ] },
+  { group = "Desktop environment", packages = [
+    "blueman", # Bluetooth
+    "dunst", # Notification
+    "mission-center",
+    "mpv",
+    "network-manager-applet", # Network
+    "polkit-kde-agent", # Authentication agent
+    "rofi-wayland", # App launcher
+    "swaylock-effects", # Lock screen
+    "swww", # Wallpaper
+    "telegram-desktop",
+    "udiskie", # Automatically mounting
+    "waybar", # Status bar
+    "xremap-wlroots-bin",
+    { group = "Brightness", packages = [
+      "brightnessctl",
+      "ddcutil",       # External monitor brightness
+    ] },
+    { group = "Browser", packages = [
+      "firefox",
+      { name = "google-chrome", aur = true },
+    ] },
+    { group = "File manager", packages = [
+      "gvfs-mtp",
+      "nautilus", # File manager
+      "vsftpd", # FTP
+      { group = "Yazi", deps = true, packages = [
+        "fd",                            # File serach
+        "ffmpegthumbnailer",             # Video thumbnails
+        "fzf",                           # Directory jumping
+        "imagemagick",                   # SVG, Font, HEIC, and JPEG XL preview
+        "jq",                            # JSON preview
+        "p7zip",                         # Archive extraction and preview
+        "poppler",                       # PDF preview
+        "ripgrep",                       # File content search
+        "zoxide",                        # Directory jumping
+        { name = "ouch", deps = false }, # Yazi plugin preview archives
+        { name = "yazi", deps = false },
+      ] },
+    ] },
+    { group = "Hyprland", packages = [
+      "hypridle",
+      "hyprland",
+      "hyprlock",
+      "hyprshot",
+      "xdg-desktop-portal-hyprland",
+      { name = "hyprpicker", deps = true },
+    ] },
+    { group = "Input method", packages = [
+      "fcitx5-im",
+      "fcitx5-rime",
+      "rime-double-pinyin",
+      "rime-emoji",
+      { name = "fcitx5-skin-fluentlight-git", aur = true },
+    ] },
+    { group = "Sound", packages = [
+      "alsa-utils",     # Advanced Linux Sound Architecture - Utilities
+      "pavucontrol",    # Simple GTK volume control tool ("mixer") for PulseAudio.
+      "pipewire-alsa",  # Low-latency audio/video router and processor - ALSA configuration
+      "pipewire-audio", # Low-latency audio/video router and processor - Audio support
+      "pipewire-pulse", # Low-latency audio/video router and processor - PulseAudio replacement
+    ] },
+    { name = "linuxqq", aur = true },
+    { name = "wlogout", aur = true }, # Logout menu
+  ] },
+  { group = "Driver", packages = [
+    { group = "Intel", packages = [
+      "intel-media-driver", # VA-API
+      "intel-ucode",
+      "libva-utils",        # Intel VA-API Media Applications and Scripts for libva
+      "mesa",               # Open-source OpenGL drivers
+      "vulkan-intel",       # Open-source Vulkan driver for Intel GPUs
+    ] },
+    { group = "Nvidia", packages = [
+      "libva-nvidia-driver", # VA-API implementation that uses NVDEC as a backend
+      "nvidia-dkms",
+      "nvidia-prime",
+      "nvidia-settings",     # Tool for configuring the NVIDIA graphics driver
+    ] },
+  ] },
+  { group = "Fonts", packages = [
+    "noto-fonts-cjk",
+    "noto-fonts-emoji",
+    "noto-fonts-extra",
+    "ttf-droid",
+    "ttf-jetbrains-mono-nerd",
+  ] },
+  { group = "Language", packages = [
+    "npm",
+    "rust",
+  ] },
+  { group = "Terminal", packages = [
+    "atuin",
+    "bat",
+    "btop",
+    "clash-meta",
+    "dust",         # A more intuitive version of du in rust
+    "eza",
+    "fzf",
+    "fzf-tab-git",
+    "git",
+    "git-delta",
+    "hugo",
+    "kitty",
+    "man-db",
+    "neovim",
+    "python-pywal",
+    "starship",
+    "tldr",
+    "trash-cli",
+    "zoxide",
+    "zsh",
+  ] },
+]

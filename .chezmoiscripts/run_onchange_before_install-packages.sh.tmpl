@@ -1,0 +1,61 @@
+{{- define "process_packages" -}}
+  {{- $archPkg := list -}} {{- $archDeps := list -}} {{- $aurPkg := list -}} {{- $aurDeps := list -}}
+  {{- $deps := get . "deps" -}} {{- $aur := get . "aur" -}} {{- $group := get . "group" -}}
+
+  echo "Starting installation of [{{ .group }}]" {{- "\n" -}}
+  {{- range .packages -}}
+    {{- if kindIs "string" . -}}
+      {{- if and $deps $aur -}}
+        {{ $aurDeps = append $aurDeps . }}
+      {{- else if $deps -}}
+        {{ $archDeps = append $archDeps . }}
+      {{- else if $aur -}}
+        {{ $aurPkg = append $aurPkg . }}
+      {{- else -}}
+        {{ $archPkg = append $archPkg . }}
+      {{- end -}}
+    {{- else if and (kindIs "map" .) (not (hasKey . "group")) -}}
+      {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
+      {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
+      {{- if and .deps .aur -}}
+        {{ $aurDeps = append $aurDeps .name }}
+      {{- else if .deps -}}
+        {{ $archDeps = append $archDeps .name }}
+      {{- else if .aur -}}
+        {{ $aurPkg = append $aurPkg .name }}
+      {{- else -}}
+        {{ $archPkg = append $archPkg .name }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- template "install_packages" (dict "packages" $archPkg) -}}
+  {{- template "install_packages" (dict "packages" $archDeps "deps" true) -}}
+  {{- template "install_packages" (dict "packages" $aurPkg "aur" true) -}}
+  {{- template "install_packages" (dict "packages" $aurDeps "deps" true "aur" true) -}}
+
+  {{- range .packages -}}
+    {{- if and (kindIs "map" .) (hasKey . "group") -}}
+      {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
+      {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
+      {{- $_ := set . "group" (print $group " - " .group) -}}
+      {{- template "process_packages" . -}}
+    {{- end -}}
+  {{- end -}}
+
+  echo "Finished installation of [{{ .group }}]" {{- "\n" -}}
+{{- end -}}
+
+{{- define "install_packages" -}}
+  {{- if .packages -}}
+    {{ if get . "aur" -}} paru -Sa {{ else -}} sudo pacman -S {{ end -}}
+    --noconfirm --needed {{- if get . "deps" }} --asdeps {{ else }} {{ end -}}
+    {{- join " " .packages }} {{- "\n" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
+#!/bin/bash
+{{ $params := dict "packages" .packages.arch "group" "Arch packages"}}
+{{- template "process_packages" $params -}}
+{{- end -}}

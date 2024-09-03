@@ -24,7 +24,7 @@ arch = [
     "telegram-desktop",
     "udiskie", # Automatically mounting
     "waybar", # Status bar
-    "xremap-wlroots-bin",
+    "wlogout", # Logout menu
     { group = "Brightness", packages = [
       "brightnessctl",
       "ddcutil",       # External monitor brightness
@@ -55,9 +55,9 @@ arch = [
       "hypridle",
       "hyprland",
       "hyprlock",
-      "hyprshot",
       "xdg-desktop-portal-hyprland",
       { name = "hyprpicker", deps = true },
+      { name = "hyprshot", aur = true },
     ] },
     { group = "Input method", packages = [
       "fcitx5-im",
@@ -74,7 +74,7 @@ arch = [
       "pipewire-pulse", # Low-latency audio/video router and processor - PulseAudio replacement
     ] },
     { name = "linuxqq", aur = true },
-    { name = "wlogout", aur = true }, # Logout menu
+    { name = "xremap-wlroots-bin", aur = true },
   ] },
   { group = "Driver", packages = [
     { group = "Intel", packages = [

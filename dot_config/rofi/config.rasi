@@ -1,0 +1,131 @@
+configuration {
+    modi:                       "drun,run,window,ssh";
+    show-icons:                 true;
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w} · {c} · {t}";
+
+    // General
+/*	threads: 0;*/
+/*	modes: "window,drun,run,ssh";*/
+/*  case-sensitive: false;*/
+/*	cycle: true;*/
+/*	filter: ;*/
+/*	cache-dir: ;*/
+	scroll-method: 1;
+/*	normalize-match: false;*/
+	show-icons: true;
+	icon-theme: "hicolor";
+/*	steal-focus: false;*/
+/*	refilter-timeout-limit: 300;*/
+
+    // Matching
+	matching: "fuzzy";
+/*	tokenize: true;*/
+/*	drun-categories: ;*/
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-show-actions: false;*/
+/*	window-match-fields: "all";*/
+/*	matching-negate-char: '-' /* unsupported */;*/
+
+    // Layout and Theming
+	font: "JetBrainsMono Nerd Font Mono 14";
+/*	location: 0;*/
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+/*	sidebar-mode: false;*/
+/*	hover-select: false;*/
+/*	eh: 1;*/
+/*	auto-select: false;*/
+/*	m: "-5";*/
+/*	dpi: -1;*/
+
+    // Pattern setting
+/*	terminal: "rofi-sensible-terminal";*/
+/*	ssh-client: "ssh";*/
+
+    // SSH settings
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
+/*	parse-hosts: false;*/
+/*	parse-known-hosts: true;*/
+
+    // Run settings
+/*	run-command: "{cmd}";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	run-list-command: "";*/
+
+    // Window switcher settings
+/*	window-format: "{w}    {c}   {t}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	window-thumbnail: false;*/
+
+    // Combi settins
+/*	combi-modes: "window,run";*/
+/*	combi-display-format: "{mode} {text}";*/
+/*	combi-hide-mode-prefix: false;*/
+
+    // History and Sorting
+/*	disable-history: false;*/
+	sort: true;
+	sorting-method: "fzf";
+/*	max-history-size: 25;*/
+
+    // File browser settings
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+
+    // Other
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
+/*	drun-url-launcher: "xdg-open";*/
+/*	pid: "/run/user/1000/rofi.pid";*/
+/*	display-window: ;*/
+/*	display-run: ;*/
+/*	display-ssh: ;*/
+/*	display-drun: ;*/
+/*	display-combi: ;*/
+/*	display-keys: ;*/
+/*	display-filebrowser: ;*/
+/*	click-to-exit: true;*/
+/*	xserver-i300-workaround: false;*/
+/*	ignored-prefixes: "";*/
+/*	application-fallback-icon: ;*/
+
+  // Keyboard Bindings
+	kb-clear-line: "Control+U";
+	kb-remove-word-back: "Control+w";
+	kb-remove-word-forward: "Alt+d";
+	kb-mode-next: "Shift+Right,Control+apostrophe,Control+Tab";
+	kb-mode-previous: "Shift+Left,Control+semicolon,Control+ISO_Left_Tab";
+	kb-page-prev: "Control+P";
+	kb-page-next: "Control+N";
+	kb-select-1: "Control+1";
+	kb-select-2: "Control+2";
+	kb-select-3: "Control+3";
+	kb-select-4: "Control+4";
+	kb-select-5: "Control+5";
+	kb-select-6: "Control+6";
+	kb-select-7: "Control+7";
+	kb-select-8: "Control+8";
+	kb-select-9: "Control+9";
+	kb-select-10: "Control+0";
+/*	ml-row-left: "ScrollLeft";*/
+/*	ml-row-right: "ScrollRight";*/
+/*	ml-row-up: "ScrollUp";*/
+/*	ml-row-down: "ScrollDown";*/
+/*	me-select-entry: "MousePrimary";*/
+/*	me-accept-entry: "MouseDPrimary";*/
+/*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  icon {
+      theme: "hicolor";
+  }
+}
+
+@theme "my-theme-2.rasi"

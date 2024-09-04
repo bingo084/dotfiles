@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Not running in the chezmoi init, exit
+[ "$CHEZMOI_COMMAND" != "init" ] && exit 0
+
 # Check if 'rbw' command exists
 if command -v rbw >/dev/null 2>&1; then
     echo ":: rbw is already installed, proceeding to initialize..."

@@ -7,7 +7,6 @@ README.md
 .config/yabai/
 .config/kitty/macos-launch-services-cmdline
 .config/fzf/executable_brew_interactive.sh
-.config/mihomo/com.metacubex.mihomo.plist
 {{- end }}
 
 # ignore linux special configuration file on other machine

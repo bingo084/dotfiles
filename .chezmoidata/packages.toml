@@ -1,6 +1,7 @@
 [packages]
 arch = [
   { group = "Package manager", packages = [
+    "base-devel",     # 	Basic tools to build Arch Linux packages
     "chezmoi",
     "pacman-contrib", # Contributed scripts and tools for pacman systems (pactree, checkupdates, etc.)
     "paru",

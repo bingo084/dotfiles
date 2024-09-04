@@ -87,10 +87,11 @@ arch = [
       "vulkan-intel",       # Open-source Vulkan driver for Intel GPUs
     ] },
     { group = "Nvidia", packages = [
-      "libva-nvidia-driver", # VA-API implementation that uses NVDEC as a backend
+      "libva-nvidia-driver",                   # VA-API implementation that uses NVDEC as a backend
       "nvidia-dkms",
       "nvidia-prime",
-      "nvidia-settings",     # Tool for configuring the NVIDIA graphics driver
+      "nvidia-settings",                       # Tool for configuring the NVIDIA graphics driver
+      { name = "linux-headers", deps = true },
     ] },
   ] },
   { group = "Fonts", packages = [

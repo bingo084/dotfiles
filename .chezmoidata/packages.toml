@@ -15,6 +15,7 @@ arch = [
   { group = "Desktop environment", packages = [
     "blueman", # Bluetooth
     "cliphist", # Clipboard history
+    "wtype", # Simulate paste shortcuts
     "dunst", # Notification
     "mission-center",
     "mpv",

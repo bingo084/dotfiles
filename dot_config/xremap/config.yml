@@ -52,7 +52,7 @@ keymap:
       C-e: { with_mark: end }
       # Page up/down
       # M-v: { with_mark: pageup }
-      C-v: { with_mark: pagedown }
+      # C-v: { with_mark: pagedown }
       # Newline
       C-m: enter
       C-j: enter

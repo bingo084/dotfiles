@@ -15,7 +15,6 @@ arch = [
   { group = "Desktop environment", packages = [
     "blueman", # Bluetooth
     "cliphist", # Clipboard history
-    "wtype", # Simulate paste shortcuts
     "dunst", # Notification
     "mission-center",
     "mpv",
@@ -28,6 +27,7 @@ arch = [
     "udiskie", # Automatically mounting
     "waybar", # Status bar
     "wlogout", # Logout menu
+    "wtype", # Simulate paste shortcuts
     { group = "Brightness", packages = [
       "brightnessctl",
       "ddcutil",       # External monitor brightness
@@ -104,6 +104,7 @@ arch = [
     { name = "otf-font-awesome", deps = true }, # Waybar icons
   ] },
   { group = "Language", packages = [
+    "go",
     "npm",
     "rust",
   ] },
@@ -126,6 +127,7 @@ arch = [
     "starship",
     "tldr",
     "trash-cli",
+    "unzip",
     "zoxide",
     "zsh",
   ] },

@@ -36,10 +36,10 @@ aur_deps=($(filter_packages {{ join " " $aurDeps }}))
 
 if [ ${#arch_pkg[@]} -gt 0 ] || [ ${#arch_deps[@]} -gt 0 ] || [ ${#aur_pkg[@]} -gt 0 ] || [ ${#aur_deps[@]} -gt 0 ]; then
   echo ":: Starting installation of [{{ .group }}]"
-  install_packages arch_pkg
-  install_packages arch_deps true
-  install_packages aur_pkg false true
-  install_packages aur_deps true true
+  install_packages arch_pkg[@]
+  install_packages arch_deps[@] true
+  install_packages aur_pkg[@] false true
+  install_packages aur_deps[@] true true
   echo ":: Finished installation of [{{ .group }}]"
 fi
 {{- "\n" -}}

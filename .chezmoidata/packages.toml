@@ -41,16 +41,17 @@ arch = [
       "nautilus", # File manager
       "vsftpd", # FTP
       { group = "Yazi", deps = true, packages = [
-        "fd",                            # File serach
-        "ffmpegthumbnailer",             # Video thumbnails
-        "fzf",                           # Directory jumping
-        "imagemagick",                   # SVG, Font, HEIC, and JPEG XL preview
-        "jq",                            # JSON preview
-        "p7zip",                         # Archive extraction and preview
-        "poppler",                       # PDF preview
-        "ripgrep",                       # File content search
-        "zoxide",                        # Directory jumping
-        { name = "ouch", deps = false }, # Yazi plugin preview archives
+        "fd",                                           # File serach
+        "ffmpegthumbnailer",                            # Video thumbnails
+        "fzf",                                          # Directory jumping
+        "imagemagick",                                  # SVG, Font, HEIC, and JPEG XL preview
+        "jq",                                           # JSON preview
+        "p7zip",                                        # Archive extraction and preview
+        "poppler",                                      # PDF preview
+        "ripgrep",                                      # File content search
+        "zoxide",                                       # Directory jumping
+        { name = "ouch", deps = false },                # Yazi plugin preview archives
+        { name = "perl-image-exiftool", deps = false }, # Metadata preview
         { name = "yazi", deps = false },
       ] },
     ] },

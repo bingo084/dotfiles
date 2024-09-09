@@ -64,7 +64,10 @@ arch = [
       { name = "hyprshot", aur = true },
     ] },
     { group = "Input method", packages = [
-      "fcitx5-im",
+      "fcitx5",
+      "fcitx5-configtool",
+      "fcitx5-gtk",
+      "fcitx5-qt",
       "fcitx5-rime",
       "rime-double-pinyin",
       "rime-emoji",

@@ -77,7 +77,9 @@ if [ "$CHEZMOI_COMMAND" = "init" ]; then
   sudo pacman -Syu --noconfirm
 fi
 
-exclude_pattern=$(IFS="|"; echo "$(pacman -Qq)")
+exclude_pattern=$(pacman -Qq | sed 's/^/^/;s/$/$/' | paste -sd '|')
 {{ $params := dict "packages" .packages.arch "group" "Arch packages"}}
 {{- template "process_packages" $params -}}
 {{- end -}}
+
+# vim:ft=bash:

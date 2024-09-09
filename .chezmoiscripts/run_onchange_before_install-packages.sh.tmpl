@@ -1,9 +1,9 @@
 {{- define "process_packages" -}}
   {{- $archPkg := list -}} {{- $archDeps := list -}} {{- $aurPkg := list -}} {{- $aurDeps := list -}}
-  {{- $deps := get . "deps" -}} {{- $aur := get . "aur" -}} {{- $group := get . "group" -}}
+  {{- $deps := get . "deps" -}} {{- $aur := get . "aur" -}} {{- $group := .group -}} {{- $installed := .installed -}}
 
   {{- range .packages -}}
-    {{- if kindIs "string" . -}}
+    {{- if and (kindIs "string" .) (not (has . $installed)) -}}
       {{- if and $deps $aur -}}
         {{ $aurDeps = append $aurDeps . }}
       {{- else if $deps -}}
@@ -13,7 +13,7 @@
       {{- else -}}
         {{ $archPkg = append $archPkg . }}
       {{- end -}}
-    {{- else if and (kindIs "map" .) (not (hasKey . "group")) -}}
+    {{- else if and (kindIs "map" .) (not (hasKey . "group")) (not (has .name $installed)) -}}
       {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
       {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
       {{- if and .deps .aur -}}
@@ -28,58 +28,42 @@
     {{- end -}}
   {{- end -}}
 
-{{- "\n" -}}
-arch_pkg=($(filter_packages {{ join " " $archPkg }}))
-arch_deps=($(filter_packages {{ join " " $archDeps }}))
-aur_pkg=($(filter_packages {{ join " " $aurPkg }}))
-aur_deps=($(filter_packages {{ join " " $aurDeps }}))
-
-if [ ${#arch_pkg[@]} -gt 0 ] || [ ${#arch_deps[@]} -gt 0 ] || [ ${#aur_pkg[@]} -gt 0 ] || [ ${#aur_deps[@]} -gt 0 ]; then
-  echo ":: Starting installation of [{{ .group }}]"
-  install_packages arch_pkg[@]
-  install_packages arch_deps[@] true
-  install_packages aur_pkg[@] false true
-  install_packages aur_deps[@] true true
-  echo ":: Finished installation of [{{ .group }}]"
-fi
-{{- "\n" -}}
+  {{- if or $archPkg $archDeps $aurPkg $aurPkg -}}
+    echo ":: Starting installation of [{{ .group }}]" {{- "\n" -}}
+    {{- template "install_packages" (dict "packages" $archPkg) -}}
+    {{- template "install_packages" (dict "packages" $archDeps "deps" true) -}}
+    {{- template "install_packages" (dict "packages" $aurPkg "aur" true) -}}
+    {{- template "install_packages" (dict "packages" $aurDeps "deps" true "aur" true) -}}
+    echo ":: Finished installation of [{{ .group }}]" {{- "\n" -}}
+  {{- end -}}
 
   {{- range .packages -}}
     {{- if and (kindIs "map" .) (hasKey . "group") -}}
       {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
       {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
       {{- $_ := set . "group" (print $group " - " .group) -}}
+      {{- $_ := set . "installed" $installed -}}
       {{- template "process_packages" . -}}
     {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "install_packages" -}}
+  {{- if .packages -}}
+    {{ if get . "aur" -}} paru -Sa {{ else -}} sudo pacman -S {{ end -}}
+    --noconfirm --needed {{- if get . "deps" }} --asdeps {{ else }} {{ end -}}
+    {{- join " " .packages }} {{- "\n" -}}
   {{- end -}}
 {{- end -}}
 
 {{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
 #!/bin/bash
 
-filter_packages () {
-  echo $(printf "%s\n" "$@" | grep -v -E "$exclude_pattern")
-}
-
-install_packages() {
-  local packages=("${!1}")
-  local options=("--noconfirm" "--needed")
-  [ "$2" = true ] && options+=("--asdeps")
-
-  if [ ${#packages[@]} -gt 0 ]; then
-    local cmd=$( [ "$3" = true ] && echo "paru -Sa" || echo "sudo pacman -S" )
-    $cmd "${options[@]}" "${packages[@]}"
-  fi
-}
-
 if [ "$CHEZMOI_COMMAND" = "init" ]; then
   echo ":: Updating system"
   sudo pacman -Syu --noconfirm
 fi
-
-exclude_pattern=$(pacman -Qq | sed 's/^/^/;s/$/$/' | paste -sd '|')
-{{ $params := dict "packages" .packages.arch "group" "Arch packages"}}
+{{ $installed := splitList "\n" (output "pacman" "-Qq") }}
+{{ $params := dict "packages" .packages.arch "group" "Arch packages" "installed" $installed }}
 {{- template "process_packages" $params -}}
 {{- end -}}
-
-# vim:ft=bash:

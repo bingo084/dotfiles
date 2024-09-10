@@ -65,6 +65,9 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 # run-help and man
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
-
+# file
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bash ~/.config/zsh/file_preview.sh ${(Q)realpath}'
 zstyle ':fzf-tab:complete:*:*' fzf-flags --height=25
+# disable preview for command options and subcommands
+zstyle ':fzf-tab:complete:*:options' fzf-preview 
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview

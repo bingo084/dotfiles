@@ -79,6 +79,7 @@ arch = [
       "pipewire-alsa",  # Low-latency audio/video router and processor - ALSA configuration
       "pipewire-audio", # Low-latency audio/video router and processor - Audio support
       "pipewire-pulse", # Low-latency audio/video router and processor - PulseAudio replacement
+      "sof-firmware",   # Sound Open Firmware
     ] },
     { name = "linuxqq", aur = true },
     { name = "xremap-wlroots-bin", aur = true },

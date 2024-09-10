@@ -59,6 +59,7 @@ arch = [
       "hypridle",
       "hyprland",
       "hyprlock",
+      "socat",                              # Monitor hyprland sock
       "xdg-desktop-portal-hyprland",
       { name = "hyprpicker", deps = true },
       { name = "hyprshot", aur = true },

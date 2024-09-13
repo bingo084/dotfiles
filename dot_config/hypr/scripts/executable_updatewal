@@ -14,7 +14,7 @@ update_wal() {
 
 	# Create color scheme from wallpaper
   rm $HOME/.cache/wal/schemes/*__cache_wallpaper_*.json
-	wal -qst -i $image_path && ~/.config/hypr/scripts/monitor_switch
+	wal -qst -i $image_path && sleep 1 && ~/.config/hypr/scripts/monitor_switch
 
 	# Load current pywal color scheme
 	source "$HOME/.cache/wal/colors.sh"

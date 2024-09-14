@@ -2,15 +2,16 @@
 
 switch_monitor() {
 	monitor_count=$(hyprctl monitors -j | jq '. | length')
+	activeworkspace=$(hyprctl activeworkspace -j | jq '.id')
 
 	if [ "$monitor_count" -gt 1 ]; then
 		echo "More than one monitor detected, disabling eDP-1..."
 		hyprctl keyword monitor eDP-1, disable
-		hyprctl dispatch workspace 1
+		hyprctl dispatch workspace $activeworkspace
 	elif [ "$monitor_count" -eq 0 ]; then
 		echo "Only one monitor detected, enabling eDP-1..."
 		hyprctl keyword monitor eDP-1, preferred, auto, 1
-		hyprctl dispatch workspace 1
+		hyprctl dispatch workspace $activeworkspace
 	fi
 }
 

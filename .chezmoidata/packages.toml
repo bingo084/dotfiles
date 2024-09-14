@@ -21,6 +21,7 @@ arch = [
     "network-manager-applet", # Network
     "polkit-kde-agent", # Authentication agent
     "rofi-wayland", # App launcher
+    "sddm", # Login manager
     "swaylock-effects", # Lock screen
     "swww", # Wallpaper
     "telegram-desktop",

@@ -2,30 +2,43 @@ const systemtray = await Service.import("systemtray");
 
 const hyprland = await Service.import("hyprland");
 
-function Workspaces() {
-  const dispatch = (ws) => hyprland.messageAsync(`dispatch workspace ${ws}`);
-  const activeId = hyprland.active.workspace.bind("id");
-  const workspaces = hyprland.bind("workspaces").as((ws) =>
-    ws
-      .map(({ id }) => id)
-      .sort()
-      .map((id) =>
-        Widget.Button({
-          on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-          child: Widget.Label(`${id}`),
-          class_name: activeId.as((i) => (i === id ? "focused" : "")),
-        }),
-      ),
-  );
-  return Widget.EventBox({
+const dispatch = (/** @type {string | number} */ ws) =>
+  hyprland.messageAsync(`dispatch workspace ${ws}`);
+const activeId = hyprland.active.workspace.bind("id");
+const defaultIds = [1, 2, 3, 4, 5];
+
+const Workspaces = () =>
+  Widget.EventBox({
     className: "workspaces",
     onScrollUp: () => dispatch("-1"),
     onScrollDown: () => dispatch("+1"),
     child: Widget.Box({
-      children: workspaces,
+      children: hyprland.bind("workspaces").as((ws) =>
+        [...new Set([...defaultIds, ...ws.map(({ id }) => id)])]
+          .sort((a, b) => a - b)
+          .map((id) =>
+            Widget.Button({
+              className: activeId.as((i) => (i === id ? "focused" : "")),
+              onClicked: () => dispatch(id),
+              child: Widget.Label(`${id}`),
+            }),
+          ),
+      ),
     }),
   });
-}
+
+const Clients = Widget.Box({
+  className: "clients",
+  children: hyprland.bind("clients").as((clients) =>
+    clients.map((client) =>
+      Widget.Button({
+        className: "focused",
+        onClicked: () => (),
+        child: Widget.Label(`${client.class}`),
+      }),
+    ),
+  ),
+});
 
 const ClientTitle = Widget.Label({
   className: "client-title",
@@ -34,7 +47,7 @@ const ClientTitle = Widget.Label({
 });
 
 const date = Variable("", {
-  poll: [1000, 'date "+%H:%M  %a %d. %b"'],
+  poll: [1000, "date '+%a, %b %d  %H:%M'"],
 });
 
 const Clock = Widget.Label({
@@ -72,7 +85,7 @@ function Volume() {
       .as((v) => " " + Math.round(v * 100) + "%"),
   });
 
-  const changeVolume = (n) =>
+  const changeVolume = (/** @type {number} */ n) =>
     (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
 
   return Widget.EventBox({
@@ -182,7 +195,7 @@ function SysTray() {
 const Left = () =>
   Widget.Box({
     spacing: 8,
-    children: [Workspaces(), ClientTitle],
+    children: [Workspaces(), Clients, ClientTitle],
   });
 
 const Center = () =>

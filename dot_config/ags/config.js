@@ -2,16 +2,18 @@ const systemtray = await Service.import("systemtray");
 
 const hyprland = await Service.import("hyprland");
 
-const dispatch = (/** @type {string | number} */ ws) =>
-  hyprland.messageAsync(`dispatch workspace ${ws}`);
+const dispatch = (
+  /** @type string */ dispatcher,
+  /** @type {string | number} */ ws,
+) => hyprland.messageAsync(`dispatch ${dispatcher} ${ws}`);
 const activeId = hyprland.active.workspace.bind("id");
 const defaultIds = [1, 2, 3, 4, 5];
 
 const Workspaces = () =>
   Widget.EventBox({
     className: "workspaces",
-    onScrollUp: () => dispatch("-1"),
-    onScrollDown: () => dispatch("+1"),
+    onScrollUp: () => dispatch("workspace", "-1"),
+    onScrollDown: () => dispatch("workspace", "+1"),
     child: Widget.Box({
       children: hyprland.bind("workspaces").as((ws) =>
         [...new Set([...defaultIds, ...ws.map(({ id }) => id)])]
@@ -19,7 +21,7 @@ const Workspaces = () =>
           .map((id) =>
             Widget.Button({
               className: activeId.as((i) => (i === id ? "focused" : "")),
-              onClicked: () => dispatch(id),
+              onClicked: () => dispatch("workspace", id),
               child: Widget.Label(`${id}`),
             }),
           ),
@@ -27,16 +29,29 @@ const Workspaces = () =>
     }),
   });
 
+const { query } = await Service.import("applications");
+const activeClient = hyprland.active.client.bind("address");
 const Clients = Widget.Box({
   className: "clients",
   children: hyprland.bind("clients").as((clients) =>
-    clients.map((client) =>
-      Widget.Button({
-        className: "focused",
-        onClicked: () => (),
-        child: Widget.Label(`${client.class}`),
-      }),
-    ),
+    clients
+      .sort((c1, c2) =>
+        c1.workspace.id - c2.workspace.id != 0
+          ? c1.workspace.id - c2.workspace.id
+          : c1.at[0] - c2.at[0] != 0
+            ? c1.at[0] - c2.at[0]
+            : c1.at[1] - c2.at[1],
+      )
+      .map(({ address, class: clazz, title }) =>
+        Widget.Button({
+          className: activeClient.as((a) => (a === address ? "focused" : "")),
+          onClicked: () => dispatch("focuswindow", `address:${address}`),
+          onMiddleClick: () => dispatch("closewindow", `address:${address}`),
+          // onHover: () => console.log(at),
+          child: Widget.Icon(query(clazz)[0]?.icon_name || "image-missing"),
+          tooltipText: title,
+        }),
+      ),
   ),
 });
 
@@ -51,7 +66,7 @@ const date = Variable("", {
 });
 
 const Clock = Widget.Label({
-  class_name: "clock",
+  className: "clock",
   label: date.bind(),
 });
 
@@ -69,8 +84,8 @@ function Volume() {
     const icon = audio.speaker.is_muted
       ? 0
       : [101, 67, 34, 1, 0].find(
-        (threshold) => threshold <= audio.speaker.volume * 100,
-      );
+          (threshold) => threshold <= audio.speaker.volume * 100,
+        );
 
     return `audio-volume-${icons[icon]}-symbolic`;
   }
@@ -230,9 +245,9 @@ App.config({
   windows: [Bar()],
 });
 
-Utils.monitorFile(`${App.configDir}/style.css`, function() {
+Utils.monitorFile(`${App.configDir}/style.css`, function () {
   App.resetCss();
   App.applyCss(`${App.configDir}/style.css`);
 });
 
-export { };
+export {};

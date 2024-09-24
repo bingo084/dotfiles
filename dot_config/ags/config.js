@@ -71,48 +71,28 @@ const Clock = Widget.Label({
 });
 
 const audio = await Service.import("audio");
-function Volume() {
-  const icons = {
-    101: "overamplified",
-    67: "high",
-    34: "medium",
-    1: "low",
-    0: "muted",
-  };
-
-  function getIcon() {
+const changeVolume = (/** @type {number} */ n) =>
+  (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
+const Volume = Widget.EventBox({
+  onMiddleClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
+  onScrollUp: () => changeVolume(1),
+  onScrollDown: () => changeVolume(-1),
+  child: Widget.Icon().hook(audio.speaker, (self) => {
+    const vol = audio.speaker.volume * 100;
     const icon = audio.speaker.is_muted
-      ? 0
-      : [101, 67, 34, 1, 0].find(
-          (threshold) => threshold <= audio.speaker.volume * 100,
-        );
+      ? "muted"
+      : [
+          [101, "overamplified"],
+          [67, "high"],
+          [34, "medium"],
+          [1, "low"],
+          [0, "muted"],
+        ].find(([threshold]) => threshold <= vol)?.[1];
 
-    return `audio-volume-${icons[icon]}-symbolic`;
-  }
-
-  const icon = Widget.Icon({
-    icon: Utils.watch(getIcon(), audio.speaker, getIcon),
-  });
-
-  const label = Widget.Label({
-    label: audio.speaker
-      .bind("volume")
-      .as((v) => " " + Math.round(v * 100) + "%"),
-  });
-
-  const changeVolume = (/** @type {number} */ n) =>
-    (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
-
-  return Widget.EventBox({
-    className: "volume",
-    onMiddleClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
-    onScrollUp: () => changeVolume(1),
-    onScrollDown: () => changeVolume(-1),
-    child: Widget.Box({
-      children: [icon, label],
-    }),
-  });
-}
+    self.icon = `audio-volume-${icon}-symbolic`;
+    self.tooltip_text = `${Math.floor(vol)}%`;
+  }),
+});
 
 const battery = await Service.import("battery");
 const Battery = Widget.Box({
@@ -223,7 +203,7 @@ const Right = () =>
   Widget.Box({
     hpack: "end",
     spacing: 8,
-    children: [Network(), Bluetooth(), Volume(), Battery, Clock, SysTray()],
+    children: [Network(), Bluetooth(), Volume, Battery, Clock, SysTray()],
   });
 
 const Bar = (monitor = 0) =>

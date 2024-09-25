@@ -74,23 +74,34 @@ const audio = await Service.import("audio");
 const changeVolume = (/** @type {number} */ n) =>
   (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
 const Volume = Widget.EventBox({
-  onMiddleClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
+  onPrimaryClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
   onScrollUp: () => changeVolume(1),
   onScrollDown: () => changeVolume(-1),
-  child: Widget.Icon().hook(audio.speaker, (self) => {
-    const vol = audio.speaker.volume * 100;
-    const icon = audio.speaker.is_muted
-      ? "muted"
-      : [
-          [101, "overamplified"],
-          [67, "high"],
-          [34, "medium"],
-          [1, "low"],
-          [0, "muted"],
-        ].find(([threshold]) => threshold <= vol)?.[1];
+  on_hover: () => console.log(audio.speaker),
+  child: Widget.Box({
+    tooltipText: audio.speaker.bind("description").as((d) => `${d}`),
+    children: [
+      Widget.Icon().hook(audio.speaker, (self) => {
+        const vol = audio.speaker.volume * 100;
+        const icon = audio.speaker.is_muted
+          ? "muted"
+          : [
+              [101, "overamplified"],
+              [67, "high"],
+              [34, "medium"],
+              [1, "low"],
+              [0, "muted"],
+            ].find(([threshold]) => threshold <= vol)?.[1];
 
-    self.icon = `audio-volume-${icon}-symbolic`;
-    self.tooltip_text = `${Math.floor(vol)}%`;
+        self.icon = `audio-volume-${icon}-symbolic`;
+        // self.tooltip_text = audio.speaker.description;
+      }),
+      Widget.Label({
+        label: audio.speaker
+          .bind("volume")
+          .as((v) => ` ${Math.round(v * 100)}%`),
+      }),
+    ],
   }),
 });
 

@@ -74,6 +74,7 @@ const audio = await Service.import("audio");
 const changeVolume = (/** @type {number} */ n) =>
   (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
 const Volume = Widget.EventBox({
+  className: "volume",
   onPrimaryClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
   onScrollUp: () => changeVolume(1),
   onScrollDown: () => changeVolume(-1),
@@ -82,7 +83,7 @@ const Volume = Widget.EventBox({
     tooltipText: audio.speaker.bind("description").as((d) => `${d}`),
     children: [
       Widget.Icon().hook(audio.speaker, (self) => {
-        const vol = audio.speaker.volume * 100;
+        const volume = audio.speaker.volume * 100;
         const icon = audio.speaker.is_muted
           ? "muted"
           : [
@@ -91,15 +92,13 @@ const Volume = Widget.EventBox({
               [34, "medium"],
               [1, "low"],
               [0, "muted"],
-            ].find(([threshold]) => threshold <= vol)?.[1];
-
+            ].find(([threshold]) => threshold <= volume)?.[1];
         self.icon = `audio-volume-${icon}-symbolic`;
-        // self.tooltip_text = audio.speaker.description;
       }),
       Widget.Label({
         label: audio.speaker
           .bind("volume")
-          .as((v) => ` ${Math.round(v * 100)}%`),
+          .as((volume) => ` ${Math.round(volume * 100)}%`),
       }),
     ],
   }),
@@ -111,6 +110,12 @@ const Battery = Widget.Box({
     .bind("charging")
     .as((ch) => (ch ? ["battery", "charging"] : ["battery"])),
   visible: battery.bind("available"),
+  tooltipText: battery
+    .bind("time_remaining")
+    .as(
+      (s) =>
+        `Time to ${battery.charging ? "full" : "empty"}: ${Math.floor(s / 3600)} h ${Math.floor((s % 3600) / 60)} m`,
+    ),
   children: [
     Widget.Icon({ icon: battery.bind("icon_name") }),
     Widget.Label({
@@ -147,9 +152,52 @@ function Bluetooth() {
       .as((on) => `bluetooth-${on ? "active" : "disabled"}-symbolic`),
   });
 
+  const menu = Widget.Menu({
+    children: bluetooth.bind("connected_devices").as((devices) =>
+      devices.map(({ icon_name, name, battery_percentage }) =>
+        Widget.MenuItem({
+          child: Widget.Box([
+            Widget.Icon(icon_name + "-symbolic"),
+            Widget.Label(`${name} ${battery_percentage} %`),
+          ]),
+        }),
+      ),
+    ),
+  });
+
+  const deviceMap = {
+    "input-keyboard": "",
+    "input-mouse": "  ",
+    "audio-headset": " ",
+  };
+
+  function parsePercent(percent) {
+    if (percent == 100) {
+      return percent + "%";
+    } else if (percent < 10) {
+      return percent + "%   ";
+    } else {
+      return percent + "%  ";
+    }
+  }
+
   return Widget.EventBox({
-    onMiddleClick: () => (bluetooth.enabled = !bluetooth.enabled),
-    child: Widget.Box([indicator, connectedList]),
+    onPrimaryClick: () => (bluetooth.enabled = !bluetooth.enabled),
+    tooltipText: bluetooth
+      .bind("connected_devices")
+      .as((devices) =>
+        devices
+          .map(
+            ({ icon_name, name, battery_percentage }) =>
+              `${deviceMap[icon_name] || " "} ${parsePercent(battery_percentage)} ${name}`,
+          )
+          .join("\n"),
+      ),
+    child: Widget.Icon({
+      icon: bluetooth
+        .bind("enabled")
+        .as((on) => `bluetooth-${on ? "active" : "disabled"}-symbolic`),
+    }),
   });
 }
 

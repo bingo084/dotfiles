@@ -1,3 +1,7 @@
+* {
+  font-family: "Noto Sans CJK SC", "Font Awesome 6 Free Solid";
+}
+
 window.bar {
   background-color: alpha(@theme_bg_color, 0.4);
   color: @theme_fg_color;

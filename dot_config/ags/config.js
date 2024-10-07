@@ -125,108 +125,57 @@ const Battery = Widget.Box({
 });
 
 const bluetooth = await Service.import("bluetooth");
-
-function Bluetooth() {
-  const connectedList = Widget.Box({
-    setup: (self) =>
-      self.hook(
-        bluetooth,
-        (self) => {
-          self.children = bluetooth.connected_devices.map(
-            ({ icon_name, name }) =>
-              Widget.Box([
-                Widget.Icon(icon_name + "-symbolic"),
-                Widget.Label(name),
-              ]),
-          );
-
-          self.visible = bluetooth.connected_devices.length > 0;
-        },
-        "notify::connected-devices",
-      ),
-  });
-
-  const indicator = Widget.Icon({
+const deviceMap = {
+  "input-keyboard": "",
+  "input-mouse": "  ",
+  "audio-headset": " ",
+};
+const batteryIcons = [
+  [80, ""],
+  [60, ""],
+  [40, ""],
+  [20, ""],
+  [0, ""],
+];
+const batteryIcon = (/** @type {number} */ percent) =>
+  `${batteryIcons.find(([threshold]) => threshold <= percent)?.[1]} ${percent}%`;
+const Bluetooth = Widget.EventBox({
+  onPrimaryClick: () => (bluetooth.enabled = !bluetooth.enabled),
+  tooltipText: bluetooth
+    .bind("connected_devices")
+    .as((devices) =>
+      devices
+        .map(
+          ({ icon_name, name, battery_percentage }) =>
+            `${deviceMap[icon_name] || " "} ${name}  ${batteryIcon(battery_percentage)}`,
+        )
+        .join("\n"),
+    ),
+  child: Widget.Icon({
     icon: bluetooth
       .bind("enabled")
       .as((on) => `bluetooth-${on ? "active" : "disabled"}-symbolic`),
-  });
-
-  const menu = Widget.Menu({
-    children: bluetooth.bind("connected_devices").as((devices) =>
-      devices.map(({ icon_name, name, battery_percentage }) =>
-        Widget.MenuItem({
-          child: Widget.Box([
-            Widget.Icon(icon_name + "-symbolic"),
-            Widget.Label(`${name} ${battery_percentage} %`),
-          ]),
-        }),
-      ),
-    ),
-  });
-
-  const deviceMap = {
-    "input-keyboard": "",
-    "input-mouse": "  ",
-    "audio-headset": " ",
-  };
-
-  function parsePercent(percent) {
-    if (percent == 100) {
-      return percent + "%";
-    } else if (percent < 10) {
-      return percent + "%   ";
-    } else {
-      return percent + "%  ";
-    }
-  }
-
-  return Widget.EventBox({
-    onPrimaryClick: () => (bluetooth.enabled = !bluetooth.enabled),
-    tooltipText: bluetooth
-      .bind("connected_devices")
-      .as((devices) =>
-        devices
-          .map(
-            ({ icon_name, name, battery_percentage }) =>
-              `${deviceMap[icon_name] || " "} ${parsePercent(battery_percentage)} ${name}`,
-          )
-          .join("\n"),
-      ),
-    child: Widget.Icon({
-      icon: bluetooth
-        .bind("enabled")
-        .as((on) => `bluetooth-${on ? "active" : "disabled"}-symbolic`),
-    }),
-  });
-}
+  }),
+});
 
 const network = await Service.import("network");
-
-function Network() {
-  const WifiIndicator = Widget.Box({
-    children: [
-      Widget.Icon({
+const Network = Widget.Stack({
+  children: {
+    wifi: Widget.EventBox({
+      tooltipText: Utils.merge(
+        [network.wifi.bind("ssid"), network.wifi.bind("strength")],
+        (ssid, strength) => (ssid ? `${ssid}    ${strength}%` : ""),
+      ),
+      child: Widget.Icon({
         icon: network.wifi.bind("icon_name"),
       }),
-      Widget.Label({
-        label: network.wifi.bind("ssid").as((ssid) => ssid || "Unknown"),
-      }),
-    ],
-  });
-
-  const WiredIndicator = Widget.Icon({
-    icon: network.wired.bind("icon_name"),
-  });
-
-  return Widget.Stack({
-    children: {
-      wifi: WifiIndicator,
-      wired: WiredIndicator,
-    },
-    shown: network.bind("primary").as((p) => p || "wifi"),
-  });
-}
+    }),
+    wired: Widget.Icon({
+      icon: network.wired.bind("icon_name"),
+    }),
+  },
+  shown: network.bind("primary").as((p) => p || "wifi"),
+});
 
 function SysTray() {
   const items = systemtray.bind("items").as((items) =>
@@ -262,7 +211,7 @@ const Right = () =>
   Widget.Box({
     hpack: "end",
     spacing: 8,
-    children: [Network(), Bluetooth(), Volume, Battery, Clock, SysTray()],
+    children: [Network, Bluetooth, Volume, Battery, Clock, SysTray()],
   });
 
 const Bar = (monitor = 0) =>

@@ -42,6 +42,11 @@ label {
   color: @success_color;
 }
 
+.hardware {
+  background-color: transparent;
+  font-size: 0.7em;
+}
+
 levelbar block,
 highlight {
   min-height: 10px;

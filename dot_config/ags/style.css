@@ -1,5 +1,5 @@
 * {
-  font-family: "Noto Sans CJK SC", "Font Awesome 6 Free Solid";
+  font-family: "Cantarell", "Font Awesome 6 Free Solid";
 }
 
 window.bar {
@@ -43,8 +43,17 @@ label {
 }
 
 .hardware {
-  background-color: transparent;
-  font-size: 0.7em;
+  padding: 1px 0;
+}
+
+.cpu,
+.ram {
+  font-size: 0.75em;
+  font-family: "Noto Sans Mono", "Font Awesome 6 Free Solid";
+}
+
+.traffic .icon {
+  -gtk-icon-transform: rotate(-90deg);
 }
 
 levelbar block,

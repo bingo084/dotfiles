@@ -59,6 +59,24 @@ const ClientTitle = Widget.Label({
   visible: hyprland.active.client.bind("address").as((addr) => !!addr),
 });
 
+const speed = Variable(
+  { rx_bps: 0, tx_bps: 0 },
+  { listen: [App.configDir + "/scripts/traffic.sh", (out) => JSON.parse(out)] },
+);
+
+const Traffic = Widget.Box({
+  className: "traffic",
+  children: speed.bind().as((s) => [
+    Widget.Icon({
+      className: "icon",
+      icon: s.tx_bps > s.rx_bps ? "network-transmit" : "network-receive",
+    }),
+    Widget.Label({
+      label: ` ${Math.max(s.tx_bps, s.rx_bps)}`,
+    }),
+  ]),
+});
+
 const divide = ([total, free]) => free / total;
 
 const cpu = Variable(0, {
@@ -91,21 +109,19 @@ const ram = Variable(0, {
       ),
   ],
 });
-
-const Hardware = Widget.ListBox({
+const Hardware = Widget.Box({
   className: "hardware",
-  setup(self) {
-    self.add(
-      Widget.Label({
-        label: cpu.bind().as((v) => ` ${(v * 100).toFixed(0)}%`),
-      }),
-    );
-    self.add(
-      Widget.Label({
-        label: ram.bind().as((v) => ` ${(v * 100).toFixed(0)}%`),
-      }),
-    );
-  },
+  vertical: true,
+  children: [
+    Widget.Label({
+      className: "cpu",
+      label: cpu.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
+    }),
+    Widget.Label({
+      className: "ram",
+      label: ram.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
+    }),
+  ],
 });
 
 const date = Variable("", {
@@ -291,6 +307,7 @@ const Right = Widget.Box({
   hpack: "end",
   spacing: 8,
   children: [
+    Traffic,
     Hardware,
     Network,
     Bluetooth,

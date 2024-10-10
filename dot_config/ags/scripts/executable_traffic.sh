@@ -1,5 +1,7 @@
 #!/bin/bash
 
+interval=${1:-1}
+
 read_all_interfaces_data() {
   awk '{
     if (!(tolower($1) ~ /^$|lo|veth|tun|tap|docker|br-|meta/)) {
@@ -17,7 +19,7 @@ read_all_interfaces_data() {
 while true; do
   last_data=$(read_all_interfaces_data)
 
-  sleep 1
+  sleep $interval
   current_data=$(read_all_interfaces_data)
 
   last_rx_bytes=$(echo $last_data | awk '{print $1}')
@@ -25,8 +27,8 @@ while true; do
   current_rx_bytes=$(echo $current_data | awk '{print $1}')
   current_tx_bytes=$(echo $current_data | awk '{print $2}')
 
-  rx_bps=$((current_rx_bytes - last_rx_bytes))
-  tx_bps=$((current_tx_bytes - last_tx_bytes))
+  rx_bps=$(((current_rx_bytes - last_rx_bytes) / interval))
+  tx_bps=$(((current_tx_bytes - last_tx_bytes) / interval))
 
   printf '{"rx_bps": %d, "tx_bps": %d}\n' $rx_bps $tx_bps
 done

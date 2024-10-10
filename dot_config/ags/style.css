@@ -42,7 +42,8 @@ label {
   color: @success_color;
 }
 
-.hardware {
+.hardware,
+.traffic {
   padding: 1px 0;
 }
 
@@ -54,6 +55,10 @@ label {
 
 .traffic .icon {
   -gtk-icon-transform: rotate(-90deg);
+}
+
+.unit {
+  font-size: 0.7em;
 }
 
 levelbar block,

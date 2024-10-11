@@ -1,3 +1,17 @@
+const Power = Widget.Button({
+  onClicked: () => Utils.subprocess("wlogout"),
+  child: Widget.Icon({
+    icon: "system-shutdown",
+  }),
+});
+
+const Search = Widget.Button({
+  onClicked: () => Utils.subprocess("rofi -show"),
+  child: Widget.Icon({
+    icon: "system-search",
+  }),
+});
+
 const systemtray = await Service.import("systemtray");
 
 const hyprland = await Service.import("hyprland");
@@ -80,15 +94,18 @@ const formatBps = (/** @type {number} */ bps) => {
 };
 
 const trafficIcon = (/** @type {number} */ tx, /** @type {number} */ rx) => {
-  if (tx === 0 && rx === 0) return "network-idle";
-  if (tx === rx) return "network-transmit-receive";
-  return tx > rx ? "network-transmit" : "network-receive";
+  if (tx === 0 && rx === 0) return "network-idle-symbolic";
+  if (tx === rx) return "network-transmit-receive-symbolic";
+  return tx > rx ? "network-transmit-symbolic" : "network-receive-symbolic";
 };
 
 const Traffic = Widget.Box({
   className: "traffic",
   children: speed.bind().as(({ tx_bps, rx_bps }) => {
     const maxBps = Math.max(tx_bps, rx_bps);
+    if (maxBps < 102400) {
+      return [];
+    }
     const { value, unit } = formatBps(maxBps);
     return [
       Widget.Icon({
@@ -105,6 +122,44 @@ const Traffic = Widget.Box({
       }),
     ];
   }),
+});
+
+const updates = Variable("", {
+  poll: [
+    60 * 1000,
+    [
+      "bash",
+      "-c",
+      "echo $(($(checkupdates 2>/dev/null | wc -l) + $(paru -Qua 2>/dev/null | wc -l)))",
+    ],
+  ],
+});
+
+const Updates = Widget.Box({
+  spacing: 8,
+  children: [
+    Widget.Icon({
+      icon: "emblem-synchronizing-symbolic",
+    }),
+    Widget.Label({
+      label: updates.bind(),
+    }),
+  ],
+});
+
+const diskUsage = Variable(
+  {},
+  {
+    listen: [App.configDir + "/scripts/disk.sh 2", (out) => JSON.parse(out)],
+  },
+);
+
+const Disk = Widget.Box({
+  spacing: 8,
+  children: [
+    Widget.Icon({ icon: "drive-harddisk-symbolic" }),
+    Widget.Label({ label: diskUsage.bind().as(({ use }) => use) }),
+  ],
 });
 
 const divide = ([total, free]) => free / total;
@@ -139,17 +194,35 @@ const ram = Variable(0, {
       ),
   ],
 });
-const Hardware = Widget.Box({
-  className: "hardware",
-  vertical: true,
+const Hardware = Widget.EventBox({
+  onMiddleClickRelease: () => Utils.subprocess("missioncenter"),
+  child: Widget.Box({
+    className: "hardware",
+    vertical: true,
+    children: [
+      Widget.Label({
+        className: "cpu",
+        label: cpu.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
+      }),
+      Widget.Label({
+        className: "ram",
+        label: ram.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
+      }),
+    ],
+  }),
+});
+
+const cpuTemp = Variable("", {
+  poll: [
+    2000,
+    ["bash", "-c", "sensors -A | grep 'Package id' | awk '{print $4}'"],
+  ],
+});
+
+const Temp = Widget.Box({
   children: [
     Widget.Label({
-      className: "cpu",
-      label: cpu.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
-    }),
-    Widget.Label({
-      className: "ram",
-      label: ram.bind().as((v) => `${(v * 100).toFixed(0).padStart(3)}%`),
+      label: cpuTemp.bind(),
     }),
   ],
 });
@@ -158,9 +231,23 @@ const date = Variable("", {
   poll: [1000, "date '+%a, %b %d  %H:%M'"],
 });
 
-const Clock = Widget.Label({
-  className: "clock",
-  label: date.bind(),
+const Calendar = Widget.Window({
+  name: "calendar",
+  anchor: ["top", "right"],
+  visible: false,
+  keymode: "on-demand",
+  child: Widget.Calendar({}),
+  setup: (self) => {
+    self.keybind("Escape", () => App.closeWindow("calendar"));
+  },
+});
+
+const Clock = Widget.EventBox({
+  onPrimaryClickRelease: () => App.toggleWindow("calendar"),
+  child: Widget.Label({
+    className: "clock",
+    label: date.bind(),
+  }),
 });
 
 const hypridle = Variable(Utils.exec("pidof hypridle"));
@@ -175,7 +262,7 @@ const Coffee = Widget.EventBox({
   },
   child: Widget.Icon({
     css: hypridle.bind().as((p) => (p ? " " : "color: red")),
-    icon: "preferences-desktop-screensaver",
+    icon: "preferences-desktop-screensaver-symbolic",
   }),
 });
 
@@ -184,7 +271,9 @@ const changeVolume = (/** @type {number} */ n) =>
   (audio.speaker.volume = Math.min(audio.speaker.volume + n / 100, 1));
 const Volume = Widget.EventBox({
   className: "volume",
-  onPrimaryClick: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
+  onPrimaryClickRelease: () =>
+    (audio.speaker.is_muted = !audio.speaker.is_muted),
+  onMiddleClickRelease: () => Utils.subprocess("pavucontrol"),
   onScrollUp: () => changeVolume(1),
   onScrollDown: () => changeVolume(-1),
   child: Widget.Box({
@@ -212,7 +301,7 @@ const Volume = Widget.EventBox({
   }),
 });
 
-import brightness from "./brightness.js";
+import brightness from "./services/brightness.js";
 
 const brightnessIcons = [
   "",
@@ -273,41 +362,30 @@ const deviceMap = {
 };
 const batteryIcons = ["", "", "", "", ""];
 const Bluetooth = Widget.EventBox({
-  onPrimaryClick: () => (bluetooth.enabled = !bluetooth.enabled),
-  tooltipText: bluetooth
-    .bind("connected_devices")
-    .as((devices) =>
-      devices
-        .map(
-          ({ icon_name, name, battery_percentage }) =>
-            `${deviceMap[icon_name] || " "} ${name}  ${icon(battery_percentage, batteryIcons)} ${battery_percentage}%`,
-        )
-        .join("\n"),
-    ),
-  child: Widget.Icon({
-    icon: bluetooth
-      .bind("enabled")
-      .as((on) => `bluetooth-${on ? "active" : "disabled"}-symbolic`),
+  onPrimaryClickRelease: () => (bluetooth.enabled = !bluetooth.enabled),
+  onMiddleClickRelease: () => Utils.subprocess("blueman-manager"),
+  child: Widget.Icon().hook(bluetooth, (self) => {
+    self.tooltip_text = bluetooth.connected_devices
+      .map(
+        ({ icon_name, name, battery_percentage }) =>
+          `${deviceMap[icon_name] || " "} ${name}  ${icon(battery_percentage, batteryIcons)} ${battery_percentage}%`,
+      )
+      .join("\n");
+    self.icon = `bluetooth-${bluetooth.enabled ? "active" : "disabled"}-symbolic`;
   }),
 });
 
 const network = await Service.import("network");
-const Network = Widget.Stack({
-  children: {
-    wifi: Widget.EventBox({
-      tooltipText: Utils.merge(
-        [network.wifi.bind("ssid"), network.wifi.bind("strength")],
-        (ssid, strength) => (ssid ? `${ssid}    ${strength}%` : ""),
-      ),
-      child: Widget.Icon({
-        icon: network.wifi.bind("icon_name"),
-      }),
-    }),
-    wired: Widget.Icon({
-      icon: network.wired.bind("icon_name"),
-    }),
-  },
-  shown: network.bind("primary").as((p) => p || "wifi"),
+
+const Network = Widget.EventBox({
+  onMiddleClickRelease: () => Utils.subprocess("nm-applet"),
+  child: Widget.Icon().hook(network, (self) => {
+    const icon = network[network.primary || "wifi"]?.icon_name;
+    self.icon = icon || "";
+    self.visible = !!icon;
+    const { ssid, strength } = network.wifi;
+    self.tooltip_text = ssid ? `${ssid}    ${strength}%` : "";
+  }),
 });
 
 const SysTray = Widget.Box({
@@ -325,7 +403,7 @@ const SysTray = Widget.Box({
 
 const Left = Widget.Box({
   spacing: 8,
-  children: [Workspaces, Clients, ClientTitle],
+  children: [Power, Search, Workspaces, Clients, ClientTitle],
 });
 
 const Center = Widget.Box({
@@ -338,7 +416,10 @@ const Right = Widget.Box({
   spacing: 8,
   children: [
     Traffic,
+    Updates,
+    Disk,
     Hardware,
+    Temp,
     Network,
     Bluetooth,
     Coffee,
@@ -366,7 +447,7 @@ const Bar = (monitor = 0) =>
 
 App.config({
   style: "./style.css",
-  windows: [Bar()],
+  windows: [Bar(), Calendar],
 });
 
 Utils.monitorFile(`${App.configDir}/style.css`, function () {

@@ -2,8 +2,6 @@
 
 [manager]
 prepend_keymap = [
-  { on = ["d", "d"], run = "remove --force", desc = "Move the files to the trash" },
-  { on = ["d", "D"], run = "remove --force --permanently", desc = "Permanently delete the files" },
   { on = ["c", "m"], run = "plugin chmod", desc = "Chmod on selected files" },
   { on = ["C"], run = "plugin ouch --args=zip", desc = "Compress with ouch" },
   { on = ["R"], run = "rename", desc = "Rename a file or directory" },

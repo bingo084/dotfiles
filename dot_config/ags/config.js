@@ -1,4 +1,4 @@
-const entry = App.configDir + "/ts/main.ts";
+const entry = App.configDir + "/ts/index.ts";
 const outdir = "/tmp/ags/js";
 
 try {
@@ -13,7 +13,9 @@ try {
     "--external",
     "gi://*",
   ]);
-  await import(`file://${outdir}/main.js`);
+  await import(`file://${outdir}/index.js`);
 } catch (error) {
   console.error(error);
 }
+
+export { }

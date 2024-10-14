@@ -6,6 +6,10 @@
     type = "git-repo"
     url = "https://github.com/bingo084/rime.git"
     refreshPeriod = "168h"
+[".config/ags"]
+    type = "git-repo"
+    url = "https://github.com/bingo084/ags-config.git"
+    refreshPeriod = "12h"
 ["bin"]
     type = "git-repo"
     url = "https://github.com/bingo084/script.git"

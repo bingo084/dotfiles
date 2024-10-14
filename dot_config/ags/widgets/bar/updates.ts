@@ -9,12 +9,14 @@ export default Widget.EventBox({
       const maxOld = Math.max(
         ...packages.map(({ old_version }) => old_version.length),
       );
-      return packages
-        .map(
-          ({ name, old_version, new_version }) =>
-            ` ${name.padEnd(maxName + 2)}<span color="red">${old_version.padEnd(maxOld + 2)}</span><span color="green">${new_version}</span>`,
-        )
-        .join("\n");
+      return packages.length == 0
+        ? "No updates"
+        : packages
+            .map(
+              ({ name, old_version, new_version }) =>
+                ` ${name.padEnd(maxName + 2)}<span color="red">${old_version.padEnd(maxOld + 2)}</span><span color="green">${new_version}</span>`,
+            )
+            .join("\n");
     }),
     children: [
       Widget.Icon("emblem-synchronizing-symbolic"),

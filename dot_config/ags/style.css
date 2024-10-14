@@ -1,5 +1,10 @@
-* {
-  font-family: "Cantarell", "Font Awesome 6 Free Solid";
+/* * { */
+/*   font-family: "Cantarell", "Font Awesome 6 Free Solid"; */
+  /* font-family: "Noto Sans Mono", "Font Awesome 6 Free Solid"; */
+/* } */
+
+tooltip {
+  font-family: "JetBrainsMono NF", "Font Awesome 6 Free Solid";
 }
 
 window.bar {

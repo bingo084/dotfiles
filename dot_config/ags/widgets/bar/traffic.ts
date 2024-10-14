@@ -1,9 +1,4 @@
-const speed = Variable(
-  { rx_bps: 0, tx_bps: 0 },
-  {
-    listen: [App.configDir + "/scripts/traffic.sh 2", (out) => JSON.parse(out)],
-  },
-);
+import { traffic } from "variables";
 
 const format = (bps: number) => {
   const units = ["B", "KB", "MB", "GB", "TB"];
@@ -26,7 +21,7 @@ const icon = (tx: number, rx: number) => {
 
 export default Widget.Box({
   className: "traffic",
-  children: speed.bind().as(({ tx_bps, rx_bps }) => {
+  children: traffic.bind().as(({ tx_bps, rx_bps }) => {
     const maxBps = Math.max(tx_bps, rx_bps);
     if (maxBps < 102400) {
       return [];

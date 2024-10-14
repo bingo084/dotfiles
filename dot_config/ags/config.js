@@ -1,4 +1,4 @@
-const entry = App.configDir + "/ts/index.ts";
+const entry = App.configDir + "/widgets/index.ts";
 const outdir = "/tmp/ags/js";
 
 try {

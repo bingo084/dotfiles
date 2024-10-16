@@ -1,0 +1,13 @@
+paru() {
+	cleanup() {
+		trap - SIGINT
+		ags -r "refreshUpdates()" >/dev/null 2>&1
+	}
+
+	trap cleanup SIGINT
+
+	ags -r "checkUpdates()" >/dev/null 2>&1
+	command paru
+	cleanup
+	unset -f cleanup
+}

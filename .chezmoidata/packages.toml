@@ -124,7 +124,7 @@ arch = [
     "bat",
     "btop",
     "clash-meta",
-    "dust",         # A more intuitive version of du in rust
+    "dust",                              # A more intuitive version of du in rust
     "eza",
     "fzf",
     "fzf-tab-git",
@@ -141,5 +141,6 @@ arch = [
     "unzip",
     "zoxide",
     "zsh",
+    { name = "ntfysh-bin", aur = true },
   ] },
 ]

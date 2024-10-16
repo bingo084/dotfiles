@@ -7,7 +7,7 @@ paru() {
 	trap cleanup SIGINT
 
 	ags -r "checkUpdates()" >/dev/null 2>&1
-	command paru
+	command paru "$@"
 	cleanup
 	unset -f cleanup
 }

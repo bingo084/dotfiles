@@ -13,7 +13,7 @@ modmap:
       backspace: backslash
       backslash: backspace
     device:
-      only: ['AT Translated Set 2 keyboard']
+      only: ["AT Translated Set 2 keyboard"]
   - name: Smart Ctrl/Esc
     remap:
       leftctrl:
@@ -23,14 +23,14 @@ modmap:
 keymap:
   - name: ChooseAll/Copy/Paste/Cut/Undo
     remap:
-      SUPER-a: [C-home, C-a, { set_mark: true }] 
+      SUPER-a: [C-home, C-a, { set_mark: true }]
       SUPER-c: [C-c, { set_mark: false }]
       SUPER-v: [C-v, { set_mark: false }]
       SUPER-x: [C-x, { set_mark: false }]
       SUPER-z: [C-z, { set_mark: false }]
-      ESC: [ESC, { set_mark: false}]
+      ESC: [ESC, { set_mark: false }]
     application:
-      not: [kitty, wezterm]
+      not: [kitty, wezterm, jetbrains-idea]
   - name: Browser
     remap:
       C-apostrophe: C-tab
@@ -80,4 +80,4 @@ keymap:
           # C-x C-c (exit)
           C-c: C-q
     application:
-      not: [kitty, wezterm]
+      not: [kitty, wezterm, jetbrains-idea]

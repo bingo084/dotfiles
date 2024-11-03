@@ -101,7 +101,7 @@ arch = [
     ] },
     { group = "Nvidia", packages = [
       "libva-nvidia-driver",                   # VA-API implementation that uses NVDEC as a backend
-      "nvidia-dkms",
+      "nvidia-open-dkms",
       "nvidia-prime",
       "nvidia-settings",                       # Tool for configuring the NVIDIA graphics driver
       { name = "linux-headers", deps = true },

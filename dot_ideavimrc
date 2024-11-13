@@ -11,7 +11,7 @@ set incsearch
 set ignorecase
 set smartcase
 " clipboard
-set clipboard=unnamed
+set clipboard+=unnamedplus
 " keymap
 let mapleader=" "
 nnoremap H ^

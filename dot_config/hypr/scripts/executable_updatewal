@@ -13,7 +13,7 @@ update_wal() {
 	export SWWW_TRANSITION_FPS=60
 
 	if swww query >/dev/null; then
-		swww img $wallpaper
+		swww img $image_path
 	fi
 }
 

@@ -84,8 +84,6 @@ arch = [
     ] },
     { group = "Status Bar", packages = [
       { name = "aylurs-gtk-shell", aur = true },     # AGS
-      { name = "bun-bin", aur = true },              # Typescript to javascript
-      { name = "gnome-bluetooth-3.0", deps = true }, # Required for bluetooth service
       { name = "otf-font-awesome", deps = true },    # Bar icons
     ] },
     { name = "linuxqq", aur = true },

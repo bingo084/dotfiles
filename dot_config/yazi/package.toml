@@ -1,5 +1,12 @@
 [plugin]
-deps = [{ use = "yazi-rs/plugins:full-border", rev = "2dc65ab" }, { use = "ndtoan96/ouch", rev = "251da69" }, { use = "Rolv-Apneseth/starship", rev = "dc9989c" }, { use = "yazi-rs/plugins:chmod", rev = "d9bfa0b" }]
+deps = [
+  { use = "yazi-rs/plugins:full-border", rev = "7afba3a" },
+  { use = "ndtoan96/ouch", rev = "b869886" },
+  { use = "Rolv-Apneseth/starship", rev = "9c37d37" },
+  { use = "yazi-rs/plugins:chmod", rev = "7afba3a" },
+  { use = "boydaihungst/restore", rev = "49c3e55" },
+  { use = "yazi-rs/plugins:git", rev = "7afba3a" },
+]
 
 [flavor]
 deps = []

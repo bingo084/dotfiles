@@ -41,12 +41,12 @@ arch = [
       "nautilus", # File manager
       "vsftpd", # FTP
       { group = "Yazi", deps = true, packages = [
+        "7zip",                                         # Archive extraction and preview
         "fd",                                           # File serach
         "ffmpegthumbnailer",                            # Video thumbnails
         "fzf",                                          # Directory jumping
         "imagemagick",                                  # SVG, Font, HEIC, and JPEG XL preview
         "jq",                                           # JSON preview
-        "p7zip",                                        # Archive extraction and preview
         "poppler",                                      # PDF preview
         "ripgrep",                                      # File content search
         "zoxide",                                       # Directory jumping
@@ -83,8 +83,8 @@ arch = [
       "sof-firmware",   # Sound Open Firmware
     ] },
     { group = "Status Bar", packages = [
-      { name = "aylurs-gtk-shell", aur = true },     # AGS
-      { name = "otf-font-awesome", deps = true },    # Bar icons
+      { name = "aylurs-gtk-shell", aur = true },  # AGS
+      { name = "otf-font-awesome", deps = true }, # Bar icons
     ] },
     { name = "linuxqq", aur = true },
     { name = "xremap-wlroots-bin", aur = true },

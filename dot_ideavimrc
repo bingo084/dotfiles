@@ -83,6 +83,8 @@ nnoremap <leader>lj :action GotoNextError<CR>
 nnoremap <leader>lk :action GotoPreviousError<CR>
 vnoremap <leader>dl :action EditorDeleteLine<CR>
 vnoremap <leader>rl :action EditorDuplicateLines<CR>
+nnoremap <leader>il :action Inline<CR>
+vnoremap <leader>il :action Inline<CR>
 " ideavimrc action
 nnoremap <leader>ov :e ~/.ideavimrc<CR>
 nnoremap <leader>rv :action IdeaVim.ReloadVimRc.reload <CR>

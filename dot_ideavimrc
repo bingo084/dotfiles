@@ -56,6 +56,9 @@ set multiple-cursors
 let context_aware=1
 set which-key
 set highlightedyank
+" input method
+set keep-english-in-normal-and-restore-in-insert
+let rime_ascii = 1
 
 " idea action
 nnoremap <leader>nc :action NewClass<CR>

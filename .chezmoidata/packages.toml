@@ -74,6 +74,15 @@ arch = [
       "rime-emoji",
       { name = "fcitx5-skin-fluentlight-git", aur = true },
     ] },
+    { group = "Media Player", packages = [
+      "clapper",
+      { name = "gst-libav", deps = true },     # Extra media decoders (via FFmpeg)
+      { name = "gst-plugin-va", deps = true }, # Hardware-accelerated video decode (via VA-API)
+      # Extra media decoders
+      { name = "gst-plugins-bad", deps = true },
+      { name = "gst-plugins-base", deps = true },
+      { name = "gst-plugins-ugly", deps = true },
+    ] },
     { group = "Sound", packages = [
       "alsa-utils",     # Advanced Linux Sound Architecture - Utilities
       "pavucontrol",    # Simple GTK volume control tool ("mixer") for PulseAudio.

@@ -1,12 +1,32 @@
-[plugin]
-deps = [
-  { use = "yazi-rs/plugins:full-border", rev = "7afba3a" },
-  { use = "ndtoan96/ouch", rev = "b869886" },
-  { use = "Rolv-Apneseth/starship", rev = "9c37d37" },
-  { use = "yazi-rs/plugins:chmod", rev = "7afba3a" },
-  { use = "boydaihungst/restore", rev = "49c3e55" },
-  { use = "yazi-rs/plugins:git", rev = "7afba3a" },
-]
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "8945e54"
+hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "ce6fb75"
+hash = "ed6c185514109d7c5463f609282b220c"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "d1cd0a3"
+hash = "d1fee6d0f74cb52d4e031dc6b9207f31"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "8945e54"
+hash = "f28138c2e11e87962b66d583fef724c3"
+
+[[plugin.deps]]
+use = "boydaihungst/restore"
+rev = "89fddfd"
+hash = "b442aa672e07ec0765b4b00e7bfdc9b5"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "8945e54"
+hash = "771f18427fb75fb19990ce602bb322f4"
 
 [flavor]
 deps = []

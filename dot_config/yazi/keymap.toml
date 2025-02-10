@@ -4,6 +4,7 @@
 prepend_keymap = [
   { on = ["c", "m"], run = "plugin chmod", desc = "Chmod on selected files" },
   { on = ["C"], run = "plugin ouch zip", desc = "Compress with ouch" },
+  { on = ["M"], run = "plugin mount", desc = "Open mount manager" },
   { on = ["R"], run = "rename", desc = "Rename a file or directory" },
   { on = ["u"], run = "plugin restore", desc = "Restore last deleted files/folders" },
 ]

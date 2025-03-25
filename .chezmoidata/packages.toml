@@ -60,6 +60,7 @@ arch = [
       "hypridle",
       "hyprland",
       "hyprlock",
+      "satty",                              # Screenshot annotation tool
       "socat",                              # Monitor hyprland sock
       "xdg-desktop-portal-hyprland",
       { name = "hyprpicker", deps = true },

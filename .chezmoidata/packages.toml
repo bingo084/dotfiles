@@ -60,12 +60,15 @@ arch = [
       "hypridle",
       "hyprland",
       "hyprlock",
-      "nwg-displays",                       # Output management
-      "satty",                              # Screenshot annotation tool
-      "socat",                              # Monitor hyprland sock
+      "nwg-displays",                                   # Output management
+      "satty",                                          # Screenshot annotation tool
+      "socat",                                          # Monitor hyprland sock
       "xdg-desktop-portal-hyprland",
+      { name = "hdrop-git", aur = true },
+      { name = "hyprland-scratchpad-git", aur = true },
       { name = "hyprpicker", deps = true },
       { name = "hyprshot", aur = true },
+      { name = "scdoc", deps = true },                  # Build hdrop documentation
     ] },
     { group = "Input method", packages = [
       "fcitx5",

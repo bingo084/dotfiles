@@ -5,6 +5,8 @@ early-exit = true
 corner-roundness = 1
 # Select the tool on startup [possible values: pointer, crop, line, arrow, rectangle, text, marker, blur, brush]
 initial-tool = "brush"
+# Configure the command to be called on copy, for example `wl-copy`
+copy-command = "wl-copy"
 # Filename to use for saving action. Omit to disable saving to file. Might contain format specifiers: https://docs.rs/chrono/latest/chrono/format/strftime/index.html
 output-filename = "/home/bingo/Pictures/Screenshots/satty-%Y-%m-%d_%H:%M:%S.png"
 # Action to perform when the Enter key is pressed [possible values: save-to-clipboard, save-to-file]

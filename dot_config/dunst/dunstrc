@@ -7,10 +7,10 @@
     progress_bar_max_width = 400
     separator_height = 2
     frame_width = 2
-    background = "#ffffffe6"
-    foreground = "#000000b3"
-    highlight = "@color11"
-    frame_color = "@color11"
+    background = "#f2f2f77f"
+    foreground = "#202020"
+    highlight = "#2020207f"
+    frame_color = "#b0b0b0"
     gap_size = 4
     separator_color = auto
     idle_threshold = 120

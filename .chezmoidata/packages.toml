@@ -17,6 +17,7 @@ arch = [
     "cliphist", # Clipboard history
     "dunst", # Notification
     "gnome-keyring", # Stores passwords and encryption keys
+    "matugen-bin", # Material you color generation tool
     "mission-center",
     "mpv",
     "network-manager-applet", # Network

@@ -17,7 +17,6 @@ arch = [
     "cliphist", # Clipboard history
     "dunst", # Notification
     "gnome-keyring", # Stores passwords and encryption keys
-    "matugen-bin", # Material you color generation tool
     "mission-center",
     "mpv",
     "network-manager-applet", # Network
@@ -104,6 +103,7 @@ arch = [
       { name = "otf-font-awesome", deps = true }, # Bar icons
     ] },
     { name = "linuxqq", aur = true },
+    { name = "matugen-bin", aur = true }, # Material you color generation tool
     { name = "xremap-wlroots-bin", aur = true },
   ] },
   { group = "Driver", packages = [

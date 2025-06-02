@@ -13,7 +13,7 @@ modmap:
       backspace: backslash
       backslash: backspace
     device:
-      only: ["AT Translated Set 2 keyboard"]
+      not: ["HHKB-Hybrid"]
   - name: Smart Ctrl/Esc
     remap:
       leftctrl:

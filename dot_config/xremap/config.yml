@@ -50,6 +50,8 @@ keymap:
       # Cursor
       C-b: { with_mark: left }
       C-f: { with_mark: right }
+      # Keep SUPER+C+P working normally
+      SUPER-C-p: SUPER-C-p
       C-p: { with_mark: up }
       C-n: { with_mark: down }
       # Forward/Backward word

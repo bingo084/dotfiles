@@ -14,33 +14,33 @@ set smartcase
 set clipboard+=unnamedplus
 " keymap
 let mapleader=" "
-nnoremap H ^
-nnoremap L $
-vnoremap H ^
-vnoremap L $
-inoremap jk <esc>
-nnoremap <CR> :nohlsearch<CR><CR>
-nnoremap <leader>bc :tabc<CR>
-nnoremap <leader>bo :tabo<CR>
+map H ^
+map L $
+vmap H ^
+vmap L $
+imap jk <esc>
+map <CR> :nohlsearch<CR><CR>
+map <leader>bc :bdelete<CR>
+map <leader>bo :tabo<CR>
 " 标签页切换
-nnoremap <C-;> gT
-nnoremap <C-'> gt
-nnoremap <leader>1 1gt
-nnoremap <leader>2 2gt
-nnoremap <leader>3 3gt
-nnoremap <leader>4 4gt
-nnoremap <leader>5 5gt
-nnoremap <leader>6 6gt
-nnoremap <leader>7 7gt
-nnoremap <leader>8 8gt
-nnoremap <leader>9 9gt
+map <C-;> gT
+map <C-'> gt
+map <leader>1 1gt
+map <leader>2 2gt
+map <leader>3 3gt
+map <leader>4 4gt
+map <leader>5 5gt
+map <leader>6 6gt
+map <leader>7 7gt
+map <leader>8 8gt
+map <leader>9 9gt
 " NERDTree
-nnoremap <leader>e :NERDTreeFocus<CR>
+map <leader>e :NERDTreeFocus<CR>
 " easymotion
-nmap s <Plug>(easymotion-f2)
-nmap S <Plug>(easymotion-F2)
-" nmap f <Plug>(easymotion-fl2)
-" nmap F <Plug>(easymotion-Fl2)
+map s <Plug>(easymotion-f2)
+map S <Plug>(easymotion-F2)
+" map f <Plug>(easymotion-fl2)
+" map F <Plug>(easymotion-Fl2)
 " which-key
 set notimeout
 set timeoutlen = 5000
@@ -61,60 +61,66 @@ set keep-english-in-normal-and-restore-in-insert
 let rime_ascii = 1
 
 " idea action
-nnoremap <leader>nc :action NewClass<CR>
-nnoremap <leader>d :action JRebel Debug<CR>
-nnoremap <leader>s :action SelectInProjectView<CR>
-nnoremap <leader>rf :action ExternalSystem.ProjectRefreshAction<CR>
-" nnoremap <leader>cl :action CommentByLineComment<CR>
-" vnoremap <leader>cl :action CommentByLineComment<CR>
-" nnoremap <leader>cb :action CommentByBlockComment<CR>
-" vnoremap <leader>cb :action CommentByBlockComment<CR>
+map <leader>nc <Action>(NewClass)
+map <leader>d <Action>(JRebel)
+map <leader>s <Action>(SelectInProjectView)
+map <leader>rf <Action>(ExternalSystem.ProjectRefreshAction)
+" map <leader>cl <Action>(CommentByLineComment)
+" vmap <leader>cl <Action>(CommentByLineComment)
+" map <leader>cb <Action>(CommentByBlockComment)
+" vmap <leader>cb <Action>(CommentByBlockComment)
 " git action
-nnoremap <leader>gm :action Git.Menu<CR>
-nnoremap <leader>rb :action Vcs.RollbackChangedLines<CR>
+map <leader>gm <Action>(Git.Menu)
+map <leader>gr <Action>(Vcs.RollbackChangedLines)
+map <leader>gR :!git restore %<CR>:action SynchronizeCurrentFile<CR>
+map <leader>gp <Action>(VcsShowCurrentChangeMarker)
+map [c <Action>(VcsShowPrevChangeMarker)
+map ]c <Action>(VcsShowNextChangeMarker)
 " code action
-nnoremap <leader>lr :action RenameElement<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotoDeclarationOnly<CR>
-nnoremap gr :action ShowUsages<CR>
-nnoremap gj :action Back<CR>
-nnoremap gk :action Forward<CR>
-nnoremap <leader>im :action ImplementMethods<CR>
-nnoremap <leader>fs :action FileStructurePopup<CR>
-nnoremap <leader>lf :action ReformatCode<CR>
-nnoremap <leader>lj :action GotoNextError<CR>
-nnoremap <leader>lk :action GotoPreviousError<CR>
-vnoremap <leader>dl :action EditorDeleteLine<CR>
-vnoremap <leader>rl :action EditorDuplicateLines<CR>
-nnoremap <leader>il :action Inline<CR>
-vnoremap <leader>il :action Inline<CR>
+map <leader>lr <Action>(RenameElement)
+map gi <Action>(GotoImplementation)
+map gd <Action>(GotoDeclarationOnly)
+map gr <Action>(ShowUsages)
+map gj <Action>(Back)
+map gk <Action>(Forward)
+map <leader>im <Action>(ImplementMethods)
+map <leader>fs <Action>(FileStructurePopup)
+map <leader>lf <Action>(ReformatCode)
+map [d <Action>(GotoPreviousError)
+map ]d <Action>(GotoNextError)
+vmap <leader>dl <Action>(EditorDeleteLine)
+vmap <leader>rl <Action>(EditorDuplicateLines)
+map <leader>il <Action>(Inline)
+vmap <leader>il <Action>(Inline)
 " ideavimrc action
-nnoremap <leader>ov :e ~/.ideavimrc<CR>
-nnoremap <leader>rv :action IdeaVim.ReloadVimRc.reload <CR>
+map <leader>ov :e ~/.ideavimrc<CR>
+map <leader>rv <Action>(IdeaVim.ReloadVimRc.reload)
 " find action
-nnoremap <leader>ff :action SearchEverywhere<CR>
-vnoremap <leader>ff :action SearchEverywhere<CR>
-nnoremap <leader>ft :action FindInPath<CR>
-vnoremap <leader>ft :action FindInPath<CR>
-nnoremap <leader>rr :action ReplaceInPath<CR>
-vnoremap <leader>rr :action ReplaceInPath<CR>
+map <leader>ff <Action>(SearchEverywhere)
+vmap <leader>ff <Action>(SearchEverywhere)
+map <leader>ft <Action>(FindInPath)
+vmap <leader>ft <Action>(FindInPath)
+map <leader>rr <Action>(ReplaceInPath)
+vmap <leader>rr <Action>(ReplaceInPath)
 " move action
-nnoremap <C-A-j> :action MoveLineDown<CR>
-nnoremap <C-A-k> :action MoveLineUp<CR>
-vnoremap <C-A-j> :action MoveLineDown<CR>
-vnoremap <C-A-k> :action MoveLineUp<CR>
-inoremap <C-A-j> <esc> :action MoveLineDown<CR> hi
-inoremap <C-A-k> <esc> :action MoveLineUp<CR> hi
+map <C-A-j> <Action>(MoveLineDown)
+map <C-A-k> <Action>(MoveLineUp)
+vmap <C-A-j> <Action>(MoveLineDown)
+vmap <C-A-k> <Action>(MoveLineUp)
+imap <C-A-j> <esc> :action MoveLineDown<CR> hi
+imap <C-A-k> <esc> :action MoveLineUp<CR> hi
 " run action
-nnoremap <leader>rc :action ChooseRunConfiguration<CR>
+map <leader>rc <Action>(ChooseRunConfiguration)
 " window action
-nnoremap <leader>at :action ActivateTerminalToolWindow<CR>
-nnoremap <leader>as :action ActivateServicesToolWindow<CR>
-nnoremap <leader>hw :action HideActiveWindow<CR>
-nnoremap <leader>ha :action HideAllWindows<CR>
-nnoremap <leader>\\ :action SplitVertically<CR>
-nnoremap <leader>- :action SplitHorizontally<CR>
-noremap <A-h> <C-w>h
-noremap <A-j> <C-w>j
-noremap <A-k> <C-w>k
-noremap <A-l> <C-w>l
+map <C--> <Action>(ActivateTerminalToolWindow)
+map <leader>at <Action>(ActivateTerminalToolWindow)
+map <leader>as <Action>(ActivateServicesToolWindow)
+map <leader>hw <Action>(HideActiveWindow)
+map <leader>ha <Action>(HideAllWindows)
+map <leader>\\ <Action>(SplitVertically)
+map <leader>- <Action>(SplitHorizontally)
+map <A-h> <C-w>h
+map <A-j> <C-w>j
+map <A-k> <C-w>k
+map <A-l> <C-w>l
+map <A-w> <Action>(Unsplit)

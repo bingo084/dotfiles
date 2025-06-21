@@ -93,7 +93,7 @@ vmap <leader>rl <Action>(EditorDuplicateLines)
 map <leader>il <Action>(Inline)
 vmap <leader>il <Action>(Inline)
 " ideavimrc action
-map <leader>ov :e ~/.ideavimrc<CR>
+map <leader>ov :e ~/.config/ideavim/ideavimrc<CR>
 map <leader>rv <Action>(IdeaVim.ReloadVimRc.reload)
 " find action
 map <leader>ff <Action>(SearchEverywhere)

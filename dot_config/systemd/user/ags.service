@@ -1,0 +1,14 @@
+[Unit]
+Description=A framework for crafting Wayland Desktop Shells
+Documentation=https://aylur.github.io/ags/
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/ags run
+Restart=on-failure
+Slice=app-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target

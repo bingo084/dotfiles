@@ -1,0 +1,14 @@
+[Unit]
+Description=Wayland clipboard manager with support for multimedia - %i Watcher
+Documentation=https://github.com/sentriz/cliphist
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/wl-paste --type %i --watch cliphist store
+Restart=on-failure
+Slice=background-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target

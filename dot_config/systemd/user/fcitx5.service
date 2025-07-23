@@ -1,0 +1,14 @@
+[Unit]
+Description=An input method framework with extension support
+Documentation=https://fcitx-im.org/wiki/Fcitx_5/zh-cn
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/fcitx5
+Restart=on-failure
+Slice=app-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target

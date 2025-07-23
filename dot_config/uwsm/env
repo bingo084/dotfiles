@@ -1,0 +1,10 @@
+#!/bin/sh
+# NVIDIA
+# Force GBM as a backend, see: https://wiki.hyprland.org/Configuring/Environment-variables/#nvidia-specific
+export GBM_BACKEND="nvidia-drm"
+export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+# Theming
+export XCURSOR_SIZE=24
+# Fcitx5, see: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
+export XMODIFIERS="@im=fcitx"
+export QT_IM_MODULE="fcitx"

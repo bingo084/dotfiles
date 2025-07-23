@@ -1,0 +1,14 @@
+[Unit]
+Description=Daemon providing a Polkit authentication UI for Plasma 
+Documentation=https://invent.kde.org/plasma/polkit-kde-agent-1
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/lib/polkit-kde-authentication-agent-1
+Restart=on-failure
+Slice=background-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target

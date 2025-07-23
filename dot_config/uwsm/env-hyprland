@@ -1,0 +1,56 @@
+#!/bin/sh
+
+set_dynamic_drm_devices() {
+  local IFS=$' \t\n'
+  # 1. Get a list of all available graphics cards
+  local all_cards
+  all_cards=$(for card in /sys/class/drm/card[0-9]; do basename "$card"; done | tr '\n' ' ')
+
+  if [ -z "$all_cards" ]; then
+    echo "WARN: No graphics cards found in /sys/class/drm/. Skip setting AQ_DRM_DEVICES." >&2
+    return 1
+  fi
+
+  local primary_gpu_card=""
+
+  # 2. Determine the primary GPU
+  # Prioritize a connected external monitor first.
+  for connector in /sys/class/drm/card[0-9]-*; do
+    if echo "$(basename "$connector")" | grep -qE '(DP|HDMI|DVI)-' && [ "$(cat "$connector/status")" = "connected" ]; then
+      primary_gpu_card=$(basename "$connector" | cut -d- -f1)
+      echo "INFO: External monitor detected. Using $primary_gpu_card as the primary GPU."
+      break
+    fi
+  done
+
+  # If no external monitor was found, fall back to the internal one.
+  if [ -z "$primary_gpu_card" ]; then
+    for connector in /sys/class/drm/card[0-9]-*; do
+      if echo "$(basename "$connector")" | grep -qE '(eDP|LVDS)-'; then
+        primary_gpu_card=$(basename "$connector" | cut -d- -f1)
+        echo "INFO: No external monitors detected. Using $primary_gpu_card (internal) as the primary GPU."
+        break
+      fi
+    done
+  fi
+
+  # Final fallback: if no connected monitor was found at all, use the first card available.
+  if [ -z "$primary_gpu_card" ]; then
+    primary_gpu_card=$(echo "$all_cards" | cut -d' ' -f1)
+    echo "WARN: Could not determine primary GPU from monitor status. Using fallback: $primary_gpu_card" >&2
+  fi
+
+  # 3. Assemble and export the final device string
+  local device_string="/dev/dri/$primary_gpu_card"
+  for card in $all_cards; do
+    if [ "$card" != "$primary_gpu_card" ]; then
+      device_string="$device_string:/dev/dri/$card"
+    fi
+  done
+
+  echo "INFO: Set dynamic DRM device order: $device_string"
+  export AQ_DRM_DEVICES="$device_string"
+}
+
+set_dynamic_drm_devices
+export HYPRCURSOR_SIZE=24

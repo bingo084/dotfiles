@@ -1,0 +1,12 @@
+[Unit]
+Description=Run wallpaper updater every 30 minutes
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Timer]
+OnActiveSec=0
+OnUnitActiveSec=30min
+Unit=update-wallpaper.service
+
+[Install]
+WantedBy=graphical-session.target

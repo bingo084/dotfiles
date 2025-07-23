@@ -1,0 +1,7 @@
+[Unit]
+Description=Update wallpaper using custom script
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/updatewal
+Slice=background-graphical.slice

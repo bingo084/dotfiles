@@ -20,7 +20,7 @@
     stripComponents = 2
     include = ["*/themes/*"]
     refreshPeriod = "168h"
-[".config/clash/config.yaml"]
+[".config/mihomo/config.yaml"]
     type = "file"
     url = {{ (rbwFields "Subscribe").MihomoConfig.value | quote }}
     refreshPeriod = "168h"

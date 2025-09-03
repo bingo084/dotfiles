@@ -138,7 +138,6 @@ arch = [
     "atuin",
     "bat",
     "btop",
-    "clash-meta",
     "dust",                              # A more intuitive version of du in rust
     "eza",
     "fzf",
@@ -148,6 +147,7 @@ arch = [
     "hugo",
     "kitty",
     "man-db",
+    "mihomo",
     "neovim",
     "python-pywal",
     "starship",

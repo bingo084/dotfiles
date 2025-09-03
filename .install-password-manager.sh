@@ -32,7 +32,7 @@ fi
 
 # Initialize rbw with the provided configuration
 echo ":: Initializing rbw..."
-rbw config set base_url https://vault.binlog.xyz
+rbw config set base_url https://vault.binlog.fun
 rbw config set email bingo084@outlook.com
 
 echo ":: rbw setup completed."

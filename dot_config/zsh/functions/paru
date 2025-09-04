@@ -1,13 +1,15 @@
 paru() {
 	cleanup() {
 		trap - SIGINT
-		timeout 0.1s ags request "updates refresh" >/dev/null 2>&1
+		timeout 0.1s ags request updates refresh >/dev/null 2>&1
 	}
 
 	trap cleanup SIGINT
 
-	timeout 0.1s ags request "updates spin" >/dev/null 2>&1
+	timeout 0.1s ags request updates spin >/dev/null 2>&1
 	command paru "$@"
 	cleanup
 	unset -f cleanup
 }
+
+# vim:ft=sh:

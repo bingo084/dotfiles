@@ -27,7 +27,6 @@ arch = [
     "swww", # Wallpaper
     "telegram-desktop",
     "udiskie", # Automatically mounting
-    "wlogout", # Logout menu
     "wtype", # Simulate paste shortcuts
     { group = "Brightness", packages = [
       "brightnessctl",

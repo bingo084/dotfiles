@@ -21,7 +21,7 @@ arch = [
     "mpv",
     "network-manager-applet", # Network
     "polkit-kde-agent", # Authentication agent
-    "rofi-wayland", # App launcher
+    "rofi", # App launcher
     "sddm", # Login manager
     "swaylock-effects", # Lock screen
     "swww", # Wallpaper

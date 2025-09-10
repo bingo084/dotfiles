@@ -97,7 +97,7 @@ arch = [
       "sof-firmware",   # Sound Open Firmware
     ] },
     { group = "Status Bar", packages = [
-      { name = "aylurs-gtk-shell", aur = true },  # AGS
+      { name = "aylurs-gtk-shell-git", aur = true },  # AGS
       { name = "libgtop", deps = true },          # Library for collecting system monitoring data
       { name = "otf-font-awesome", deps = true }, # Bar icons
     ] },

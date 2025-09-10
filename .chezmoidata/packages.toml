@@ -97,9 +97,10 @@ arch = [
       "sof-firmware",   # Sound Open Firmware
     ] },
     { group = "Status Bar", packages = [
-      { name = "aylurs-gtk-shell-git", aur = true },  # AGS
-      { name = "libgtop", deps = true },          # Library for collecting system monitoring data
-      { name = "otf-font-awesome", deps = true }, # Bar icons
+      { name = "aylurs-gtk-shell-git", aur = true },       # AGS
+      { name = "libastal-meta", aur = true, deps = true }, # Library for astal
+      { name = "libgtop", deps = true },                   # Library for collecting system monitoring data
+      { name = "otf-font-awesome", deps = true },          # Bar icons
     ] },
     { name = "linuxqq", aur = true },
     { name = "matugen-bin", aur = true }, # Material you color generation tool

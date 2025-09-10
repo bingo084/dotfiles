@@ -98,6 +98,7 @@ arch = [
     ] },
     { group = "Status Bar", packages = [
       { name = "aylurs-gtk-shell-git", aur = true },       # AGS
+      { name = "dart-sass", aur = true, deps = true },     # Compile scss
       { name = "libastal-meta", aur = true, deps = true }, # Library for astal
       { name = "libgtop", deps = true },                   # Library for collecting system monitoring data
       { name = "otf-font-awesome", deps = true },          # Bar icons

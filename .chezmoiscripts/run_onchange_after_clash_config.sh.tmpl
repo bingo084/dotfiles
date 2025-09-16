@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-{{- $source := joinPath .chezmoi.homeDir "/.config/clash/config.yaml" }}
+{{- $source := joinPath .chezmoi.homeDir "/.config/mihomo/config.yaml" }}
 # clash config hash: {{ include $source | sha256sum }}
 echo ":: clash config has changed"
 echo ":: cp to homebrew mihomo config..."

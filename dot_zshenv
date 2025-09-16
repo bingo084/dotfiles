@@ -1,4 +1,4 @@
 typeset -U path
-path=( ~/bin ~/bin/statusbar ~/bin/rime $path)
+path=( ~/bin ~/bin/statusbar ~/bin/rime ~/go/bin $path)
 
 ZDOTDIR=$HOME/.config/zsh

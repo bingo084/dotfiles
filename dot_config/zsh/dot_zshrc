@@ -13,9 +13,15 @@ setopt share_history
 bindkey -e
 
 # Control-x-e to open current line in $EDITOR, awesome when writting functions or editing multiline commands.
-autoload -U edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey '^x^e' edit-command-line
+function kitty_scrollback_edit_command_line() {
+  local VISUAL="$HOME/.local/share/nvim/lazy/kitty-scrollback.nvim/scripts/edit_command_line.sh"
+  zle edit-command-line
+  zle kill-whole-line
+}
+zle -N kitty_scrollback_edit_command_line
+bindkey '^x^e' kitty_scrollback_edit_command_line
 
 if command -v brew &> /dev/null; then
 	fpath=(/opt/homebrew/share/zsh/site-functions $fpath)

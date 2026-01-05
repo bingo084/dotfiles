@@ -7,6 +7,7 @@ README.md
 .config/yabai/
 .config/kitty/macos-launch-services-cmdline
 .config/fzf/executable_brew_interactive.sh
+Library/Application Support/lazygit/
 {{- end }}
 
 # ignore linux special configuration file on other machine
@@ -24,6 +25,7 @@ README.md
 .config/hypr/
 .config/xremap/
 .config/swaylock/
+.config/lazygit/
 {{- end }}
 
 key.txt.age

@@ -90,6 +90,7 @@ alias ll="ls -l"
 alias lla="ll -a"
 if command -v bat &>/dev/null; then
 	alias cat="bat"
+	export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 fi
 # alias chezmoi
 chezmoi_path=$HOME/.local/share/chezmoi

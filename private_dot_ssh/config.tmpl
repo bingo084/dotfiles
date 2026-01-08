@@ -1,3 +1,6 @@
+Match host *-prod,prod-*
+    PermitLocalCommand yes
+    LocalCommand sh -c 'printf "\n\033[1;33;41m ⚠ 生产环境警告 ⚠ \033[0m\n\033[1;31m登录身份: %r\033[0m\n\033[1;31m目标主机: %h\033[0m\n\n"; read -p "确认登录生产环境？输入 YES 继续: " x < /dev/tty; if [ "$x" != "YES" ]; then echo "登录已取消"; kill $PPID; fi'
 Host *
     ServerAliveInterval 60
 {{ (rbwFields "SSH").Config.value }}

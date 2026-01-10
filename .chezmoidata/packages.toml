@@ -147,6 +147,7 @@ arch = [
     "git-delta",
     "hugo",
     "kitty",
+    "lazygit",
     "man-db",
     "mihomo",
     "neovim",

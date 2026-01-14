@@ -1,8 +1,8 @@
 [user]
-	name = bingo
-	email = bingo084@outlook.com
+  name = bingo
+  email = bingo084@outlook.com
 [core]
-	autocrlf = input
+  autocrlf = input
   pager = delta
 [interactive]
   diffFilter = delta --color-only
@@ -17,12 +17,12 @@
 [diff]
   colorMoved = default
 [pull]
-	rebase = true
+  rebase = true
 [rebase]
-	autoStash = true
+  autoStash = true
 [url "git@github.com:bingo084"]
   pushInsteadOf = https://github.com/bingo084
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 ; vim:ft=gitconfig

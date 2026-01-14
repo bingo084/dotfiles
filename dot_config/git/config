@@ -11,6 +11,7 @@
 [delta]
   features = catppuccin-frappe
   navigate = true
+  tabs = 2
 [merge]
   conflictstyle = diff3
 [diff]
@@ -23,3 +24,5 @@
   pushInsteadOf = https://github.com/bingo084
 [init]
 	defaultBranch = main
+
+; vim:ft=gitconfig

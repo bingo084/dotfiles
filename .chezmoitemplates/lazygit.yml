@@ -3,4 +3,7 @@ gui:
   expandFocusedSidePanel: true
   nerdFontsVersion: "3"
   filterMode: fuzzy
+git:
+  pagers:
+    - pager: delta --dark --paging=never
 notARepository: skip

@@ -5,5 +5,5 @@ gui:
   filterMode: fuzzy
 git:
   pagers:
-    - pager: delta --dark --paging=never
+    - pager: delta --paging=never
 notARepository: skip

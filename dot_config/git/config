@@ -12,6 +12,11 @@
   features = catppuccin-frappe
   navigate = true
   tabs = 2
+  file-added-label = 
+  file-copied-label = 
+  file-modified-label = 
+  file-removed-label = 
+  file-renamed-label = 
 [merge]
   conflictstyle = zdiff3
 [diff]

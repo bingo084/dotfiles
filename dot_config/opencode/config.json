@@ -11,9 +11,64 @@
     "history_next": "ctrl+n,down",
   },
   "plugin": [
+    "opencode-cursor-auth@1.0.16",
     "opencode-gemini-auth@latest"
   ],
   "provider": {
+    "cursor": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Cursor",
+      "options": {
+        "baseURL": "http://127.0.0.1:32123/v1"
+      },
+      "models": {
+        "auto": {
+          "name": "Auto"
+        },
+        "composer-1": {
+          "name": "Composer 1"
+        },
+        "gemini-3-pro": {
+          "name": "Gemini 3 Pro"
+        },
+        "gemini-3-flash": {
+          "name": "Gemini 3 Flash"
+        },
+        "gpt-5.1-codex-max": {
+          "name": "GPT-5.1 Codex Max"
+        },
+        "gpt-5.1-codex-max-high": {
+          "name": "GPT-5.1 Codex Max High"
+        },
+        "gpt-5.1-high": {
+          "name": "GPT-5.1 High"
+        },
+        "gpt-5.2": {
+          "name": "GPT-5.2"
+        },
+        "gpt-5.2-codex": {
+          "name": "GPT-5.2 Codex"
+        },
+        "gpt-5.2-high": {
+          "name": "GPT-5.2 High"
+        },
+        "grok": {
+          "name": "Grok"
+        },
+        "opus-4.5": {
+          "name": "Claude 4.5 Opus"
+        },
+        "opus-4.5-thinking": {
+          "name": "Claude 4.5 Opus (Thinking)"
+        },
+        "sonnet-4.5": {
+          "name": "Claude 4.5 Sonnet"
+        },
+        "sonnet-4.5-thinking": {
+          "name": "Claude 4.5 Sonnet (Thinking)"
+        }
+      }
+    },
     "google": {
       "options": {
         "projectId": "gen-lang-client-0222383534"

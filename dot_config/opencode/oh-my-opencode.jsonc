@@ -1,8 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
-    "Sisyphus": {
+    "sisyphus": {
       "model": "cursor/opus-4.5-thinking"
+    },
+    "oracle": {
+      "model": "cursor/gpt-5.2-high"
     },
     "librarian": {
       "model": "cursor/sonnet-4.5"
@@ -10,17 +13,43 @@
     "explore": {
       "model": "cursor/gemini-3-flash"
     },
-    "oracle": {
-      "model": "cursor/gpt-5.2-high"
-    },
-    "frontend-ui-ux-engineer": {
-      "model": "cursor/gemini-3-pro"
-    },
-    "document-writer": {
-      "model": "cursor/gemini-3-flash"
-    },
     "multimodal-looker": {
       "model": "cursor/gemini-3-flash"
-    }
+    },
+    "prometheus": {
+      "model": "cursor/opus-4.5-thinking"
+    },
+    "metis": {
+      "model": "cursor/sonnet-4.5"
+    },
+    "momus": {
+      "model": "cursor/opus-4.5-thinking"
+    },
+    "atlas": {
+      "model": "cursor/sonnet-4.5"
+    },
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "cursor/gemini-3-pro"
+    },
+    "ultrabrain": {
+      "model": "cursor/gpt-5.2-codex"
+    },
+    "artistry": {
+      "model": "cursor/gemini-3-pro"
+    },
+    "quick": {
+      "model": "cursor/haiku-4.5"
+    },
+    "unspecified-low": {
+      "model": "cursor/sonnet-4.5"
+    },
+    "unspecified-high": {
+      "model": "cursor/opus-4.5-thinking"
+    },
+    "writing": {
+      "model": "cursor/gemini-3-flash"
+    },
   }
 }

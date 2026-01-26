@@ -67,6 +67,12 @@
         },
         "sonnet-4.5-thinking": {
           "name": "Claude 4.5 Sonnet (Thinking)"
+        },
+        "haiku-4.5": {
+          "name": "Claude 4.5 Haiku"
+        },
+        "haiku-4.5-thinking": {
+          "name": "Claude 4.5 Haiku (Thinking)"
         }
       }
     },

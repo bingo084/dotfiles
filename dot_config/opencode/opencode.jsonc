@@ -12,28 +12,76 @@
   },
   "plugin": [
     "oh-my-opencode",
-    "opencode-cursor-auth@1.0.16",
+    "cursor-acp",
     "opencode-gemini-auth@latest"
   ],
   "provider": {
     "cursor": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "Cursor",
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://127.0.0.1:32123/v1"
+        "baseURL": "http://127.0.0.1:32124/v1"
       },
       "models": {
         "auto": {
           "name": "Auto"
         },
+        "composer-1.5": {
+          "name": "Composer 1.5"
+        },
         "composer-1": {
           "name": "Composer 1"
         },
-        "gemini-3-pro": {
-          "name": "Gemini 3 Pro"
+        "gpt-5.3-codex": {
+          "name": "GPT-5.3 Codex"
         },
-        "gemini-3-flash": {
-          "name": "Gemini 3 Flash"
+        "gpt-5.3-codex-low": {
+          "name": "GPT-5.3 Codex Low"
+        },
+        "gpt-5.3-codex-high": {
+          "name": "GPT-5.3 Codex High"
+        },
+        "gpt-5.3-codex-xhigh": {
+          "name": "GPT-5.3 Codex Extra High"
+        },
+        "gpt-5.3-codex-fast": {
+          "name": "GPT-5.3 Codex Fast"
+        },
+        "gpt-5.3-codex-low-fast": {
+          "name": "GPT-5.3 Codex Low Fast"
+        },
+        "gpt-5.3-codex-high-fast": {
+          "name": "GPT-5.3 Codex High Fast"
+        },
+        "gpt-5.3-codex-xhigh-fast": {
+          "name": "GPT-5.3 Codex Extra High Fast"
+        },
+        "gpt-5.2": {
+          "name": "GPT-5.2"
+        },
+        "gpt-5.2-codex": {
+          "name": "GPT-5.2 Codex"
+        },
+        "gpt-5.2-codex-high": {
+          "name": "GPT-5.2 Codex High"
+        },
+        "gpt-5.2-codex-low": {
+          "name": "GPT-5.2 Codex Low"
+        },
+        "gpt-5.2-codex-xhigh": {
+          "name": "GPT-5.2 Codex Extra High"
+        },
+        "gpt-5.2-codex-fast": {
+          "name": "GPT-5.2 Codex Fast"
+        },
+        "gpt-5.2-codex-high-fast": {
+          "name": "GPT-5.2 Codex High Fast"
+        },
+        "gpt-5.2-codex-low-fast": {
+          "name": "GPT-5.2 Codex Low Fast"
+        },
+        "gpt-5.2-codex-xhigh-fast": {
+          "name": "GPT-5.2 Codex Extra High Fast"
         },
         "gpt-5.1-codex-max": {
           "name": "GPT-5.1 Codex Max"
@@ -44,17 +92,17 @@
         "gpt-5.1-high": {
           "name": "GPT-5.1 High"
         },
-        "gpt-5.2": {
-          "name": "GPT-5.2"
+        "opus-4.6-thinking": {
+          "name": "Claude 4.6 Opus (Thinking)"
         },
-        "gpt-5.2-codex": {
-          "name": "GPT-5.2 Codex"
+        "sonnet-4.5-thinking": {
+          "name": "Claude 4.5 Sonnet (Thinking)"
         },
         "gpt-5.2-high": {
           "name": "GPT-5.2 High"
         },
-        "grok": {
-          "name": "Grok"
+        "opus-4.6": {
+          "name": "Claude 4.6 Opus"
         },
         "opus-4.5": {
           "name": "Claude 4.5 Opus"
@@ -65,8 +113,14 @@
         "sonnet-4.5": {
           "name": "Claude 4.5 Sonnet"
         },
-        "sonnet-4.5-thinking": {
-          "name": "Claude 4.5 Sonnet (Thinking)"
+        "gemini-3-pro": {
+          "name": "Gemini 3 Pro"
+        },
+        "gemini-3-flash": {
+          "name": "Gemini 3 Flash"
+        },
+        "grok": {
+          "name": "Grok"
         },
         "haiku-4.5": {
           "name": "Claude 4.5 Haiku"

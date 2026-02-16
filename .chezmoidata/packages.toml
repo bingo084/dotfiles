@@ -139,7 +139,7 @@ arch = [
     "atuin",
     "bat",
     "btop",
-    "dust",                              # A more intuitive version of du in rust
+    "dust",                                    # A more intuitive version of du in rust
     "eza",
     "fzf",
     "fzf-tab-git",
@@ -159,5 +159,6 @@ arch = [
     "zoxide",
     "zsh",
     { name = "ntfysh-bin", aur = true },
+    { name = "tree-sitter-cli", deps = true },
   ] },
 ]

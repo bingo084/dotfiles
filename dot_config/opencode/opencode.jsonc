@@ -12,8 +12,8 @@
   },
   "plugin": [
     "oh-my-opencode",
-    "cursor-acp",
-    "opencode-gemini-auth@latest"
+    "@rama_nigg/open-cursor",
+    "opencode-gemini-auth"
   ],
   "provider": {
     "cursor": {

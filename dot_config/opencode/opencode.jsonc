@@ -1,15 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "keybinds": {
-    "messages_page_up": "alt+u",
-    "messages_page_down": "alt+d",
-    "command_list": "<leader>p",
-    "input_move_up": "ctrl+p,up",
-    "input_move_down": "ctrl+n,down",
-    "input_backspace": "ctrl+h,backspace,shift+backspace",
-    "history_previous": "ctrl+p,up",
-    "history_next": "ctrl+n,down",
-  },
   "plugin": [
     "oh-my-opencode",
     "@rama_nigg/open-cursor",
@@ -31,6 +21,9 @@
         },
         "composer-1": {
           "name": "Composer 1"
+        },
+        "gpt-5.4-high": {
+          "name": "GPT-5.4 High"
         },
         "gpt-5.3-codex": {
           "name": "GPT-5.3 Codex"
@@ -110,11 +103,11 @@
         "opus-4.5-thinking": {
           "name": "Claude 4.5 Opus (Thinking)"
         },
-        "sonnet-4.5": {
-          "name": "Claude 4.5 Sonnet"
+        "sonnet-4.6": {
+          "name": "Claude 4.6 Sonnet"
         },
-        "gemini-3-pro": {
-          "name": "Gemini 3 Pro"
+        "gemini-3.1-pro": {
+          "name": "Gemini 3.1 Pro"
         },
         "gemini-3-flash": {
           "name": "Gemini 3 Flash"
@@ -135,6 +128,5 @@
         "projectId": "gen-lang-client-0222383534"
       }
     }
-  },
-  "theme": "catppuccin-frappe"
+  }
 }

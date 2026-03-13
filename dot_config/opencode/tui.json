@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "theme": "catppuccin-frappe",
+  "keybinds": {
+    "messages_page_up": "alt+u",
+    "messages_page_down": "alt+d",
+    "command_list": "<leader>p",
+    "input_move_up": "ctrl+p,up",
+    "input_move_down": "ctrl+n,down",
+    "input_backspace": "ctrl+h,backspace,shift+backspace",
+    "history_previous": "ctrl+p,up",
+    "history_next": "ctrl+n,down"
+  }
+}

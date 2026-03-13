@@ -1,55 +1,60 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  // https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/reference/configuration.md#model-resolution
   "agents": {
     "sisyphus": {
-      "model": "cursor/opus-4.6-thinking"
+      "model": "cursor/opus-4.6",
+      "ultrawork": "cursor/opus-4.6-thinking"
+    },
+    "hephaestus": {
+      "model": "cursor/gpt-5.3-codex"
     },
     "oracle": {
-      "model": "cursor/gpt-5.2-high"
+      "model": "cursor/gpt-5.4-high"
     },
     "librarian": {
-      "model": "cursor/sonnet-4.5"
+      "model": "cursor/gemini-3-flash"
     },
     "explore": {
       "model": "cursor/haiku-4.5"
     },
     "multimodal-looker": {
-      "model": "cursor/gemini-3-flash"
+      "model": "cursor/gpt-5.3-codex"
     },
     "prometheus": {
-      "model": "cursor/opus-4.6-thinking"
+      "model": "cursor/opus-4.6"
     },
     "metis": {
-      "model": "cursor/opus-4.6-thinking"
+      "model": "cursor/opus-4.6"
     },
     "momus": {
-      "model": "cursor/gpt-5.2"
+      "model": "cursor/gpt-5.4-high"
     },
     "atlas": {
-      "model": "cursor/sonnet-4.5"
+      "model": "cursor/sonnet-4.6"
     },
   },
   "categories": {
     "visual-engineering": {
-      "model": "cursor/gemini-3-pro"
+      "model": "cursor/gemini-3.1-pro"
     },
     "ultrabrain": {
-      "model": "cursor/gpt-5.3-codex"
+      "model": "cursor/gpt-5.4-high"
     },
     "deep": {
       "model": "cursor/gpt-5.3-codex"
     },
     "artistry": {
-      "model": "cursor/gemini-3-pro"
+      "model": "cursor/gemini-3.1-pro"
     },
     "quick": {
       "model": "cursor/haiku-4.5"
     },
     "unspecified-low": {
-      "model": "cursor/sonnet-4.5"
+      "model": "cursor/sonnet-4.6"
     },
     "unspecified-high": {
-      "model": "cursor/opus-4.6-thinking"
+      "model": "cursor/opus-4.6"
     },
     "writing": {
       "model": "cursor/gemini-3-flash"

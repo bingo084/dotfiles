@@ -4,7 +4,7 @@
   "agents": {
     "sisyphus": {
       "model": "cursor/opus-4.6",
-      "ultrawork": "cursor/opus-4.6-thinking"
+      "ultrawork": { "model": "cursor/opus-4.6-thinking" }
     },
     "hephaestus": {
       "model": "cursor/gpt-5.3-codex"

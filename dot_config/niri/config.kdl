@@ -1,0 +1,252 @@
+// Input device configuration.
+// https://yalter.github.io/niri/Configuration:-Input
+input {
+    keyboard {
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt
+        dwtp
+        drag-lock
+        natural-scroll
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+
+    disable-power-key-handling
+    focus-follows-mouse
+}
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    Mod+Return  hotkey-overlay-title="Open a Terminal: kitty"   { spawn "kitty"; }
+    Mod+Space   hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%+" "-l" "1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%-"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%-"; }
+
+    Mod+Escape repeat=false { toggle-overview; }
+
+    Mod+Q       hotkey-overlay-title="Kill Focused Window"       repeat=false { spawn-sh "kill $(niri msg -j focused-window | jq .pid)"; }
+    Mod+Shift+Q hotkey-overlay-title="Force Kill Focused Window" repeat=false { spawn-sh "kill -9 $(niri msg -j focused-window | jq .pid)"; }
+    Mod+W                                                        repeat=false { close-window; }
+
+    Mod+Up          { focus-window-or-workspace-up; }
+    Mod+Down        { focus-window-or-workspace-down; }
+    Mod+Left        { focus-column-or-monitor-left; }
+    Mod+Right       { focus-column-or-monitor-right; }
+    Mod+K           { focus-window-or-workspace-up; }
+    Mod+J           { focus-window-or-workspace-down; }
+    Mod+H           { focus-column-or-monitor-left; }
+    Mod+L           { focus-column-or-monitor-right; }
+    Mod+Shift+Tab   { focus-column-left-or-last; }
+    Mod+Tab         { focus-column-right-or-first; }
+
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Left  { consume-or-expel-window-left; }
+    Mod+Shift+Right { consume-or-expel-window-right; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+H     { consume-or-expel-window-left; }
+    Mod+Shift+L     { consume-or-expel-window-right; }
+
+    Mod+Comma        { focus-column-first; }
+    Mod+Period       { focus-column-last; }
+    Mod+Shift+Comma  { move-column-to-first; }
+    Mod+Shift+Period { move-column-to-last; }
+
+    Mod+Ctrl+Up    { move-column-to-workspace-up; }
+    Mod+Ctrl+Down  { move-column-to-workspace-down; }
+    Mod+Ctrl+Left  { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+Right { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+K     { move-column-to-workspace-up; }
+    Mod+Ctrl+J     { move-column-to-workspace-down; }
+    Mod+Ctrl+H     { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+L     { move-column-right-or-to-monitor-right; }
+
+    Mod+BracketLeft  { focus-monitor-previous; }
+    Mod+BracketRight { focus-monitor-next; }
+
+    // Mouse
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    // Workspace
+    Mod+1       { focus-workspace 1; }
+    Mod+2       { focus-workspace 2; }
+    Mod+3       { focus-workspace 3; }
+    Mod+4       { focus-workspace 4; }
+    Mod+5       { focus-workspace 5; }
+    Mod+6       { focus-workspace 6; }
+    Mod+7       { focus-workspace 7; }
+    Mod+8       { focus-workspace 8; }
+    Mod+9       { focus-workspace 9; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
+    Mod+Ctrl+1  { move-column-to-workspace 1; }
+    Mod+Ctrl+2  { move-column-to-workspace 2; }
+    Mod+Ctrl+3  { move-column-to-workspace 3; }
+    Mod+Ctrl+4  { move-column-to-workspace 4; }
+    Mod+Ctrl+5  { move-column-to-workspace 5; }
+    Mod+Ctrl+6  { move-column-to-workspace 6; }
+    Mod+Ctrl+7  { move-column-to-workspace 7; }
+    Mod+Ctrl+8  { move-column-to-workspace 8; }
+    Mod+Ctrl+9  { move-column-to-workspace 9; }
+
+    Mod+R       { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R  { reset-window-height; }
+
+    Mod+F       { maximize-column; }
+    Mod+Shift+F { maximize-window-to-edges; }
+    Mod+Ctrl+F  { fullscreen-window; }
+
+    Mod+Ctrl+C { center-column; }
+
+    Mod+Minus       { set-column-width "-1%"; }
+    Mod+Equal       { set-column-width "+1%"; }
+    Mod+Shift+Minus { set-window-height "-1%"; }
+    Mod+Shift+Equal { set-window-height "+1%"; }
+
+    Mod+Ctrl+Minus       hotkey-overlay-title="Move Floating Window Left"  { spawn-sh "niri msg action move-floating-window -x -1%"; }
+    Mod+Ctrl+Equal       hotkey-overlay-title="Move Floating Window Right" { spawn-sh "niri msg action move-floating-window -x +1%"; }
+    Mod+Ctrl+Shift+Minus hotkey-overlay-title="Move Floating Window Up"    { spawn-sh "niri msg action move-floating-window -y -1%"; }
+    Mod+Ctrl+Shift+Equal hotkey-overlay-title="Move Floating Window Down"  { spawn-sh "niri msg action move-floating-window -y +1%"; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+T       { toggle-window-floating; }
+    Mod+Shift+T { switch-focus-between-floating-and-tiling; }
+
+    Mod+G { toggle-column-tabbed-display; }
+
+    // Screenshot
+    Print       hotkey-overlay-title="Screenshot Region" { spawn "screenshot" "region"; }
+    Shift+Print hotkey-overlay-title="Screenshot Window" { spawn "screenshot" "window"; }
+    Ctrl+Print  hotkey-overlay-title="Screenshot Output" { spawn "screenshot" "output"; }
+    Mod+P       hotkey-overlay-title="Screenshot Region" { spawn "screenshot" "region"; }
+    Mod+Shift+P hotkey-overlay-title="Screenshot Window" { spawn "screenshot" "window"; }
+    Mod+Ctrl+P  hotkey-overlay-title="Screenshot Output" { spawn "screenshot" "output"; }
+
+    Mod+Ctrl+Shift+Q { quit; }
+}
+
+// Settings that influence how windows are positioned and sized.
+// https://yalter.github.io/niri/Configuration:-Layout
+layout {
+    gaps 6
+    always-center-single-column
+
+    default-column-width {}
+
+    focus-ring {
+        width 2
+    }
+
+    shadow {
+        on
+    }
+
+    tab-indicator {
+        width 2
+        active-color "#ffc87f"
+    }
+
+    struts {
+        left 10
+        right 10
+    }
+}
+
+spawn-at-startup "waybar"
+spawn-at-startup "hyprlock" "--immediate"
+spawn-at-startup "firefox"
+spawn-at-startup "Telegram"
+
+prefer-no-csd
+
+environment {
+    // Fcitx5, see: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
+    XMODIFIERS "@im=fcitx"
+    QT_IM_MODULES "wayland;fcitx"
+    QT_IM_MODULE "fcitx"
+}
+
+cursor {
+    xcursor-theme "breeze_cursors"
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// Window rules let you adjust behavior for individual windows.
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+window-rule {
+    draw-border-with-background false
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+window-rule {
+    match is-floating=true
+    focus-ring {
+        off
+    }
+}
+window-rule {
+    match app-id="org.pulseaudio.pavucontrol"
+    match app-id="blueman-manager"
+    match app-id="flameshot"
+    match title=r#"^(图片查看器|图片|预览|群聊的聊天记录|Media viewer|画中画)$"#
+    open-floating true
+}
+window-rule {
+    match app-id="com.gabm.satty"
+    open-floating true
+    // Wait for issue(https://github.com/niri-wm/niri/issues/978) to be resolved, support for relative-to="cursor"
+    // default-floating-position x=0 y=0 relative-to="cursor"
+}
+window-rule {
+    match app-id="org.telegram.desktop"
+    scroll-factor 1.2
+}
+
+debug {
+    // Use nvidia as primary render device
+    // lspci -d ::03xx && ls -l /dev/dri/by-path
+    render-drm-device "/dev/dri/renderD128"
+}

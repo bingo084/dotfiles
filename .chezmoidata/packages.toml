@@ -145,4 +145,11 @@ arch = [
     "socat",                       # Monitor hyprland sock
     "xdg-desktop-portal-hyprland",
   ] },
+  { name = "niri", deps = [
+    "gnome-keyring",
+    "polkit-kde-agent",
+    "xdg-desktop-portal-gnome",
+    "xdg-desktop-portal-gtk",
+    "xwayland-satellite",
+  ] },
 ]

@@ -28,13 +28,13 @@ arch = [
   "wtype",                  # Simulate paste shortcuts
   "xremap-wlroots-bin",
   # Driver
-  "intel-ucode",
   "libva-utils", # Intel VA-API Media Applications and Scripts for libva
-  { name = "mesa", packages = [ # Open-source OpenGL drivers
+  { name = "intel-ucode", when = "intel-cpu" },
+  { name = "mesa", when = "intel-gpu", packages = [ # Open-source OpenGL drivers
     "intel-media-driver", # VA-API
     "vulkan-intel",       # Open-source Vulkan driver for Intel GPUs
   ] },
-  { name = "nvidia-open-dkms", deps = [
+  { name = "nvidia-open-dkms", when = "nvidia", deps = [
     "libva-nvidia-driver", # VA-API implementation that uses NVDEC as a backend
     "linux-headers",
     "nvidia-prime",

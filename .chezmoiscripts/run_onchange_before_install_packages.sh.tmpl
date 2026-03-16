@@ -2,6 +2,7 @@
   {{- $pkg := list -}}
   {{- $deps := list -}}
   {{- $installed := .installed -}}
+  {{- $conditions := .conditions -}}
 
   {{- range .packages -}}
     {{- if kindIs "string" . -}}
@@ -10,6 +11,9 @@
       {{- end -}}
 
     {{- else if kindIs "map" . -}}
+      {{- if and (hasKey . "when") (not (has .when $conditions)) -}}
+        {{- continue -}} 
+      {{- end -}}
       {{- if not (has .name $installed) -}}
         {{- $pkg = append $pkg .name -}}
       {{- end -}}
@@ -68,8 +72,14 @@ if [ "$CHEZMOI_COMMAND" = "init" ]; then
   echo ":: Updating system"
   sudo pacman -Syu --noconfirm
 fi
-{{ $installed := splitList "\n" (output "pacman" "-Qq") }}
+{{- $installed := splitList "\n" (output "pacman" "-Qq") -}}
+{{- $lspci := output "lspci" -}}
+{{- $lscpu := output "lscpu" -}}
+{{- $conditions := list -}}
+{{- if contains "NVIDIA" $lspci -}}{{- $conditions = append $conditions "nvidia" -}}{{- end -}}
+{{- if contains "Intel" $lspci -}}{{- $conditions = append $conditions "intel-gpu" -}}{{- end -}}
+{{- if contains "GenuineIntel" $lscpu -}}{{- $conditions = append $conditions "intel-cpu" -}}{{- end }}
 echo ":: Installing packages"
-{{- template "install_packages" (dict "packages" .packages.arch "installed" $installed) }}
+{{- template "install_packages" (dict "packages" .packages.arch "installed" $installed "conditions" $conditions) }}
 echo ":: Done"
 {{- end -}}

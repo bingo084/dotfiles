@@ -69,7 +69,7 @@ paru -S --noconfirm --needed --asdeps {{ join " " $deps }}
 #!/bin/bash
 
 if [ "$CHEZMOI_COMMAND" = "init" ]; then
-  echo -e "\e[33m:: Installing packages\e[0m"
+  echo -e "\e[33m:: Updating system\e[0m"
   sudo pacman -Syu --noconfirm
 fi
 {{- $installed := splitList "\n" (output "pacman" "-Qq") -}}

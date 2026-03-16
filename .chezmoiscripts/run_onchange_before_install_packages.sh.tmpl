@@ -69,7 +69,7 @@ paru -S --noconfirm --needed --asdeps {{ join " " $deps }}
 #!/bin/bash
 
 if [ "$CHEZMOI_COMMAND" = "init" ]; then
-  echo ":: Updating system"
+  echo -e "\e[33m:: Installing packages\e[0m"
   sudo pacman -Syu --noconfirm
 fi
 {{- $installed := splitList "\n" (output "pacman" "-Qq") -}}
@@ -79,7 +79,7 @@ fi
 {{- if contains "NVIDIA" $lspci -}}{{- $conditions = append $conditions "nvidia" -}}{{- end -}}
 {{- if contains "Intel" $lspci -}}{{- $conditions = append $conditions "intel-gpu" -}}{{- end -}}
 {{- if contains "GenuineIntel" $lscpu -}}{{- $conditions = append $conditions "intel-cpu" -}}{{- end }}
-echo ":: Installing packages"
+echo -e "\e[33m:: Installing packages\e[0m"
 {{- template "install_packages" (dict "packages" .packages.arch "installed" $installed "conditions" $conditions) }}
-echo ":: Done"
+echo -e "\e[32m:: Done\e[0m"
 {{- end -}}

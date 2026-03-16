@@ -1,58 +1,63 @@
-{{- define "process_packages" -}}
-  {{- $archPkg := list -}} {{- $archDeps := list -}} {{- $aurPkg := list -}} {{- $aurDeps := list -}}
-  {{- $deps := get . "deps" -}} {{- $aur := get . "aur" -}} {{- $group := .group -}} {{- $installed := .installed -}}
-
-  {{- range .packages -}}
-    {{- if and (kindIs "string" .) (not (has . $installed)) -}}
-      {{- if and $deps $aur -}}
-        {{ $aurDeps = append $aurDeps . }}
-      {{- else if $deps -}}
-        {{ $archDeps = append $archDeps . }}
-      {{- else if $aur -}}
-        {{ $aurPkg = append $aurPkg . }}
-      {{- else -}}
-        {{ $archPkg = append $archPkg . }}
-      {{- end -}}
-    {{- else if and (kindIs "map" .) (not (hasKey . "group")) (not (has .name $installed)) -}}
-      {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
-      {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
-      {{- if and .deps .aur -}}
-        {{ $aurDeps = append $aurDeps .name }}
-      {{- else if .deps -}}
-        {{ $archDeps = append $archDeps .name }}
-      {{- else if .aur -}}
-        {{ $aurPkg = append $aurPkg .name }}
-      {{- else -}}
-        {{ $archPkg = append $archPkg .name }}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- if or $archPkg $archDeps $aurPkg $aurPkg -}}
-    echo ":: Starting installation of [{{ .group }}]" {{- "\n" -}}
-    {{- template "install_packages" (dict "packages" $archPkg) -}}
-    {{- template "install_packages" (dict "packages" $archDeps "deps" true) -}}
-    {{- template "install_packages" (dict "packages" $aurPkg "aur" true) -}}
-    {{- template "install_packages" (dict "packages" $aurDeps "deps" true "aur" true) -}}
-    echo ":: Finished installation of [{{ .group }}]" {{- "\n" -}}
-  {{- end -}}
-
-  {{- range .packages -}}
-    {{- if and (kindIs "map" .) (hasKey . "group") -}}
-      {{- if not (hasKey . "deps") -}} {{- $_ := set . "deps" $deps -}} {{- end -}}
-      {{- if not (hasKey . "aur") -}} {{- $_ := set . "aur" $aur -}} {{- end -}}
-      {{- $_ := set . "group" (print $group " - " .group) -}}
-      {{- $_ := set . "installed" $installed -}}
-      {{- template "process_packages" . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-
 {{- define "install_packages" -}}
-  {{- if .packages -}}
-    {{ if get . "aur" -}} paru -Sa {{ else -}} sudo pacman -S {{ end -}}
-    --noconfirm --needed {{- if get . "deps" }} --asdeps {{ else }} {{ end -}}
-    {{- join " " .packages }} {{- "\n" -}}
+  {{- $pkg := list -}}
+  {{- $deps := list -}}
+  {{- $installed := .installed -}}
+
+  {{- range .packages -}}
+    {{- if kindIs "string" . -}}
+      {{- if not (has . $installed) -}}
+        {{- $pkg = append $pkg . -}}
+      {{- end -}}
+
+    {{- else if kindIs "map" . -}}
+      {{- if not (has .name $installed) -}}
+        {{- $pkg = append $pkg .name -}}
+      {{- end -}}
+
+      {{- /* deps = [...] or deps = "pkg" — install as dependencies (--asdeps) */ -}}
+      {{- if hasKey . "deps" -}}
+        {{- if kindIs "string" .deps -}}
+          {{- if not (has .deps $installed) -}}
+            {{- $deps = append $deps .deps -}}
+          {{- end -}}
+        {{- else -}}
+          {{- range .deps -}}
+            {{- if kindIs "string" . -}}
+              {{- if not (has . $installed) -}}
+                {{- $deps = append $deps . -}}
+              {{- end -}}
+            {{- else if kindIs "map" . -}}
+              {{- if not (has .name $installed) -}}
+                {{- $deps = append $deps .name -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- /* packages = [...] — install as explicit (not --asdeps) */ -}}
+      {{- if hasKey . "packages" -}}
+        {{- range .packages -}}
+          {{- if kindIs "string" . -}}
+            {{- if not (has . $installed) -}}
+              {{- $pkg = append $pkg . -}}
+            {{- end -}}
+          {{- else if kindIs "map" . -}}
+            {{- if not (has .name $installed) -}}
+              {{- $pkg = append $pkg .name -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $pkg }}
+paru -S --noconfirm --needed {{ join " " $pkg }}
+  {{- end -}}
+  {{- if $deps }}
+paru -S --noconfirm --needed --asdeps {{ join " " $deps }}
   {{- end -}}
 {{- end -}}
 
@@ -64,6 +69,7 @@ if [ "$CHEZMOI_COMMAND" = "init" ]; then
   sudo pacman -Syu --noconfirm
 fi
 {{ $installed := splitList "\n" (output "pacman" "-Qq") }}
-{{ $params := dict "packages" .packages.arch "group" "Arch packages" "installed" $installed }}
-{{- template "process_packages" $params -}}
+echo ":: Installing packages"
+{{- template "install_packages" (dict "packages" .packages.arch "installed" $installed) }}
+echo ":: Done"
 {{- end -}}

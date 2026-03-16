@@ -1,167 +1,148 @@
 [packages]
 arch = [
-  { group = "Package manager", packages = [
-    "base-devel",     # 	Basic tools to build Arch Linux packages
-    "chezmoi",
-    "pacman-contrib", # Contributed scripts and tools for pacman systems (pactree, checkupdates, etc.)
-    "paru",
-    "pkgstats",
+  # Browser
+  "firefox",
+  "google-chrome",
+  # Communication
+  "linuxqq",
+  "telegram-desktop",
+  # Desktop
+  "android-tools",          # ADB command (adb, fastboot, etc.)
+  "android-udev",           # Mount device
+  "blueman",                # Bluetooth
+  "brightnessctl",
+  "cliphist",               # Clipboard history
+  "ddcutil",                # External monitor brightness
+  "dunst",                  # Notification
+  "gnome-keyring",          # Stores passwords and encryption keys
+  "matugen-bin",            # Material you color generation tool
+  "mission-center",         # System monitor
+  "network-manager-applet", # Network
+  "polkit-kde-agent",       # Authentication agent
+  "power-profiles-daemon",  # Power management
+  "rofi",                   # App launcher
+  "sddm",                   # Login manager
+  "swaylock-effects",       # Lock screen
+  "swww",                   # Wallpaper
+  "udiskie",                # Automatically mounting
+  "wtype",                  # Simulate paste shortcuts
+  "xremap-wlroots-bin",
+  # Driver
+  "intel-ucode",
+  "libva-utils", # Intel VA-API Media Applications and Scripts for libva
+  { name = "mesa", packages = [ # Open-source OpenGL drivers
+    "intel-media-driver", # VA-API
+    "vulkan-intel",       # Open-source Vulkan driver for Intel GPUs
   ] },
-
-  { group = "Android", packages = [
-    "android-tools", # ADB command (adb, fastboot, etc.)
-    "android-udev",  # Mount device
+  { name = "nvidia-open-dkms", deps = [
+    "libva-nvidia-driver", # VA-API implementation that uses NVDEC as a backend
+    "linux-headers",
+    "nvidia-prime",
+    "nvidia-settings",     # Tool for configuring the NVIDIA graphics driver
   ] },
-  { group = "Desktop environment", packages = [
-    "blueman", # Bluetooth
-    "cliphist", # Clipboard history
-    "dunst", # Notification
-    "gnome-keyring", # Stores passwords and encryption keys
-    "mission-center",
-    "mpv",
-    "network-manager-applet", # Network
-    "polkit-kde-agent", # Authentication agent
-    "power-profiles-daemon", # Power management
-    "rofi", # App launcher
-    "sddm", # Login manager
-    "swaylock-effects", # Lock screen
-    "swww", # Wallpaper
-    "telegram-desktop",
-    "udiskie", # Automatically mounting
-    "wtype", # Simulate paste shortcuts
-    { group = "Brightness", packages = [
-      "brightnessctl",
-      "ddcutil",       # External monitor brightness
-    ] },
-    { group = "Browser", packages = [
-      "firefox",
-      { name = "google-chrome", aur = true },
-    ] },
-    { group = "File manager", packages = [
-      "gvfs-mtp",
-      "nautilus", # File manager
-      "vsftpd", # FTP
-      { group = "Yazi", deps = true, packages = [
-        "7zip",                                         # Archive extraction and preview
-        "fd",                                           # File serach
-        "ffmpegthumbnailer",                            # Video thumbnails
-        "fzf",                                          # Directory jumping
-        "imagemagick",                                  # SVG, Font, HEIC, and JPEG XL preview
-        "jq",                                           # JSON preview
-        "poppler",                                      # PDF preview
-        "ripgrep",                                      # File content search
-        "zoxide",                                       # Directory jumping
-        { name = "ouch", deps = false },                # Yazi plugin preview archives
-        { name = "perl-image-exiftool", deps = false }, # Metadata preview
-        { name = "yazi", deps = false },
-      ] },
-    ] },
-    { group = "Hyprland", packages = [
-      "hypridle",
-      "hyprland",
-      "hyprlock",
-      "kanshi",                                         # Output management
-      "satty",                                          # Screenshot annotation tool
-      "socat",                                          # Monitor hyprland sock
-      "xdg-desktop-portal-hyprland",
-      { name = "hdrop-git", aur = true },
-      { name = "hyprland-scratchpad-git", aur = true },
-      { name = "hyprpicker", deps = true },
-      { name = "hyprshot", aur = true },
-      { name = "scdoc", deps = true },                  # Build hdrop documentation
-    ] },
-    { group = "Input method", packages = [
-      "fcitx5",
-      "fcitx5-configtool",
-      "fcitx5-gtk",
-      "fcitx5-qt",
-      "fcitx5-rime",
-      "rime-double-pinyin",
-      "rime-emoji",
-      { name = "fcitx5-skin-fluentlight-git", aur = true },
-    ] },
-    { group = "Media Player", packages = [
-      "clapper",
-      { name = "gst-libav", deps = true },     # Extra media decoders (via FFmpeg)
-      { name = "gst-plugin-va", deps = true }, # Hardware-accelerated video decode (via VA-API)
-      # Extra media decoders
-      { name = "gst-plugins-bad", deps = true },
-      { name = "gst-plugins-base", deps = true },
-      { name = "gst-plugins-ugly", deps = true },
-    ] },
-    { group = "Sound", packages = [
-      "alsa-utils",     # Advanced Linux Sound Architecture - Utilities
-      "pavucontrol",    # Simple GTK volume control tool ("mixer") for PulseAudio.
-      "pipewire-alsa",  # Low-latency audio/video router and processor - ALSA configuration
-      "pipewire-audio", # Low-latency audio/video router and processor - Audio support
-      "pipewire-pulse", # Low-latency audio/video router and processor - PulseAudio replacement
-      "sof-firmware",   # Sound Open Firmware
-    ] },
-    { group = "Status Bar", packages = [
-      { name = "aylurs-gtk-shell", aur = true },           # AGS
-      { name = "dart-sass", aur = true, deps = true },     # Compile scss
-      { name = "libastal-meta", aur = true, deps = true }, # Library for astal
-      { name = "libgtop", deps = true },                   # Library for collecting system monitoring data
-      { name = "otf-font-awesome", deps = true },          # Bar icons
-    ] },
-    { name = "linuxqq", aur = true },
-    { name = "matugen-bin", aur = true }, # Material you color generation tool
-    { name = "xremap-wlroots-bin", aur = true },
+  # File manager
+  "gvfs-mtp", # MTP support for file managers
+  "nautilus",
+  { name = "yazi", deps = [
+    "7zip",                # Archive extraction and preview
+    "fd",                  # File search
+    "ffmpegthumbnailer",   # Video thumbnails
+    "fzf",                 # Directory jumping
+    "imagemagick",         # SVG, Font, HEIC, and JPEG XL preview
+    "jq",                  # JSON preview
+    "ouch",                # Yazi plugin preview archives
+    "perl-image-exiftool", # Metadata preview
+    "poppler",             # PDF preview
+    "ripgrep",             # File content search
+    "zoxide",              # Directory jumping
   ] },
-  { group = "Driver", packages = [
-    { group = "Intel", packages = [
-      "intel-media-driver", # VA-API
-      "intel-ucode",
-      "libva-utils",        # Intel VA-API Media Applications and Scripts for libva
-      "mesa",               # Open-source OpenGL drivers
-      "vulkan-intel",       # Open-source Vulkan driver for Intel GPUs
-    ] },
-    { group = "Nvidia", packages = [
-      "libva-nvidia-driver",                   # VA-API implementation that uses NVDEC as a backend
-      "nvidia-open-dkms",
-      "nvidia-prime",
-      "nvidia-settings",                       # Tool for configuring the NVIDIA graphics driver
-      { name = "linux-headers", deps = true },
-    ] },
+  # Fonts
+  "noto-fonts-cjk",
+  "noto-fonts-emoji",
+  "noto-fonts-extra",
+  "ttf-droid",
+  "ttf-jetbrains-mono-nerd",
+  # Input method
+  { name = "fcitx5", deps = [
+    "fcitx5-configtool",
+    "fcitx5-gtk",
+    "fcitx5-qt",
+    "fcitx5-rime",
+    "fcitx5-skin-fluentlight-git",
+    "rime-double-pinyin",
+    "rime-emoji",
   ] },
-  { group = "Fonts", packages = [
-    "noto-fonts-cjk",
-    "noto-fonts-emoji",
-    "noto-fonts-extra",
-    "ttf-droid",
-    "ttf-jetbrains-mono-nerd",
+  # Language
+  "go",
+  "npm",
+  "rust",
+  # Media player
+  "mpv",
+  { name = "clapper", deps = [
+    "gst-libav",     # Extra media decoders (via FFmpeg)
+    "gst-plugin-va", # Hardware-accelerated video decode (via VA-API)
+    # Extra media decoders
+    "gst-plugins-bad",
+    "gst-plugins-base",
+    "gst-plugins-ugly",
   ] },
-  { group = "Language", packages = [
-    "go",
-    "npm",
-    "rust",
+  # Package manager
+  "base-devel",     # Basic tools to build Arch Linux packages
+  "chezmoi",
+  "pacman-contrib", # Contributed scripts and tools for pacman systems (pactree, checkupdates, etc.)
+  "paru",
+  "pkgstats",
+  # Sound
+  "pavucontrol",    # Simple GTK volume control tool ("mixer") for PulseAudio.
+  "pipewire-alsa",  # Low-latency audio/video router and processor - ALSA configuration
+  "pipewire-audio", # Low-latency audio/video router and processor - Audio support
+  "pipewire-pulse", # Low-latency audio/video router and processor - PulseAudio replacement
+  "sof-firmware",   # Sound Open Firmware
+  # Status bar
+  { name = "aylurs-gtk-shell", deps = [
+    "dart-sass",        # Compile scss
+    "libastal-meta",    # Library for astal
+    "libgtop",          # Library for collecting system monitoring data
+    "otf-font-awesome", # Bar icons
   ] },
-  { group = "Terminal", packages = [
-    "atuin",
-    "bat",
-    "btop",
-    "dust",                                    # A more intuitive version of du in rust
-    "eza",
-    "fzf",
-    "fzf-tab-git",
-    "gemini-cli",
-    "git",
-    "git-delta",
-    "hugo",
-    "kitty",
-    "lazygit",
-    "man-db",
-    "mihomo",
-    "neovim",
-    "opencode",
-    "python-pywal",
-    "starship",
-    "tldr",
-    "trash-cli",
-    "unzip",
-    "zoxide",
-    "zsh",
-    { name = "ntfysh-bin", aur = true },
-    { name = "tree-sitter-cli", deps = true },
+  # Terminal
+  "atuin",
+  "bat",
+  "btop",
+  "dust",                                        # A more intuitive version of du in rust
+  "eza",
+  "fzf",
+  "fzf-tab-git",
+  "gemini-cli",
+  "git",
+  "git-delta",
+  "hugo",
+  "kitty",
+  "lazygit",
+  "man-db",
+  "mihomo",
+  "ntfysh-bin",
+  "opencode",
+  "python-pywal",
+  "starship",
+  "tldr",
+  "trash-cli",
+  "unzip",
+  "zoxide",
+  "zsh",
+  { name = "neovim", deps = "tree-sitter-cli" },
+  # Window manager
+  { name = "hyprland", deps = [
+    "hdrop-git",
+    "hypridle",
+    "hyprland-scratchpad-git",
+    "hyprlock",
+    "hyprpicker",
+    "hyprshot",
+    "kanshi",                      # Output management
+    "satty",                       # Screenshot annotation tool
+    "scdoc",                       # Build hdrop documentation
+    "socat",                       # Monitor hyprland sock
+    "xdg-desktop-portal-hyprland",
   ] },
 ]

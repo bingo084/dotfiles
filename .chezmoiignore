@@ -25,6 +25,7 @@ Library/Application Support/lazygit/
 .config/hypr/
 .config/xremap/
 .config/swaylock/
+.config/paru/
 {{- end }}
 
 key.txt.age

@@ -71,6 +71,11 @@ paru -S --noconfirm --needed --asdeps {{ join " " $deps }}
 if [ "$CHEZMOI_COMMAND" = "init" ]; then
   echo -e "\e[33m:: Updating system\e[0m"
   sudo pacman -Syu --noconfirm
+
+  if ! command -v paru >/dev/null 2>&1; then
+    echo -e "\e[33m:: Installing paru\e[0m"
+    sudo pacman -S --noconfirm paru
+  fi
 fi
 {{- $installed := splitList "\n" (output "pacman" "-Qq") -}}
 {{- $lspci := output "lspci" -}}

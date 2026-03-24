@@ -1,8 +1,8 @@
 [packages]
 arch = [
   # Browser
-  "firefox",
   "google-chrome",
+  { name = "firefox", deps = "firefox-i18n-zh-cn" },
   # Communication
   "linuxqq",
   "telegram-desktop",
@@ -10,6 +10,7 @@ arch = [
   "android-tools",          # ADB command (adb, fastboot, etc.)
   "android-udev",           # Mount device
   "blueman",                # Bluetooth
+  "breeze-cursors",
   "brightnessctl",
   "cliphist",               # Clipboard history
   "ddcutil",                # External monitor brightness
@@ -69,8 +70,8 @@ arch = [
     "fcitx5-qt",
     "fcitx5-rime",
     "fcitx5-skin-fluentlight-git",
-    "rime-double-pinyin",
     "rime-emoji",
+    "rime-sbxlm",
   ] },
   # Language
   "go",

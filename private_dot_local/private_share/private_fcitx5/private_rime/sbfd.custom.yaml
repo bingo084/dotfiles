@@ -1,0 +1,15 @@
+patch:
+  # Return 实现 commit_code 的效果，processors 插到 key_binder 后、selector 前
+  "engine/processors/@after 4": lua_processor@*sbxlm.return_commit_code
+  key_binder/bindings/+:
+    - {accept: "Control+p", send: Page_Up, when: has_menu}
+    - {accept: "Control+n", send: Page_Down, when: has_menu}
+    - {accept: "Control+b", send: Up, when: has_menu}
+    - {accept: "Control+f", send: Down, when: has_menu}
+    - {accept: "Release+Escape", set_option: ascii_mode, when: always}
+  # ascii_mode: 英文
+  switches/@0/reset: 1
+  # is_enhanced: 增强
+  switches/@3/reset: 1
+  # 提示：两者
+  switches/@4/reset: 3

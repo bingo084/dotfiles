@@ -47,11 +47,15 @@ keymap:
       only: [google-chrome, firefox]
   - name: Emacs
     remap:
+      # Keep SUPER+C+* working normally
+      SUPER-C-f: SUPER-C-f
+      SUPER-C-h: SUPER-C-h
+      SUPER-C-j: SUPER-C-j
+      SUPER-C-k: SUPER-C-k
+      SUPER-C-p: SUPER-C-p
       # Cursor
       C-b: { with_mark: left }
       C-f: { with_mark: right }
-      # Keep SUPER+C+P working normally
-      SUPER-C-p: SUPER-C-p
       C-p: { with_mark: up }
       C-n: { with_mark: down }
       # Forward/Backward word

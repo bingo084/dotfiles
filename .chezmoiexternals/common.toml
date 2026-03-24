@@ -33,3 +33,7 @@
     type = "file"
     url = "{{ .githubRaw }}/catppuccin/delta/main/catppuccin.gitconfig"
     refreshPeriod = "168h"
+[".face"]
+    type = "file"
+    url = 'https://gravatar.com/avatar/{{ sha256sum "bingo084@outlook.com" }}?s=2048'
+    refreshPeriod = "168h"

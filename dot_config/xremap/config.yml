@@ -25,9 +25,6 @@ modmap:
       btn_side:
         held: leftmeta
         alone: btn_side
-      btn_extra:
-        held: leftalt
-        alone: btn_extra
 keymap:
   - name: ChooseAll/Copy/Paste/Cut/Undo
     remap:

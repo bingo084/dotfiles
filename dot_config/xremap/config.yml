@@ -44,12 +44,14 @@ keymap:
       only: [google-chrome, firefox]
   - name: Emacs
     remap:
-      # Keep SUPER+C+* working normally
+      # Keep *+C+* working normally
       SUPER-C-f: SUPER-C-f
       SUPER-C-h: SUPER-C-h
       SUPER-C-j: SUPER-C-j
       SUPER-C-k: SUPER-C-k
       SUPER-C-p: SUPER-C-p
+      SUPER-C-SHIFT-j: SUPER-C-SHIFT-j
+      SUPER-C-SHIFT-k: SUPER-C-SHIFT-k
       # Cursor
       C-b: { with_mark: left }
       C-f: { with_mark: right }

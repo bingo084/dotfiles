@@ -22,6 +22,7 @@ arch = [
   "polkit-kde-agent",       # Authentication agent
   "power-profiles-daemon",  # Power management
   "rofi",                   # App launcher
+  "scrcpy",                 # Android real-time screencast control tool
   "sddm",                   # Login manager
   "swaylock-effects",       # Lock screen
   "swww",                   # Wallpaper

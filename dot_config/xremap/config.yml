@@ -52,6 +52,8 @@ keymap:
       SUPER-C-p: SUPER-C-p
       SUPER-C-SHIFT-j: SUPER-C-SHIFT-j
       SUPER-C-SHIFT-k: SUPER-C-SHIFT-k
+      SUPER-C-SHIFT-h: SUPER-C-SHIFT-h
+      SUPER-C-SHIFT-l: SUPER-C-SHIFT-l
       # Cursor
       C-b: { with_mark: left }
       C-f: { with_mark: right }

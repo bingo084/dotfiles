@@ -129,6 +129,8 @@ binds {
     Mod+Ctrl+9  { move-column-to-workspace 9; }
     Mod+Ctrl+Shift+K { move-workspace-up; }
     Mod+Ctrl+Shift+J { move-workspace-down; }
+    Mod+Ctrl+Shift+H { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
 
     Mod+R       { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }

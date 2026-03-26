@@ -36,6 +36,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 export TERMINAL="kitty"
 export EDITOR="nvim"
 export PAGER="less -R"
+# rbw ssh-agent
+sock=$XDG_RUNTIME_DIR/rbw/ssh-agent-socket
+[[ -S $sock ]] || sock=${TMPDIR%/}/rbw-$EUID/ssh-agent-socket
+[[ -S $sock ]] && export SSH_AUTH_SOCK=$sock
 
 plugins=(
   zsh-autosuggestions.zsh
@@ -125,3 +129,5 @@ if command -v systemctl &> /dev/null; then
 	alias suee="systemctl --user enable"
 	alias suen="systemctl --user enable --now"
 fi
+
+# vim:ft=zsh:

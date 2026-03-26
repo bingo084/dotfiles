@@ -12,6 +12,20 @@ output "ViewSonic Corporation VX2480-HD-PRO VXK193500367" {
   alias $HOME
 }
 
+output "Dell Inc. DELL S2421HSX JPNQ093" {
+  mode 1920x1080@75.00Hz
+  position 0,0
+  scale 1
+  alias $WORK1
+}
+
+output "Dell Inc. DELL U2720QM JCJWV13" {
+  mode 3840x2160@60.00Hz
+  position 1920,0
+  scale 1.67
+  alias $WORK2
+}
+
 profile external {
   output $INTERNAL disable
   output $HOME enable
@@ -19,4 +33,9 @@ profile external {
 
 profile internal {
   output $INTERNAL enable
+}
+
+profile work {
+  output $WORK1 enable
+  output $WORK2 enable
 }

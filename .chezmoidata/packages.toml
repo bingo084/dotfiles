@@ -9,6 +9,7 @@ arch = [
   # Desktop
   "android-tools",          # ADB command (adb, fastboot, etc.)
   "android-udev",           # Mount device
+  "awww",                   # Wallpaper
   "blueman",                # Bluetooth
   "breeze-cursors",
   "brightnessctl",
@@ -25,7 +26,6 @@ arch = [
   "scrcpy",                 # Android real-time screencast control tool
   "sddm",                   # Login manager
   "swaylock-effects",       # Lock screen
-  "swww",                   # Wallpaper
   "udiskie",                # Automatically mounting
   "wtype",                  # Simulate paste shortcuts
   "xremap-wlroots-bin",

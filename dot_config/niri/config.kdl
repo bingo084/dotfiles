@@ -198,7 +198,7 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "hyprlock" "--immediate"
-spawn-at-startup "firefox"
+spawn-at-startup "google-chrome-stable"
 spawn-at-startup "Telegram"
 
 prefer-no-csd

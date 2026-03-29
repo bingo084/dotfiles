@@ -1,10 +1,12 @@
-{{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 {{- $source := joinPath .chezmoi.homeDir "/.config/mihomo/config.yaml" }}
 # clash config hash: {{ include $source | sha256sum }}
 echo ":: clash config has changed"
-echo ":: cp to homebrew mihomo config..."
+echo ":: cp to etc mihomo config..."
+{{ if eq .chezmoi.os "darwin" -}}
 cp {{ $source }} $HOMEBREW_PREFIX/etc/mihomo/config.yaml
+{{ else if eq .chezmoi.os "linux" -}}
+sudo cp {{ $source }} /etc/mihomo/config.yaml
+{{- end }}
 echo ":: reloading..."
 curl 'http://127.0.0.1:9090/configs?force=true' -X PUT -d '{"path":"","payload":""}'
-{{- end }}

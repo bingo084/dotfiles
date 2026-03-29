@@ -1,7 +1,7 @@
 #!/bin/bash
 {{- $source := joinPath .chezmoi.homeDir "/.config/mihomo/config.yaml" }}
-# clash config hash: {{ include $source | sha256sum }}
-echo ":: clash config has changed"
+# mihomo config hash: {{ include $source | sha256sum }}
+echo ":: mihomo config has changed"
 echo ":: cp to etc mihomo config..."
 {{ if eq .chezmoi.os "darwin" -}}
 cp {{ $source }} $HOMEBREW_PREFIX/etc/mihomo/config.yaml

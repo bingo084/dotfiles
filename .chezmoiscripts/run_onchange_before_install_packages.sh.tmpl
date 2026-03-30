@@ -57,11 +57,15 @@
     {{- end -}}
   {{- end -}}
 
+  {{- if or $pkg $deps }}
+echo -e "\e[33m:: Installing packages\e[0m"
   {{- if $pkg }}
 paru -S --noconfirm --needed {{ join " " $pkg }}
   {{- end -}}
   {{- if $deps }}
 paru -S --noconfirm --needed --asdeps {{ join " " $deps }}
+  {{- end }}
+echo -e "\e[32m:: Done\e[0m"
   {{- end -}}
 {{- end -}}
 
@@ -84,7 +88,5 @@ fi
 {{- if contains "NVIDIA" $lspci -}}{{- $conditions = append $conditions "nvidia" -}}{{- end -}}
 {{- if contains "Intel" $lspci -}}{{- $conditions = append $conditions "intel-gpu" -}}{{- end -}}
 {{- if contains "GenuineIntel" $lscpu -}}{{- $conditions = append $conditions "intel-cpu" -}}{{- end }}
-echo -e "\e[33m:: Installing packages\e[0m"
 {{- template "install_packages" (dict "packages" .packages.arch "installed" $installed "conditions" $conditions) }}
-echo -e "\e[32m:: Done\e[0m"
 {{- end -}}

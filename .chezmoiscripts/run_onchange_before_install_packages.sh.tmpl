@@ -84,9 +84,11 @@ fi
 {{- $installed := splitList "\n" (output "pacman" "-Qq") -}}
 {{- $lspci := output "lspci" -}}
 {{- $lscpu := output "lscpu" -}}
+{{- $fstype := trim (output "findmnt" "-n" "-o" "FSTYPE" "/") -}}
 {{- $conditions := list -}}
 {{- if contains "NVIDIA" $lspci -}}{{- $conditions = append $conditions "nvidia" -}}{{- end -}}
 {{- if contains "Intel" $lspci -}}{{- $conditions = append $conditions "intel-gpu" -}}{{- end -}}
 {{- if contains "GenuineIntel" $lscpu -}}{{- $conditions = append $conditions "intel-cpu" -}}{{- end }}
+{{- $conditions = append $conditions $fstype -}}
 {{- template "install_packages" (dict "packages" .packages.arch "installed" $installed "conditions" $conditions) }}
 {{- end -}}

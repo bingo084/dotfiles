@@ -3,6 +3,13 @@ arch = [
   # Browser
   "google-chrome",
   { name = "firefox", deps = "firefox-i18n-zh-cn" },
+  # Btrfs
+  { name = "btrfs-progs", when = "btrfs", deps = [
+    "btrfs-assistant", # Btrfs snapshot management tool
+    "grub-btrfs",      # Include btrfs snapshots in GRUB boot options
+    "snap-pac",        # Pacman hooks that use snapper to create pre/post btrfs snapshots
+    "snapper",         # Managing BTRFS and LVM snapshots
+  ] },
   # Communication
   "linuxqq",
   "telegram-desktop",

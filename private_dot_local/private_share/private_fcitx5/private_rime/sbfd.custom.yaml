@@ -8,8 +8,6 @@ patch:
     - {accept: "Control+f", send: Down, when: has_menu}
     - {accept: Up, send: Page_Up, when: composing}
     - {accept: Down, send: Page_Down, when: composing}
-    - {accept: Left, send: Up, when: composing}
-    - {accept: Right, send: Down, when: composing}
     - {accept: "Release+Escape", set_option: ascii_mode, when: always}
   # ascii_mode: 英文
   switches/@0/reset: 1

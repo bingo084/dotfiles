@@ -200,6 +200,8 @@ spawn-at-startup "waybar"
 spawn-at-startup "hyprlock" "--immediate"
 spawn-at-startup "google-chrome-stable"
 spawn-at-startup "Telegram"
+// Auto start rbw-agent to handle ssh agent requests
+spawn-at-startup "rbw" "sync"
 
 prefer-no-csd
 

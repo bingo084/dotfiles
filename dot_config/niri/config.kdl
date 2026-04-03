@@ -26,6 +26,7 @@ binds {
 
     Mod+Return  hotkey-overlay-title="Open a Terminal: kitty"   { spawn "kitty"; }
     Mod+Space   hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show"; }
+    ALT+V       hotkey-overlay-title="Clipboard History"        { spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy && wtype-paste"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%+" "-l" "1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%-"; }

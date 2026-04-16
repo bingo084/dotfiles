@@ -18,7 +18,7 @@ input {
     }
 
     disable-power-key-handling
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="20%"
 }
 
 binds {
@@ -189,11 +189,6 @@ layout {
     tab-indicator {
         width 2
         active-color "#ffc87f"
-    }
-
-    struts {
-        left 12
-        right 12
     }
 }
 

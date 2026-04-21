@@ -205,6 +205,8 @@ environment {
     XMODIFIERS "@im=fcitx"
     QT_IM_MODULES "wayland;fcitx"
     QT_IM_MODULE "fcitx"
+    // Use qt6ct to configure Qt6 applications, see: https://wiki.archlinuxcn.org/wiki/Dolphin#单击打开文件夹/文件
+    QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 cursor {

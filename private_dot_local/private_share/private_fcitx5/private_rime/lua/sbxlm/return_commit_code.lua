@@ -16,8 +16,7 @@ function this.func(key_event, env)
 		return rime.process_results.kNoop
 	end
 
-	local segment = context.composition:back()
-	if not segment or not segment:has_tag("abc") then
+	if context.composition:empty() then
 		return rime.process_results.kNoop
 	end
 

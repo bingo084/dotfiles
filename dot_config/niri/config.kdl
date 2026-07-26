@@ -133,9 +133,10 @@ binds {
     Mod+Ctrl+Shift+H { move-workspace-to-monitor-left; }
     Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
 
-    Mod+R       { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R  { reset-window-height; }
+    Mod+R            { switch-preset-column-width; }
+    Mod+Shift+R      { switch-preset-column-width-back; }
+    Mod+Ctrl+R       { switch-preset-window-height; }
+    Mod+Ctrl+Shift+R { switch-preset-window-height-back; }
 
     Mod+F       { maximize-column; }
     Mod+Shift+F { maximize-window-to-edges; }
@@ -176,7 +177,22 @@ layout {
     gaps 6
     always-center-single-column
 
+    preset-column-widths {
+        proportion 0.4
+        proportion 0.5
+        proportion 0.6
+        proportion 1.0
+    }
+
+
     default-column-width {}
+
+    preset-window-heights {
+        proportion 0.4
+        proportion 0.5
+        proportion 0.6
+        proportion 1.0
+    }
 
     focus-ring {
         width 2
@@ -246,6 +262,19 @@ window-rule {
 window-rule {
     match app-id="org.telegram.desktop"
     scroll-factor 1.2
+}
+layer-rule {
+    match layer="top"
+    match layer="overlay"
+
+    background-effect {
+        blur true
+    }
+    popups {
+        background-effect {
+            blur true
+        }
+    }
 }
 
 debug {

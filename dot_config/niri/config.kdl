@@ -161,12 +161,8 @@ binds {
     Mod+G { toggle-column-tabbed-display; }
 
     // Screenshot
-    Print       hotkey-overlay-title="Screenshot Region" { spawn "screenshot" "region"; }
-    Shift+Print hotkey-overlay-title="Screenshot Window" { spawn "screenshot" "window"; }
-    Ctrl+Print  hotkey-overlay-title="Screenshot Output" { spawn "screenshot" "output"; }
-    Mod+P       hotkey-overlay-title="Screenshot Region" { spawn "screenshot" "region"; }
-    Mod+Shift+P hotkey-overlay-title="Screenshot Window" { spawn "screenshot" "window"; }
-    Mod+Ctrl+P  hotkey-overlay-title="Screenshot Output" { spawn "screenshot" "output"; }
+    Print       hotkey-overlay-title="Screenshot" { spawn "mark-shot"; }
+    Mod+P       hotkey-overlay-title="Screenshot" { spawn "mark-shot"; }
 
     Mod+Ctrl+Shift+Q { quit; }
 }

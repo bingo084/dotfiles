@@ -25,6 +25,7 @@ arch = [
   "ddcutil",                # External monitor brightness
   "dunst",                  # Notification
   "gnome-keyring",          # Stores passwords and encryption keys
+  "mark-shot",              # Screenshot tool
   "matugen-bin",            # Material you color generation tool
   "mission-center",         # System monitor
   "network-manager-applet", # Network
@@ -150,9 +151,7 @@ arch = [
     "hyprland-scratchpad-git",
     "hyprlock",
     "hyprpicker",
-    "hyprshot",
     "kanshi",                      # Output management
-    "satty",                       # Screenshot annotation tool
     "scdoc",                       # Build hdrop documentation
     "socat",                       # Monitor hyprland sock
     "xdg-desktop-portal-hyprland",

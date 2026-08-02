@@ -21,6 +21,8 @@ input {
     focus-follows-mouse max-scroll-amount="20%"
 }
 
+include "monitor.kdl"
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 

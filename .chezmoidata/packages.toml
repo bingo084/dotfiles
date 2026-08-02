@@ -151,7 +151,7 @@ arch = [
     "hyprland-scratchpad-git",
     "hyprlock",
     "hyprpicker",
-    "kanshi",                      # Output management
+    "nwg-displays",                # Output management
     "scdoc",                       # Build hdrop documentation
     "socat",                       # Monitor hyprland sock
     "xdg-desktop-portal-hyprland",

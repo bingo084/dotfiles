@@ -261,19 +261,6 @@ window-rule {
     match app-id="org.telegram.desktop"
     scroll-factor 1.2
 }
-layer-rule {
-    match layer="top"
-    match layer="overlay"
-
-    background-effect {
-        blur true
-    }
-    popups {
-        background-effect {
-            blur true
-        }
-    }
-}
 
 debug {
     // Use nvidia as primary render device

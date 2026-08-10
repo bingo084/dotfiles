@@ -1,41 +1,25 @@
-output "BOE 0x0760 Unknown" {
-  mode 1920x1080@60.03Hz
-  position 0,0
-  scale 1
-  alias $INTERNAL
-}
-
-output "ViewSonic Corporation VX2480-HD-PRO VXK193500367" {
-  mode 1920x1080@144.00Hz
-  position 1920,0
-  scale 1
-  alias $HOME
-}
-
-output "Dell Inc. DELL S2421HSX JPNQ093" {
-  mode 1920x1080@75.00Hz
-  position 0,0
-  scale 1
-  alias $WORK1
-}
-
-output "Dell Inc. DELL U2720QM JCJWV13" {
-  mode 3840x2160@60.00Hz
-  position 1920,0
-  scale 1.67
-  alias $WORK2
-}
-
+# Default when at least one external output is connected.
 profile external {
-  output $INTERNAL disable
-  output $HOME enable
+  output eDP-1 disable
+  output "* * *" enable
+  ...output "*" enable
 }
 
+# Manually enable all outputs while external outputs are connected.
+profile all {
+  output eDP-1 enable
+  output "* * *" enable
+  ...output "*" enable
+}
+
+# Manually enable only the internal output while external outputs stay connected.
 profile internal {
-  output $INTERNAL enable
+  output eDP-1 enable
+  output "* * *" disable
+  ...output "*" disable
 }
 
-profile work {
-  output $WORK1 enable
-  output $WORK2 enable
+# Automatically enable the internal output when it is the only connected output.
+profile internal {
+  output eDP-1 enable
 }

@@ -45,6 +45,7 @@ keymap:
   - name: Emacs
     remap:
       # Keep *+C+* working normally
+      SUPER-C-c: SUPER-C-c
       SUPER-C-f: SUPER-C-f
       SUPER-C-h: SUPER-C-h
       SUPER-C-j: SUPER-C-j

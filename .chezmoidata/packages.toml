@@ -151,7 +151,7 @@ arch = [
     "hyprlock",
     "hyprpicker",
     "hyprshutdown",
-    "kanshi",                      # Output management
+    "monique",                     # Output management
     "scdoc",                       # Build hdrop documentation
     "socat",                       # Monitor hyprland sock
     "xdg-desktop-portal-hyprland",

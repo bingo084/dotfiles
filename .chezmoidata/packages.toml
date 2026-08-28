@@ -148,9 +148,9 @@ arch = [
   { name = "hyprland", deps = [
     "hdrop-git",
     "hypridle",
-    "hyprland-scratchpad-git",
     "hyprlock",
     "hyprpicker",
+    "hyprshutdown",
     "kanshi",                      # Output management
     "scdoc",                       # Build hdrop documentation
     "socat",                       # Monitor hyprland sock

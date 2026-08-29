@@ -35,40 +35,7 @@ if hl.plugin.scrolloverview then
 			hl.plugin.scrolloverview.overview("off")
 		end)
 		hl.bind("mouse:274", hl.plugin.scrolloverview.window("close"))
-
-		local shift_pressed = {}
-
-		local function update_scrolling_mode()
-			hl.config({
-				plugin = {
-					scrolloverview = {
-						input = {
-							scrolling_mode = next(shift_pressed) and 1 or 0,
-						},
-					},
-				},
-			})
-		end
-
-		local function bind_scroll_modifier(key)
-			hl.bind(key, function()
-				shift_pressed[key] = true
-				update_scrolling_mode()
-			end, { transparent = true, non_consuming = true })
-
-			hl.bind("SHIFT + " .. key, function()
-				shift_pressed[key] = nil
-				update_scrolling_mode()
-			end, {
-				release = true,
-				transparent = true,
-				non_consuming = true,
-				submap_universal = true,
-			})
-		end
-
-		update_scrolling_mode()
-		bind_scroll_modifier("Shift_L")
-		bind_scroll_modifier("Shift_R")
+		hl.bind("SHIFT + mouse_up", hl.plugin.scrolloverview.navigate("left"))
+		hl.bind("SHIFT + mouse_down", hl.plugin.scrolloverview.navigate("right"))
 	end)
 end

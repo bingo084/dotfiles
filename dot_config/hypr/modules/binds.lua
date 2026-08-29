@@ -102,6 +102,8 @@ global_bind("SUPER + H", hl.dsp.layout("focus l"))
 global_bind("SUPER + L", hl.dsp.layout("focus r"))
 global_bind("SUPER + J", navigation.focus_window_or_workspace_down)
 global_bind("SUPER + K", navigation.focus_window_or_workspace_up)
+global_bind("SUPER + SHIFT + mouse_up", hl.dsp.layout("move -col"))
+global_bind("SUPER + SHIFT + mouse_down", hl.dsp.layout("move +col"))
 -- Cycle focus
 global_bind("ALT + TAB", hl.dsp.window.cycle_next())
 global_bind("ALT + SHIFT + TAB", hl.dsp.window.cycle_next({ next = false }))

@@ -1,27 +1,33 @@
 local navigation = require("utils.navigation")
 
+local function global_bind(keys, dispatcher, options)
+	local resolved = {}
+	for name, value in pairs(options or {}) do
+		resolved[name] = value
+	end
+	resolved.submap_universal = true
+	return hl.bind(keys, dispatcher, resolved)
+end
+
+local function global_exec(keys, command, options)
+	return global_bind(keys, hl.dsp.exec_cmd(command), options)
+end
+
+local locked = { locked = true }
+local locked_repeating = { locked = true, repeating = true }
+
 hl.config({
 	-- https://wiki.hypr.land/Configuring/Basics/Variables/#binds
 	binds = { movefocus_cycles_groupfirst = true, allow_pin_fullscreen = true },
 })
 
-local terminal = "kitty"
-local fileManager = "dolphin"
-local browser = "google-chrome-stable"
-local launcher = "rofi -show"
-local screenshot = "mark-shot"
-
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- Applications
-hl.bind("SUPER + RETURN", hl.dsp.exec_cmd(terminal), { submap_universal = true })
-hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(launcher), { submap_universal = true })
-hl.bind("SUPER + B", hl.dsp.exec_cmd(browser), { submap_universal = true })
-hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager), { submap_universal = true })
-hl.bind(
-	"ALT + V",
-	hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy && wtype-paste"),
-	{ submap_universal = true }
-)
+global_exec("SUPER + RETURN", "kitty")
+global_exec("SUPER + SPACE", "rofi -show")
+global_exec("SUPER + B", "google-chrome-stable")
+global_exec("SUPER + E", "nautilus")
+global_exec("ALT + V", "cliphist list | rofi -dmenu | cliphist decode | wl-copy && wtype-paste")
 -- Notifications
 hl.bind("SUPER + N", hl.dsp.submap("notify"))
 hl.define_submap("notify", "reset", function()
@@ -33,73 +39,53 @@ hl.define_submap("notify", function()
 	hl.bind("catchall", hl.dsp.submap("reset"))
 end)
 -- Screenshots
-hl.bind("PRINT", hl.dsp.exec_cmd(screenshot), { submap_universal = true })
-hl.bind("SUPER + P", hl.dsp.exec_cmd(screenshot), { submap_universal = true })
+global_exec("PRINT", "mark-shot")
+global_exec("SUPER + P", "mark-shot")
 -- Brightness
 local brightness = "brightnessctl -c backlight -e4 -n2 set 1%"
-hl.bind(
-	"XF86MonBrightnessUp",
-	hl.dsp.exec_cmd(brightness .. "+"),
-	{ locked = true, repeating = true, submap_universal = true }
-)
-hl.bind(
-	"XF86MonBrightnessDown",
-	hl.dsp.exec_cmd(brightness .. "-"),
-	{ locked = true, repeating = true, submap_universal = true }
-)
+global_exec("XF86MonBrightnessUp", brightness .. "+", locked_repeating)
+global_exec("XF86MonBrightnessDown", brightness .. "-", locked_repeating)
 -- Volume
 local volume = "wpctl set-volume @DEFAULT_SINK@ -l 1.0 1%"
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd(volume .. "+"),
-	{ locked = true, repeating = true, submap_universal = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd(volume .. "-"),
-	{ locked = true, repeating = true, submap_universal = true }
-)
-hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle"),
-	{ locked = true, submap_universal = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SOURCE@ toggle"),
-	{ locked = true, submap_universal = true }
-)
+global_exec("XF86AudioRaiseVolume", volume .. "+", locked_repeating)
+global_exec("XF86AudioLowerVolume", volume .. "-", locked_repeating)
+global_exec("XF86AudioMute", "wpctl set-mute @DEFAULT_SINK@ toggle", locked)
+global_exec("XF86AudioMicMute", "wpctl set-mute @DEFAULT_SOURCE@ toggle", locked)
 -- Media
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, submap_universal = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, submap_universal = true })
-hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true, submap_universal = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true, submap_universal = true })
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true, submap_universal = true })
+global_exec("XF86AudioPlay", "playerctl play-pause", locked)
+global_exec("XF86AudioPause", "playerctl play-pause", locked)
+global_exec("XF86AudioStop", "playerctl stop", locked)
+global_exec("XF86AudioPrev", "playerctl previous", locked)
+global_exec("XF86AudioNext", "playerctl next", locked)
 -- Hyprland
-hl.bind("SUPER + CTRL + SHIFT + Q", hl.dsp.exec_cmd("hyprshutdown"), { submap_universal = true })
+global_exec("SUPER + CTRL + SHIFT + Q", "hyprshutdown")
 -- Windows
-hl.bind("SUPER + W", hl.dsp.window.close(), { submap_universal = true })
-hl.bind("SUPER + Q", hl.dsp.window.kill(), { submap_universal = true })
-hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized" }), { submap_universal = true })
-hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen(), { submap_universal = true })
-hl.bind("SUPER + T", hl.dsp.window.float(), { submap_universal = true })
-hl.bind("SUPER + O", hl.dsp.window.pin(), { submap_universal = true })
-hl.bind("ALT + mouse:272", hl.dsp.window.close(), { submap_universal = true })
+global_bind("SUPER + W", hl.dsp.window.close())
+global_bind("SUPER + Q", hl.dsp.window.kill())
+global_bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+global_bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
+global_bind("SUPER + T", hl.dsp.window.float())
+global_bind("SUPER + O", hl.dsp.window.pin())
+global_bind("ALT + mouse:272", hl.dsp.window.close())
 -- Resize
 hl.bind("SUPER + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
+	local function repeat_bind(keys, dispatcher)
+		return hl.bind(keys, dispatcher, { repeating = true })
+	end
+
 	hl.bind("R", hl.dsp.layout("colresize +conf"))
 	hl.bind("E", hl.dsp.layout("colresize -conf"))
 
-	hl.bind("H", hl.dsp.window.resize({ x = -20, y = 0, relative = true }), { repeating = true })
-	hl.bind("L", hl.dsp.window.resize({ x = 20, y = 0, relative = true }), { repeating = true })
-	hl.bind("J", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true })
-	hl.bind("K", hl.dsp.window.resize({ x = 0, y = -20, relative = true }), { repeating = true })
+	repeat_bind("H", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
+	repeat_bind("L", hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
+	repeat_bind("J", hl.dsp.window.resize({ x = 0, y = 20, relative = true }))
+	repeat_bind("K", hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
 
-	hl.bind("SHIFT + H", hl.dsp.window.move({ x = -20, y = 0, relative = true }), { repeating = true })
-	hl.bind("SHIFT + L", hl.dsp.window.move({ x = 20, y = 0, relative = true }), { repeating = true })
-	hl.bind("SHIFT + J", hl.dsp.window.move({ x = 0, y = 20, relative = true }), { repeating = true })
-	hl.bind("SHIFT + K", hl.dsp.window.move({ x = 0, y = -20, relative = true }), { repeating = true })
+	repeat_bind("SHIFT + H", hl.dsp.window.move({ x = -20, y = 0, relative = true }))
+	repeat_bind("SHIFT + L", hl.dsp.window.move({ x = 20, y = 0, relative = true }))
+	repeat_bind("SHIFT + J", hl.dsp.window.move({ x = 0, y = 20, relative = true }))
+	repeat_bind("SHIFT + K", hl.dsp.window.move({ x = 0, y = -20, relative = true }))
 
 	hl.bind("C", hl.dsp.window.center())
 	hl.bind("F", hl.dsp.window.fullscreen({ mode = "maximized" }))
@@ -112,24 +98,24 @@ end)
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Move focus
-hl.bind("SUPER + H", hl.dsp.layout("focus l"), { submap_universal = true })
-hl.bind("SUPER + L", hl.dsp.layout("focus r"), { submap_universal = true })
-hl.bind("SUPER + J", navigation.focus_window_or_workspace_down, { submap_universal = true })
-hl.bind("SUPER + K", navigation.focus_window_or_workspace_up, { submap_universal = true })
+global_bind("SUPER + H", hl.dsp.layout("focus l"))
+global_bind("SUPER + L", hl.dsp.layout("focus r"))
+global_bind("SUPER + J", navigation.focus_window_or_workspace_down)
+global_bind("SUPER + K", navigation.focus_window_or_workspace_up)
 -- Cycle focus
-hl.bind("ALT + TAB", hl.dsp.window.cycle_next(), { submap_universal = true })
-hl.bind("ALT + SHIFT + TAB", hl.dsp.window.cycle_next({ next = false }), { submap_universal = true })
-hl.bind("SUPER + TAB", hl.dsp.focus({ workspace = "previous" }), { submap_universal = true })
+global_bind("ALT + TAB", hl.dsp.window.cycle_next())
+global_bind("ALT + SHIFT + TAB", hl.dsp.window.cycle_next({ next = false }))
+global_bind("SUPER + TAB", hl.dsp.focus({ workspace = "previous" }))
 -- Move window
-hl.bind("SUPER + SHIFT + H", hl.dsp.layout("consume_or_expel prev"), { submap_universal = true })
-hl.bind("SUPER + SHIFT + L", hl.dsp.layout("consume_or_expel next"), { submap_universal = true })
-hl.bind("SUPER + SHIFT + J", navigation.move_window_down_or_to_workspace_down, { submap_universal = true })
-hl.bind("SUPER + SHIFT + K", navigation.move_window_up_or_to_workspace_up, { submap_universal = true })
+global_bind("SUPER + SHIFT + H", hl.dsp.layout("consume_or_expel prev"))
+global_bind("SUPER + SHIFT + L", hl.dsp.layout("consume_or_expel next"))
+global_bind("SUPER + SHIFT + J", navigation.move_window_down_or_to_workspace_down)
+global_bind("SUPER + SHIFT + K", navigation.move_window_up_or_to_workspace_up)
 -- Swap window
-hl.bind("SUPER + CTRL + H", hl.dsp.layout("swapcol l"), { submap_universal = true })
-hl.bind("SUPER + CTRL + L", hl.dsp.layout("swapcol r"), { submap_universal = true })
-hl.bind("SUPER + CTRL + J", hl.dsp.window.swap({ direction = "d" }), { submap_universal = true })
-hl.bind("SUPER + CTRL + K", hl.dsp.window.swap({ direction = "u" }), { submap_universal = true })
+global_bind("SUPER + CTRL + H", hl.dsp.layout("swapcol l"))
+global_bind("SUPER + CTRL + L", hl.dsp.layout("swapcol r"))
+global_bind("SUPER + CTRL + J", hl.dsp.window.swap({ direction = "d" }))
+global_bind("SUPER + CTRL + K", hl.dsp.window.swap({ direction = "u" }))
 -- Groups
 hl.bind("SUPER + G", hl.dsp.submap("group"))
 hl.define_submap("group", function()
@@ -144,8 +130,8 @@ end)
 -- Workspaces
 for i = 1, 10 do
 	local key = i % 10 -- 10 maps to key 0
-	hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }), { submap_universal = true })
-	hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), { submap_universal = true })
+	global_bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }))
+	global_bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e+1" }))

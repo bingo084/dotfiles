@@ -1,5 +1,3 @@
-require("monitors")
-
 require("modules.animations")
 require("modules.appearance")
 require("modules.autostart")
@@ -8,6 +6,7 @@ require("modules.env")
 require("modules.gestures")
 require("modules.input")
 require("modules.layouts")
+require("modules.monitors")
 require("modules.misc")
 require("modules.plugins")
 require("modules.rules")

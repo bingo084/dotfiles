@@ -135,8 +135,8 @@ for i = 1, 10 do
 	global_bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }))
 	global_bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-hl.bind("SUPER + mouse_down", navigation.focus_next_workspace)
-hl.bind("SUPER + mouse_up", navigation.focus_previous_workspace)
+hl.bind("SUPER + mouse_down", navigation.scroll_next_workspace)
+hl.bind("SUPER + mouse_up", navigation.scroll_previous_workspace)
 -- Move workspace
 hl.bind("SUPER + D", hl.dsp.submap("workspace"))
 hl.define_submap("workspace", "reset", function()

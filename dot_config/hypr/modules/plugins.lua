@@ -1,3 +1,5 @@
+local navigation = require("utils.navigation")
+
 -- hyprpm add https://github.com/yayuuu/hyprland-scroll-overview.git
 -- .config/hypr/hyprland.lua
 if hl.plugin.scrolloverview then
@@ -35,6 +37,8 @@ if hl.plugin.scrolloverview then
 			hl.plugin.scrolloverview.overview("off")
 		end)
 		hl.bind("mouse:274", hl.plugin.scrolloverview.window("close"))
+		hl.bind("mouse_up", navigation.focus_previous_workspace)
+		hl.bind("mouse_down", navigation.focus_next_workspace)
 		hl.bind("SHIFT + mouse_up", hl.plugin.scrolloverview.navigate("left"))
 		hl.bind("SHIFT + mouse_down", hl.plugin.scrolloverview.navigate("right"))
 	end)

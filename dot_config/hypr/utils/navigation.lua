@@ -26,17 +26,20 @@ local function vertical_neighbor(window, step)
 	return neighbor
 end
 
-local function workspace_in_direction(step)
-	local current = hl.get_active_workspace()
+local function workspace_in_direction(step, monitor)
+	local current = hl.get_active_workspace(monitor)
 	if current == nil or current.special then
 		return nil
 	end
 
+	local monitor_name = monitor and monitor.name
 	local neighbor
 	local nearest = math.huge
 	for _, workspace in ipairs(hl.get_workspaces()) do
 		local distance = (workspace.id - current.id) * step
-		if not workspace.special and distance > 0 and distance < nearest then
+		local same_monitor = monitor_name == nil
+			or (workspace.monitor ~= nil and workspace.monitor.name == monitor_name)
+		if not workspace.special and same_monitor and distance > 0 and distance < nearest then
 			neighbor = workspace
 			nearest = distance
 		end
@@ -58,12 +61,35 @@ local function workspace_has_windows(workspace)
 end
 
 local function focus_workspace(step)
-	local workspace = workspace_in_direction(step)
-	if workspace ~= nil then
-		hl.dispatch(hl.dsp.focus({ workspace = workspace_selector(workspace) }))
-	elseif step > 0 and workspace_has_windows(hl.get_active_workspace()) then
-		hl.dispatch(hl.dsp.focus({ workspace = "emptyn" }))
+	local cursor = hl.get_cursor_pos()
+	local monitor = cursor and hl.get_monitor_at(cursor) or hl.get_active_monitor()
+	if monitor == nil then
+		return
 	end
+
+	if not monitor.focused then
+		hl.dispatch(hl.dsp.focus({ monitor = monitor }))
+	end
+
+	local workspace = workspace_in_direction(step, monitor)
+	if workspace ~= nil then
+		hl.dispatch(hl.dsp.focus({ workspace = workspace_selector(workspace), on_current_monitor = true }))
+	elseif step > 0 and workspace_has_windows(hl.get_active_workspace(monitor)) then
+		hl.dispatch(hl.dsp.focus({ workspace = "emptyn", on_current_monitor = true }))
+	end
+end
+
+local workspace_scroll_ready = true
+local function scroll_workspace(step)
+	if not workspace_scroll_ready then
+		return
+	end
+
+	workspace_scroll_ready = false
+	focus_workspace(step)
+	hl.timer(function()
+		workspace_scroll_ready = true
+	end, { timeout = 125, type = "oneshot" })
 end
 
 local function tiled_columns(workspace)
@@ -241,6 +267,14 @@ end
 
 function M.focus_next_workspace()
 	focus_workspace(1)
+end
+
+function M.scroll_previous_workspace()
+	scroll_workspace(-1)
+end
+
+function M.scroll_next_workspace()
+	scroll_workspace(1)
 end
 
 function M.move_window_down_or_to_workspace_down()

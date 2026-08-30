@@ -57,6 +57,15 @@ local function workspace_has_windows(workspace)
 	return workspace ~= nil and not workspace.special and #workspace:get_windows() > 0
 end
 
+local function focus_workspace(step)
+	local workspace = workspace_in_direction(step)
+	if workspace ~= nil then
+		hl.dispatch(hl.dsp.focus({ workspace = workspace_selector(workspace) }))
+	elseif step > 0 and workspace_has_windows(hl.get_active_workspace()) then
+		hl.dispatch(hl.dsp.focus({ workspace = "emptyn" }))
+	end
+end
+
 local function tiled_columns(workspace)
 	local by_x = {}
 	for _, window in ipairs(workspace:get_windows()) do
@@ -224,6 +233,14 @@ end
 
 function M.focus_window_or_workspace_up()
 	focus_window_or_workspace(-1)
+end
+
+function M.focus_previous_workspace()
+	focus_workspace(-1)
+end
+
+function M.focus_next_workspace()
+	focus_workspace(1)
 end
 
 function M.move_window_down_or_to_workspace_down()

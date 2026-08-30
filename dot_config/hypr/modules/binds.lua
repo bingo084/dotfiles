@@ -18,7 +18,7 @@ local locked_repeating = { locked = true, repeating = true }
 
 hl.config({
 	-- https://wiki.hypr.land/Configuring/Basics/Variables/#binds
-	binds = { movefocus_cycles_groupfirst = true, allow_pin_fullscreen = true },
+	binds = { allow_pin_fullscreen = true, movefocus_cycles_groupfirst = true, scroll_event_delay = 0 },
 })
 
 -- https://wiki.hypr.land/Configuring/Basics/Binds/

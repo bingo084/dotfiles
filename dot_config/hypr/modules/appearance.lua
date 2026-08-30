@@ -1,10 +1,12 @@
+local colors = require("generated.colors")
+
 hl.config({
 	-- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 	general = {
 		border_size = 2,
 		gaps_in = 2,
 		gaps_out = 4,
-		col = { inactive_border = "rgba(adc6ff19)", active_border = "rgba(adc6ff33)" },
+		col = { inactive_border = colors.outline_variant[100], active_border = colors.primary[80] },
 	},
 	-- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
 	decoration = {

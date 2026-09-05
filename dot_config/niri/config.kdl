@@ -267,3 +267,6 @@ debug {
     // lspci -d ::03xx && ls -l /dev/dri/by-path
     render-drm-device "/dev/dri/renderD128"
 }
+
+// Monique monitor configuration
+include "generated/monitors.kdl"

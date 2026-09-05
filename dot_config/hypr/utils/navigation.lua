@@ -128,6 +128,81 @@ local function column_index(workspace, target)
 	return nil
 end
 
+local function horizontal_gaps(name)
+	local gaps = hl.get_config(name)
+	if type(gaps) == "number" then
+		return gaps, gaps
+	elseif type(gaps) == "table" then
+		return gaps.left or 0, gaps.right or 0
+	end
+
+	return 0, 0
+end
+
+local function column_width(column, index, count)
+	local width = column.right - column.x
+	local gap_left, gap_right = horizontal_gaps("general.gaps_in")
+	if index > 1 then
+		width = width + gap_left
+	end
+	if index < count then
+		width = width + gap_right
+	end
+
+	return width
+end
+
+local function monitor_work_area(monitor)
+	local left = monitor.x
+	local right = left + monitor.width / monitor.scale
+	local reserved = monitor.reserved
+	if type(reserved) == "table" then
+		left = left + (reserved.left or reserved[4] or 0)
+		right = right - (reserved.right or reserved[2] or 0)
+	end
+
+	local gap_left, gap_right = horizontal_gaps("general.gaps_out")
+	return left + gap_left, right - gap_right
+end
+
+local function expand_column_to_available_width()
+	local window = hl.get_active_window()
+	if
+		window == nil
+		or window.workspace == nil
+		or window.monitor == nil
+		or window.floating
+		or (window.fullscreen and window.fullscreen ~= 0)
+	then
+		return
+	end
+
+	local columns = tiled_columns(window.workspace)
+	local work_left, work_right = monitor_work_area(window.monitor)
+	local usable_width = work_right - work_left
+	if usable_width <= 0 then
+		return
+	end
+
+	local active_width
+	local occupied_width = 0
+	for index, column in ipairs(columns) do
+		local width = column_width(column, index, #columns)
+		if column.windows[window.address] then
+			active_width = width
+		elseif column.x >= work_left - 1 and column.right <= work_right + 1 then
+			occupied_width = occupied_width + width
+		end
+	end
+
+	local available_width = usable_width - occupied_width
+	if active_width == nil or available_width <= active_width + 1 then
+		return
+	end
+
+	hl.dispatch(hl.dsp.layout(string.format("colresize %.6f", available_width / usable_width)))
+end
+
 local function projected_center(window, workspace)
 	local center = window.at.x + window.size.x / 2
 	local source_monitor = window.monitor
@@ -275,6 +350,10 @@ end
 
 function M.scroll_next_workspace()
 	scroll_workspace(1)
+end
+
+function M.expand_column_to_available_width()
+	expand_column_to_available_width()
 end
 
 function M.move_window_down_or_to_workspace_down()

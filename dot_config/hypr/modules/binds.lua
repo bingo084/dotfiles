@@ -73,12 +73,22 @@ hl.define_submap("resize", function()
 	local function repeat_bind(keys, dispatcher)
 		return hl.bind(keys, dispatcher, { repeating = true })
 	end
+	local function resize_width(step)
+		return function()
+			local window = hl.get_active_window()
+			if window ~= nil and window.floating then
+				hl.dispatch(hl.dsp.window.resize({ x = step * 20, y = 0, relative = true }))
+			else
+				hl.dispatch(hl.dsp.layout(string.format("colresize %+.3f", step * 0.025)))
+			end
+		end
+	end
 
-	hl.bind("R", hl.dsp.layout("colresize +conf"))
-	hl.bind("E", hl.dsp.layout("colresize -conf"))
+	hl.bind("SPACE", hl.dsp.layout("colresize 0.5"))
+	hl.bind("E", navigation.expand_column_to_available_width)
 
-	repeat_bind("H", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
-	repeat_bind("L", hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
+	repeat_bind("H", resize_width(-1))
+	repeat_bind("L", resize_width(1))
 	repeat_bind("J", hl.dsp.window.resize({ x = 0, y = 20, relative = true }))
 	repeat_bind("K", hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
 

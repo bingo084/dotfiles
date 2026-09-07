@@ -195,7 +195,7 @@ layout {
     }
 }
 
-spawn-at-startup "hyprlock" "--immediate"
+spawn-at-startup "hyprlock"
 spawn-at-startup "google-chrome-stable"
 spawn-at-startup "Telegram"
 // Auto start rbw-agent to handle ssh agent requests

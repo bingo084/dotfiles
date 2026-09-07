@@ -1,16 +1,26 @@
-#!/bin/bash
+#!/bin/sh
+
+set -eu
+
 {{- $source := joinPath .chezmoi.homeDir "/.config/mihomo/config.yaml" }}
 # mihomo config hash: {{ include $source | sha256sum }}
 echo ":: mihomo config has changed"
+echo ":: validating mihomo config..."
+mihomo -t -d "$(dirname "{{ $source }}")" -f "{{ $source }}"
 echo ":: cp to etc mihomo config..."
 {{ if eq .chezmoi.os "darwin" -}}
-cp {{ $source }} $HOMEBREW_PREFIX/etc/mihomo/config.yaml
+brew_prefix="$(brew --prefix)"
+install -m 600 "{{ $source }}" "$brew_prefix/etc/mihomo/config.yaml"
 {{ else if eq .chezmoi.os "linux" -}}
-sudo cp {{ $source }} /etc/mihomo/config.yaml
+sudo install -m 600 "{{ $source }}" /etc/mihomo/config.yaml
 {{- end }}
 echo ":: reloading..."
 {{ if eq .chezmoi.os "darwin" -}}
-curl 'http://127.0.0.1:9090/configs?force=true' -X PUT -d '{"path":"","payload":""}'
+curl --fail --silent --show-error \
+  'http://127.0.0.1:9090/configs?force=true' \
+  -X PUT \
+  -H 'Content-Type: application/json' \
+  -d '{"path":"","payload":""}'
 {{ else if eq .chezmoi.os "linux" -}}
 sudo systemctl restart mihomo
 {{- end }}

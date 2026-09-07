@@ -24,6 +24,7 @@
 [".config/mihomo/config.yaml"]
     type = "file"
     url = '{{ (rbwFields "Subscribe").MihomoConfig.value }}'
+    private = true
     refreshPeriod = "168h"
 [".config/git/themes/catppuccin.gitconfig"]
     type = "file"

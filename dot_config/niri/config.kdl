@@ -27,9 +27,11 @@ include optional=true "generated/monitors.kdl"
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return  hotkey-overlay-title="Open a Terminal: kitty"   { spawn "kitty"; }
-    Mod+Space   hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show"; }
-    ALT+V       hotkey-overlay-title="Clipboard History"        { spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy && wtype-paste"; }
+    Mod+Return  hotkey-overlay-title="Open Terminal: kitty"        { spawn "kitty"; }
+    Mod+Space   hotkey-overlay-title="Open Launcher: rofi"         { spawn "rofi" "-show"; }
+    Mod+B       hotkey-overlay-title="Open Browser: chrome"        { spawn "google-chrome-stable"; }
+    Mod+E       hotkey-overlay-title="Open File Manager: nautilus" { spawn "nautilus"; }
+    ALT+V       hotkey-overlay-title="Clipboard History"           { spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy && wtype-paste"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%+" "-l" "1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "1%-"; }
@@ -37,12 +39,13 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
 
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPause       allow-when-locked=true { spawn "playerctl" "pause"; }
     XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
 
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%-"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%-"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "-c" "backlight" "-e4" "-n2" "set" "1%+"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "-c" "backlight" "-e4" "-n2" "set" "1%-"; }
 
     Mod+Escape repeat=false { toggle-overview; }
 

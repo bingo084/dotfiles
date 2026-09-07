@@ -1,6 +1,6 @@
 -- https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function()
-	hl.exec_cmd("gtklock")
+	hl.exec_cmd("hyprlock")
 	hl.exec_cmd("google-chrome-stable", { workspace = 1 })
 	hl.exec_cmd("Telegram", { workspace = 2 })
 	-- Start rbw-agent to SSH requests

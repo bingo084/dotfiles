@@ -179,22 +179,7 @@ layout {
     gaps 6
     always-center-single-column
 
-    preset-column-widths {
-        proportion 0.4
-        proportion 0.5
-        proportion 0.6
-        proportion 1.0
-    }
-
-
     default-column-width {}
-
-    preset-window-heights {
-        proportion 0.4
-        proportion 0.5
-        proportion 0.6
-        proportion 1.0
-    }
 
     focus-ring {
         width 2
@@ -243,23 +228,9 @@ window-rule {
     clip-to-geometry true
 }
 window-rule {
-    match is-floating=true
-    focus-ring {
-        off
-    }
-}
-window-rule {
-    match app-id="org.pulseaudio.pavucontrol"
-    match app-id="blueman-manager"
-    match app-id="flameshot"
-    match title=r#"^(图片查看器|图片|预览|群聊的聊天记录|Media viewer|画中画)$"#
+    match app-id=r#"(pavucontrol|blueman-manager)"#
+    match title=r#"(查看器|预览|聊天记录|Media viewer|画中画)"#
     open-floating true
-}
-window-rule {
-    match app-id="com.gabm.satty"
-    open-floating true
-    // Wait for issue(https://github.com/niri-wm/niri/issues/978) to be resolved, support for relative-to="cursor"
-    // default-floating-position x=0 y=0 relative-to="cursor"
 }
 window-rule {
     match app-id="org.telegram.desktop"

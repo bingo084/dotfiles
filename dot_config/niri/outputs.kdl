@@ -1,4 +1,0 @@
-output "Xiaomi Corporation Mi Monitor Unknown" {
-    mode "3840x2160"
-    scale 1.35
-}

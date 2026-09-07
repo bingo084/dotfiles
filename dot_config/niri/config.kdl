@@ -21,7 +21,8 @@ input {
     focus-follows-mouse max-scroll-amount="20%"
 }
 
-include "outputs.kdl"
+// Monique monitor configuration
+include optional=true "generated/monitors.kdl"
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -267,6 +268,3 @@ debug {
     // lspci -d ::03xx && ls -l /dev/dri/by-path
     render-drm-device "/dev/dri/renderD128"
 }
-
-// Monique monitor configuration
-include "generated/monitors.kdl"

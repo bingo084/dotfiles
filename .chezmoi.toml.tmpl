@@ -1,5 +1,11 @@
 encryption = "age"
 progress = true
+[env]
+{{- if and (eq .chezmoi.os "linux") (env "XDG_RUNTIME_DIR") }}
+    SSH_AUTH_SOCK = {{ joinPath (env "XDG_RUNTIME_DIR") "rbw/ssh-agent-socket" | quote }}
+{{- else }}
+    SSH_AUTH_SOCK = {{ joinPath (env "TMPDIR" | default "/tmp") (printf "rbw-%s/ssh-agent-socket" .chezmoi.uid) | quote }}
+{{- end }}
 [data]
     github = "https://ghfast.top/https://github.com"
     githubRaw = "https://ghfast.top/https://raw.githubusercontent.com"

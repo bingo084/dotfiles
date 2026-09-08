@@ -30,11 +30,11 @@ else
   esac
 fi
 
-if [ -z "$VAULTWARDEN_URL" ]; then
+if [ -z "${VAULTWARDEN_DOMAIN:-}" ]; then
   read -rp "Enter vaultwarden domain: " VAULTWARDEN_DOMAIN
 fi
 
-if [ -z "$VAULTWARDEN_EMAIL" ]; then
+if [ -z "${VAULTWARDEN_EMAIL:-}" ]; then
   read -rp "Enter vaultwarden email: " VAULTWARDEN_EMAIL
 fi
 
@@ -42,5 +42,6 @@ fi
 echo ":: Initializing rbw..."
 rbw config set base_url "https://$VAULTWARDEN_DOMAIN"
 rbw config set email "$VAULTWARDEN_EMAIL"
+rbw unlock
 
 echo ":: rbw setup completed."

@@ -234,7 +234,7 @@ window-rule {
 }
 window-rule {
     match app-id=r#"(pavucontrol|blueman-manager)"#
-    match title=r#"(查看器|预览|聊天记录|Media viewer|画中画)"#
+    match title=r#"(查看器|播放器|预览|聊天记录|Media viewer|画中画)"#
     open-floating true
 }
 window-rule {

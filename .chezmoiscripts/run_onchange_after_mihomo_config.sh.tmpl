@@ -2,9 +2,13 @@
 
 set -eu
 
-{{- $source := joinPath .chezmoi.homeDir "/.config/mihomo/config.yaml" }}
+{{- $repo := joinPath .chezmoi.homeDir "/.config/mihomo" }}
+{{- $source := joinPath $repo "mihomo.yaml" }}
+# mihomo config revision: {{ output "git" "-C" $repo "rev-parse" "HEAD" }}
 # mihomo config hash: {{ include $source | sha256sum }}
 echo ":: mihomo config has changed"
+chmod 700 "{{ $repo }}"
+chmod 600 "{{ $source }}"
 echo ":: validating mihomo config..."
 mihomo -t -d "$(dirname "{{ $source }}")" -f "{{ $source }}"
 echo ":: cp to etc mihomo config..."

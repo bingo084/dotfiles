@@ -18,13 +18,13 @@ install -m 600 "{{ $source }}" "$brew_prefix/etc/mihomo/config.yaml"
 {{ else if eq .chezmoi.os "linux" -}}
 sudo install -m 600 "{{ $source }}" /etc/mihomo/config.yaml
 {{- end }}
-echo ":: reloading..."
-{{ if eq .chezmoi.os "darwin" -}}
+# Send the file itself because the running service may use a copied config path.
+echo ":: hot-reloading via controller..."
+jq -Rs '{path: "", payload: .}' < "{{ $source }}" |
 curl --fail --silent --show-error \
-  'http://127.0.0.1:9090/configs?force=true' \
   -X PUT \
   -H 'Content-Type: application/json' \
-  -d '{"path":"","payload":""}'
-{{ else if eq .chezmoi.os "linux" -}}
-sudo systemctl restart mihomo
-{{- end }}
+  --data-binary @- \
+  'http://127.0.0.1:9090/configs?force=true'
+
+# vim:ft=sh:

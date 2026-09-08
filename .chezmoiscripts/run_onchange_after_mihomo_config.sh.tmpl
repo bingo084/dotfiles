@@ -3,28 +3,7 @@
 set -eu
 
 {{- $repo := joinPath .chezmoi.homeDir "/.config/mihomo" }}
-{{- $source := joinPath $repo "mihomo.yaml" }}
 # mihomo config revision: {{ output "git" "-C" $repo "rev-parse" "HEAD" }}
-# mihomo config hash: {{ include $source | sha256sum }}
-echo ":: mihomo config has changed"
-chmod 700 "{{ $repo }}"
-chmod 600 "{{ $source }}"
-echo ":: validating mihomo config..."
-mihomo -t -d "$(dirname "{{ $source }}")" -f "{{ $source }}"
-echo ":: cp to etc mihomo config..."
-{{ if eq .chezmoi.os "darwin" -}}
-brew_prefix="$(brew --prefix)"
-install -m 600 "{{ $source }}" "$brew_prefix/etc/mihomo/config.yaml"
-{{ else if eq .chezmoi.os "linux" -}}
-sudo install -m 600 "{{ $source }}" /etc/mihomo/config.yaml
-{{- end }}
-# Send the file itself because the running service may use a copied config path.
-echo ":: hot-reloading via controller..."
-jq -Rs '{path: "", payload: .}' < "{{ $source }}" |
-curl --fail --silent --show-error \
-  -X PUT \
-  -H 'Content-Type: application/json' \
-  --data-binary @- \
-  'http://127.0.0.1:9090/configs?force=true'
+exec "{{ joinPath $repo "deploy" }}"
 
 # vim:ft=sh:

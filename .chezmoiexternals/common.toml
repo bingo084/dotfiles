@@ -25,7 +25,7 @@
     type = "git-repo"
     url = 'git@gist.github.com:{{ index (splitList "/" (rbwFields "Subscribe").MihomoConfig.value) 4 }}.git'
     refreshPeriod = "168h"
-    clone.args = ["-c", 'core.hooksPath={{ joinPath .chezmoi.homeDir ".config/mihomo" }}']
+    clone.args = ["-c", "include.path=../.gitconfig"]
 [".config/git/themes/catppuccin.gitconfig"]
     type = "file"
     url = "{{ .githubRaw }}/catppuccin/delta/main/catppuccin.gitconfig"

@@ -28,7 +28,6 @@
     type = "git-repo"
     url = "ssh://git@ssh.github.com:443/gist/{{ $mihomoGistID }}.git"
     refreshPeriod = "168h"
-    pull.args = ["--ff-only"]
 [".config/git/themes/catppuccin.gitconfig"]
     type = "file"
     url = "{{ .githubRaw }}/catppuccin/delta/main/catppuccin.gitconfig"

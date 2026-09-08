@@ -21,16 +21,14 @@
     url = "{{ .github }}/catppuccin/btop/releases/latest/download/themes.tar.gz"
     stripComponents = 1
     refreshPeriod = "168h"
-{{- $mihomoConfigURL := (rbwFields "Subscribe").MihomoConfig.value -}}
-{{- $mihomoConfigPath := (urlParse $mihomoConfigURL).path -}}
-{{- $mihomoGistID := index (splitList "/" $mihomoConfigPath) 2 }}
+# {{- $mihomoConfigURL := (rbwFields "Subscribe").MihomoConfig.value }}
+# {{- $mihomoConfigPath := (urlParse $mihomoConfigURL).path }}
+# {{- $mihomoGistID := index (splitList "/" $mihomoConfigPath) 2 }}
 [".config/mihomo"]
     type = "git-repo"
     url = "ssh://git@ssh.github.com:443/gist/{{ $mihomoGistID }}.git"
-    private = true
     refreshPeriod = "168h"
-    [".config/mihomo".pull]
-        args = ["--ff-only"]
+    pull.args = ["--ff-only"]
 [".config/git/themes/catppuccin.gitconfig"]
     type = "file"
     url = "{{ .githubRaw }}/catppuccin/delta/main/catppuccin.gitconfig"

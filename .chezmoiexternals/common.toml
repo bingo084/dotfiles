@@ -25,6 +25,7 @@
     type = "git-repo"
     url = 'ssh://git@ssh.github.com:443/gist/{{ index (splitList "/" (rbwFields "Subscribe").MihomoConfig.value) 4 }}.git'
     refreshPeriod = "168h"
+    clone.args = ["-c", "core.hooksPath=.githooks"]
 [".config/git/themes/catppuccin.gitconfig"]
     type = "file"
     url = "{{ .githubRaw }}/catppuccin/delta/main/catppuccin.gitconfig"

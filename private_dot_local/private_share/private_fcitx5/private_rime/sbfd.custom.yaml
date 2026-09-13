@@ -15,3 +15,8 @@ patch:
   switches/@3/reset: 1
   # 提示：两者
   switches/@4/reset: 3
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key:
+      Shift_L: commit_text
+      Shift_R: commit_text

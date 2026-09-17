@@ -3,3 +3,8 @@ patch:
     - schema: sbfd
     - schema: tiger_sentence
   switcher/caption: "〔方案选单〕"
+  key_binder/bindings/+:
+    - {accept: Control+p, send: Page_Up, when: has_menu}
+    - {accept: Control+n, send: Page_Down, when: has_menu}
+    - {accept: Control+b, send: Up, when: has_menu}
+    - {accept: Control+f, send: Down, when: has_menu}

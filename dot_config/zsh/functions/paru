@@ -1,15 +1,22 @@
 paru() {
-	cleanup() {
-		trap - SIGINT
-		timeout 0.1s ags request updates refresh >/dev/null 2>&1
+	setopt localoptions localtraps
+	local update_exit=130
+	local update_signal=0
+	trap 'return 130' INT
+	trap 'update_signal=129; return 129' HUP
+	trap 'update_signal=143; return 143' TERM
+
+	timeout 1s qs ipc -p "$HOME/.config/quickshell" call updates begin >/dev/null 2>&1 || true
+	{
+		command paru "$@"
+		update_exit=$?
+	} always {
+		timeout 1s qs ipc -p "$HOME/.config/quickshell" call updates end >/dev/null 2>&1 || true
+		if (( update_signal )); then
+			exit $update_signal
+		fi
 	}
-
-	trap cleanup SIGINT
-
-	timeout 0.1s ags request updates spin >/dev/null 2>&1
-	command paru "$@"
-	cleanup
-	unset -f cleanup
+	return $update_exit
 }
 
 # vim:ft=sh:

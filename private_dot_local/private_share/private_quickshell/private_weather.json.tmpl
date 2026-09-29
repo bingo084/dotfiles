@@ -1,0 +1,9 @@
+{{- $weather := rbwFields "和风天气" -}}
+{
+  "weather_host": {{ $weather.ApiHost.value | quote }},
+  "weather_key": {{ $weather.ApiKey.value | quote }},
+  "tencent_map": {
+    "key": {{ (rbwFields "TencentMap").Key.value | quote }},
+    "secret_key": {{ (rbwFields "TencentMap").SecretKey.value | quote }}
+  }
+}

@@ -1,5 +1,8 @@
 [config]
 
+[config.custom_colors]
+warning = { color = "#ffb300", blend = false }
+
 [config.wallpaper]
 command = "awww img --transition-type any --transition-fps 255 {{ image }}"
 

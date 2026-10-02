@@ -1,4 +1,4 @@
-# 个人快捷键及虎整辅助功能：小鹤反查、快符、统计、拆分、Emoji。
+# 个人快捷键及虎整辅助功能：小鹤反查、统计、拆分、Emoji。
 patch:
   engine/segmentors/@before 0: matcher
   engine/processors:
@@ -6,7 +6,6 @@ patch:
   - lua_processor@tiger_sentence_ascii
   - lua_processor@*tiger_emoji_processor
   - recognizer
-  - lua_processor@*tiger_kf_processor
   - lua_processor@*tiger_punct_alt
   - lua_processor@tiger_sentence_processor
   - key_binder

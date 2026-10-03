@@ -123,6 +123,7 @@ arch = [
   "btop",
   "dust",                                        # A more intuitive version of du in rust
   "eza",
+  "fish",
   "fzf",
   "fzf-tab-git",
   "gemini-cli",

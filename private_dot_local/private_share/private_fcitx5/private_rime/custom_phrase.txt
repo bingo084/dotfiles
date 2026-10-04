@@ -1,0 +1,5 @@
+# Personal Tiger Sentence phrases. Fields are separated by Tab.
+# Optional third field: before (default) or after.
+要不要	vcv
+不要	cv
+要不	vc

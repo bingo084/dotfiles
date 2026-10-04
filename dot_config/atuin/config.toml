@@ -5,3 +5,7 @@ show_tabs = false
 enter_accept = true
 [sync]
 records = true
+
+[keymap.emacs]
+"alt-u" = "scroll-half-page-up"
+"alt-d" = "scroll-half-page-down"

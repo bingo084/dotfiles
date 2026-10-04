@@ -1,5 +1,7 @@
 README.md
 
+.config/fcitx5/conf/cached_layouts
+
 # ignore mac special configuration file on other machine
 {{- if ne .chezmoi.os "darwin" }}
 .config/sketchybar/

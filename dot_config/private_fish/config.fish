@@ -48,6 +48,8 @@ if command -q zoxide
     zoxide init --cmd cd fish | source
 end
 
+bind tab complete-and-search
+
 abbr -a v nvim
 abbr -a s 'kitty +kitten ssh'
 abbr -a lg lazygit

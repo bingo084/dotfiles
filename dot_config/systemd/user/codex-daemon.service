@@ -1,0 +1,11 @@
+[Unit]
+Description=Start the Codex app-server daemon at login
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+ExecStart=/usr/bin/codex app-server daemon start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

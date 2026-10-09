@@ -5,6 +5,7 @@ Description=Start the Codex app-server daemon at login
 Type=oneshot
 WorkingDirectory=%h
 ExecStart=/usr/bin/codex app-server daemon start
+ExecStop=/usr/bin/codex app-server daemon stop
 RemainAfterExit=yes
 
 [Install]

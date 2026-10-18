@@ -68,6 +68,7 @@ arch = [
     "zoxide",              # Directory jumping
   ] },
   # Fonts
+  "otf-apple-pingfang",
   "noto-fonts-cjk",
   "noto-fonts-emoji",
   "noto-fonts-extra",

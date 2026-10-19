@@ -118,6 +118,13 @@ arch = [
     "libgtop",          # Library for collecting system monitoring data
     "otf-font-awesome", # Bar icons
   ] },
+  { name = "quickshell", deps = [
+    "iw",             # Wi-Fi link information
+    "mactahoe-icon-theme-git",
+    "python-gobject", # Bluetooth pairing agent
+    "qml-niri",
+    "websocat",
+  ] },
   # Terminal
   "atuin",
   "bat",

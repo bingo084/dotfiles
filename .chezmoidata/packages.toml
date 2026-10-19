@@ -123,6 +123,7 @@ arch = [
     "mactahoe-icon-theme-git",
     "python-gobject", # Bluetooth pairing agent
     "qml-niri",
+    "qrencode",       # Wi-Fi sharing QR codes
     "websocat",
   ] },
   # Terminal

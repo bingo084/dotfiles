@@ -143,7 +143,6 @@ arch = [
   "lazygit",
   "man-db",
   "mihomo",
-  "ntfysh-bin",
   "openai-codex",
   "opencode",
   "python-pywal",

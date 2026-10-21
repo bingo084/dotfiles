@@ -2,7 +2,7 @@
 
 layout {
     focus-ring {
-        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklab"
+        active-gradient from="{{colors.primary_fixed_dim.default.hex}}" to="{{colors.tertiary_fixed_dim.default.hex}}" angle=135 in="oklab"
         inactive-color "{{colors.outline.default.hex}}"
         urgent-color "{{colors.error.default.hex}}"
     }
@@ -13,7 +13,7 @@ layout {
     }
 
     tab-indicator {
-        active-color "{{colors.tertiary.default.hex}}"
+        active-color "{{colors.tertiary_fixed_dim.default.hex}}"
         inactive-color "{{colors.outline.default.hex}}b3"
         urgent-color "{{colors.error.default.hex}}"
     }

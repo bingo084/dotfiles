@@ -124,6 +124,7 @@ arch = [
     "python-gobject", # Bluetooth pairing agent
     "qml-niri",
     "qrencode",       # Wi-Fi sharing QR codes
+    "qt6ct",          # Qt6 font and icon theme settings
     "websocat",
   ] },
   # Terminal

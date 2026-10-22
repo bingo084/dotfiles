@@ -1,3 +1,7 @@
 {
-<* for name, value in colors *>  "{{name}}": "{{value.default.hex}}"<* if not {{loop.last}} *>,<* endif *>
-<* endfor *>}
+<* for name, value in colors *>  "{{name}}": "{{value.default.hex}}",
+<* endfor *>  "warning": "<* if {{is_dark_mode}} *>#ff9d30<* else *>#c07800<* endif *>",
+  "on_warning": "<* if {{is_dark_mode}} *>#482900<* else *>#ffffff<* endif *>",
+  "warning_container": "<* if {{is_dark_mode}} *>#673d00<* else *>#ffddba<* endif *>",
+  "on_warning_container": "<* if {{is_dark_mode}} *>#ffddba<* else *>#2b1700<* endif *>"
+}

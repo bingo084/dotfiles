@@ -1,5 +1,5 @@
 // Input device configuration.
-// https://yalter.github.io/niri/Configuration:-Input
+// https://niri-wm.github.io/niri/Configuration:-Input
 input {
     keyboard {
         numlock
@@ -177,7 +177,7 @@ binds {
 }
 
 // Settings that influence how windows are positioned and sized.
-// https://yalter.github.io/niri/Configuration:-Layout
+// https://niri-wm.github.io/niri/Configuration:-Layout
 layout {
     gaps 6
     always-center-single-column

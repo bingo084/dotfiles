@@ -230,11 +230,14 @@ layer-rule {
 }
 
 // Window rules let you adjust behavior for individual windows.
-// https://yalter.github.io/niri/Configuration:-Window-Rules
+// https://niri-wm.github.io/niri/Configuration:-Window-Rules
 window-rule {
     draw-border-with-background false
     geometry-corner-radius 10
     clip-to-geometry true
+    background-effect {
+        xray false
+    }
 }
 window-rule {
     match app-id=r#"(pavucontrol|blueman-manager)"#

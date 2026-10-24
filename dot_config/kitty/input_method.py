@@ -1,4 +1,4 @@
-"""Use Chinese in Codex and English in shell tools; let Neovim manage itself."""
+"""Use Chinese in Codex and English in Neovim and shell tools."""
 
 import os
 import shlex
@@ -34,7 +34,7 @@ def _target(boss):
     if window is None or window.destroyed or window.os_window_id != current_focused_os_window_id():
         return None
     if "IS_NVIM" in window.user_vars:
-        return None
+        return True
     if window.last_cmd_output_start_time:
         command = _command_name(window.last_cmd_cmdline)
     else:

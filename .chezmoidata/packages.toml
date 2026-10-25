@@ -65,6 +65,7 @@ arch = [
     "perl-image-exiftool", # Metadata preview
     "poppler",             # PDF preview
     "ripgrep",             # File content search
+    "ueberzugpp",          # Neovim image preview
     "zoxide",              # Directory jumping
   ] },
   # Fonts

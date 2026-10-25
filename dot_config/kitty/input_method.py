@@ -1,4 +1,4 @@
-"""Use Chinese in Codex and English in Neovim and shell tools."""
+"""Use Neovim context and foreground commands to choose the input mode."""
 
 import os
 import shlex
@@ -40,7 +40,8 @@ def _target(boss):
                  or ("+runpy" in argv and "ask" in argv and "--type=yesno" in argv)):
         return True
     if "IS_NVIM" in window.user_vars:
-        return True
+        context = window.user_vars.get("NVIM_MODE", "normal")
+        return {"normal": True, "codex": False}.get(context)
     if window.last_cmd_output_start_time:
         command = _command_name(window.last_cmd_cmdline)
     else:
@@ -171,5 +172,5 @@ def on_cmd_startstop(boss, window, data):
 
 
 def on_set_user_var(boss, window, data):
-    if data["key"] == "IS_NVIM" and window is boss.active_window:
+    if data["key"] in ("IS_NVIM", "NVIM_MODE") and window is boss.active_window:
         _refresh(boss)

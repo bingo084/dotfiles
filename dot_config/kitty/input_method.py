@@ -16,6 +16,7 @@ _pending = False
 _scheduled = False
 _warned = False
 _awaiting_prompt = set()
+_context = None
 _english_commands = {"lazygit", "lazydocker", "yazi", "fm", "btop", "htop", "fzf", "less", "man", "bat"}
 
 
@@ -33,6 +34,11 @@ def _target(boss):
     window = boss.active_window
     if window is None or window.destroyed or window.os_window_id != current_focused_os_window_id():
         return None
+    argv = window.child.argv
+    # Kitty's confirmation dialog is a UI kitten, not a shell command.
+    if argv and ((os.path.basename(argv[0]) == "kitten" and argv[1:2] == ["ask"])
+                 or ("+runpy" in argv and "ask" in argv and "--type=yesno" in argv)):
+        return True
     if "IS_NVIM" in window.user_vars:
         return True
     if window.last_cmd_output_start_time:
@@ -76,14 +82,18 @@ def _call(boss, method, args, callback):
 
 
 def _apply(boss):
-    global _busy, _pending
+    global _busy, _pending, _context
     if _busy or not _pending:
         return
     _pending = False
     window = boss.active_window
-    if window is not None and window.at_prompt:
-        _awaiting_prompt.discard(window.id)
     target = _target(boss)
+    context = (window.id, target) if window is not None and target is not None else None
+    if context == _context:
+        return
+    _context = context
+    if window is not None and target is not None:
+        _awaiting_prompt.discard(window.id)
     if target is None:
         return
     _busy = True
@@ -96,8 +106,10 @@ def _apply(boss):
             _apply(boss)
 
     def queried(ok, result):
+        global _context
         # A newer command or focus event supersedes this query.
         if not ok or revision != _revision or _target(boss) != target:
+            _context = None
             finish()
         elif result not in ("b true", "b false") or (result == "b true") == target:
             finish()

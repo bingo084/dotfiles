@@ -4,3 +4,4 @@
 不要	cv
 要不	vc
 问题	ao	after
+办法	sk	after

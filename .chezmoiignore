@@ -20,7 +20,6 @@ Library/
 .config/fontconfig/
 .config/systemd
 .config/environment.d
-.config/dunst/
 .config/swaync/
 .config/waybar/
 .config/wal/

@@ -23,7 +23,6 @@ arch = [
   "brightnessctl",
   "cliphist",               # Clipboard history
   "ddcutil",                # External monitor brightness
-  "dunst",                  # Notification
   "gnome-keyring",          # Stores passwords and encryption keys
   "mark-shot",              # Screenshot tool
   "matugen-bin",            # Material you color generation tool

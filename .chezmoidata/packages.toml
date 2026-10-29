@@ -120,6 +120,7 @@ arch = [
     "otf-font-awesome", # Bar icons
   ] },
   { name = "quickshell", deps = [
+    "cava",           # Media spectrum
     "iw",             # Wi-Fi link information
     "mactahoe-icon-theme-git",
     "python-gobject", # Bluetooth pairing agent

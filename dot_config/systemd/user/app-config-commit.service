@@ -1,0 +1,8 @@
+[Unit]
+Description=Commit and push application configurations
+
+[Service]
+Type=oneshot
+Environment=SSH_AUTH_SOCK=%t/rbw/ssh-agent-socket
+ExecStart=%h/.local/bin/app-config commit --push
+TimeoutStartSec=1min

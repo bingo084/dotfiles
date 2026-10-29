@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+add_config() {
+    preview=false
+    if [[ ${1:-} == --dry-run ]]; then
+        preview=true
+        shift
+    fi
+    if (( $# != 1 )); then
+        printf 'Usage: app-config add [--dry-run] FILE_OR_DIRECTORY\n' >&2
+        exit 2
+    fi
+
+    repo=$(chezmoi source-path)
+    config_home=$(realpath -- "$HOME")
+    # Resolve parent symlinks, but retain the final component so existing links are rejected.
+    input=$(realpath --no-symlinks -- "$1")
+    target="$(realpath -- "$(dirname -- "$input")")/$(basename -- "$input")"
+    case "$target" in
+        "$repo"|"$repo"/*|"$config_home") printf 'Choose a configuration outside the source repository.\n' >&2; exit 1 ;;
+        "$config_home"/*) ;;
+        *) printf 'The configuration must be inside your home directory.\n' >&2; exit 1 ;;
+    esac
+    case "$repo" in
+        "$target"/*) printf 'Cannot move a directory containing the source repository.\n' >&2; exit 1 ;;
+    esac
+    if [[ -L "$target" || ( ! -f "$target" && ! -d "$target" ) ]]; then
+        printf 'Expected an existing file or directory, not a symlink: %s\n' "$target" >&2
+        exit 1
+    fi
+    storage="$repo/.app-configs/${target#"$config_home"/}"
+    if [[ -e "$storage" || -L "$storage" ]]; then
+        printf 'Already exists: %s\n' "$storage" >&2
+        exit 1
+    fi
+    printf '%s -> %s\n' "$target" "$storage"
+    $preview && exit 0
+
+    # Disable automatic Git actions and user hooks for enrollment.
+    config_dir=$(mktemp -d)
+    config="$config_dir/chezmoi.toml"
+    trap 'rm -rf -- "$config_dir"' EXIT
+    printf '[git]\nautoAdd = false\nautoCommit = false\nautoPush = false\n' > "$config"
+    mkdir -p -- "$(dirname -- "$storage")"
+    mv -- "$target" "$storage"
+    if ! ln -s -- "$storage" "$target"; then
+        mv -- "$storage" "$target"
+        exit 1
+    fi
+    if ! chezmoi --config-format toml --config "$config" --source "$repo" --destination "$config_home" add --follow=false --template-symlinks "$target"; then
+        rm -- "$target"
+        mv -- "$storage" "$target"
+        exit 1
+    fi
+    printf 'Added. Review and commit the configuration and symlink declaration together.\n'
+}
+
+commit_configs() {
+    preview=false
+    push=false
+    for arg in "$@"; do
+        case "$arg" in
+            --dry-run) preview=true ;;
+            --push) push=true ;;
+            *) printf 'Usage: app-config commit [--dry-run] [--push]\n' >&2; exit 2 ;;
+        esac
+    done
+
+    cd -- "$(chezmoi source-path)"
+    export GIT_LITERAL_PATHSPECS=1
+
+    if $preview; then
+        git status --short --untracked-files=all -- .app-configs/
+        $push && printf 'Would push the current branch, including other pending commits.\n'
+        return 0
+    fi
+
+    # Also handle tracked deletions when the directory no longer exists.
+    if [[ -d .app-configs || -n $(git ls-files -- .app-configs/) ]]; then
+        git add --intent-to-add --all -- .app-configs/
+    fi
+    if git diff --quiet HEAD -- .app-configs/; then
+        printf 'No application configuration changes.\n'
+    else
+        git commit --only -m 'chore(dotfiles): sync application configs' -- .app-configs/
+    fi
+
+    # Retry a previously failed push even when there are no new file changes.
+    if $push; then
+        git push
+    fi
+}
+
+case "${1:-}" in
+    add) shift; add_config "$@" ;;
+    commit) shift; commit_configs "$@" ;;
+    -h|--help) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push]}\n' ;;
+    *) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push]}\n' >&2; exit 2 ;;
+esac

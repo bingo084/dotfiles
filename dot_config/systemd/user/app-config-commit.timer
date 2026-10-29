@@ -1,0 +1,11 @@
+[Unit]
+Description=Check application configurations every five minutes
+PartOf=graphical-session.target
+
+[Timer]
+OnActiveSec=2min
+OnUnitInactiveSec=5min
+AccuracySec=30s
+
+[Install]
+WantedBy=graphical-session.target

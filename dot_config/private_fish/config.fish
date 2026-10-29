@@ -1,4 +1,4 @@
-fish_add_path --global $HOME/bin $HOME/go/bin
+fish_add_path --global $HOME/.local/bin $HOME/bin $HOME/go/bin
 set -gx TERMINAL kitty
 set -gx EDITOR nvim
 set -gx VISUAL nvim

@@ -37,18 +37,15 @@ add_config() {
     printf '%s -> %s\n' "$target" "$storage"
     $preview && exit 0
 
-    # Disable automatic Git actions and user hooks for enrollment.
-    config_dir=$(mktemp -d)
-    config="$config_dir/chezmoi.toml"
-    trap 'rm -rf -- "$config_dir"' EXIT
-    printf '[git]\nautoAdd = false\nautoCommit = false\nautoPush = false\n' > "$config"
+    # Check the source state before moving any live files.
+    chezmoi managed > /dev/null
     mkdir -p -- "$(dirname -- "$storage")"
     mv -- "$target" "$storage"
     if ! ln -s -- "$storage" "$target"; then
         mv -- "$storage" "$target"
         exit 1
     fi
-    if ! chezmoi --config-format toml --config "$config" --source "$repo" --destination "$config_home" add --follow=false --template-symlinks "$target"; then
+    if ! chezmoi add --follow=false "$target"; then
         rm -- "$target"
         mv -- "$storage" "$target"
         exit 1

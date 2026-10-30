@@ -22,9 +22,6 @@ add_config() {
         "$config_home"/*) ;;
         *) printf 'The configuration must be inside your home directory.\n' >&2; exit 1 ;;
     esac
-    case "$repo" in
-        "$target"/*) printf 'Cannot move a directory containing the source repository.\n' >&2; exit 1 ;;
-    esac
     if [[ -L "$target" || ( ! -f "$target" && ! -d "$target" ) ]]; then
         printf 'Expected an existing file or directory, not a symlink: %s\n' "$target" >&2
         exit 1
@@ -37,15 +34,13 @@ add_config() {
     printf '%s -> %s\n' "$target" "$storage"
     $preview && exit 0
 
-    # Check the source state before moving any live files.
-    chezmoi managed > /dev/null
     mkdir -p -- "$(dirname -- "$storage")"
     mv -- "$target" "$storage"
     if ! ln -s -- "$storage" "$target"; then
         mv -- "$storage" "$target"
         exit 1
     fi
-    if ! chezmoi add --follow=false "$target"; then
+    if ! chezmoi add "$target"; then
         rm -- "$target"
         mv -- "$storage" "$target"
         exit 1
@@ -65,7 +60,6 @@ commit_configs() {
     done
 
     cd -- "$(chezmoi source-path)"
-    export GIT_LITERAL_PATHSPECS=1
 
     if $preview; then
         git status --short --untracked-files=all -- .app-configs/

@@ -83,9 +83,30 @@ commit_configs() {
     fi
 }
 
+watch_configs() {
+    if (( $# != 0 )); then
+        printf 'Usage: app-config watch\n' >&2
+        exit 2
+    fi
+
+    cd -- "$(chezmoi source-path)"
+    mkdir -p -- .app-configs
+    # Keep monitoring while waiting, so each new event restarts the quiet period.
+    inotifywait --monitor --recursive --format '%e' \
+        --event close_write,create,delete,move .app-configs/ |
+        while IFS= read -r event; do
+            while IFS= read -r -t 30 event; do :; done
+            # Reuse the timer's service to serialize background commits and pushes.
+            if ! systemctl --user start app-config-commit.service; then
+                printf 'Commit/push failed; the timer will retry.\n' >&2
+            fi
+        done
+}
+
 case "${1:-}" in
     add) shift; add_config "$@" ;;
     commit) shift; commit_configs "$@" ;;
-    -h|--help) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push]}\n' ;;
-    *) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push]}\n' >&2; exit 2 ;;
+    watch) shift; watch_configs "$@" ;;
+    -h|--help) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push] | watch}\n' ;;
+    *) printf 'Usage: app-config {add [--dry-run] FILE_OR_DIRECTORY | commit [--dry-run] [--push] | watch}\n' >&2; exit 2 ;;
 esac

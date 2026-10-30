@@ -1,0 +1,11 @@
+[Unit]
+Description=Watch application configurations and commit after 30 quiet seconds
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/app-config watch
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=graphical-session.target

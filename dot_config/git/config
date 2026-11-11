@@ -29,5 +29,7 @@
   pushInsteadOf = https://github.com/bingo084
 [init]
   defaultBranch = main
+[filter "monique-state"]
+  clean = jq 'del(.last_applied_time, .active_profile)'
 
 ; vim:ft=gitconfig

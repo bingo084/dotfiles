@@ -61,20 +61,36 @@ commit_configs() {
 
     cd -- "$(chezmoi source-path)"
 
+    files=()
+    while IFS= read -r -d '' file; do
+        filter=''
+        case "$file" in
+            .app-configs/.config/monique/profiles/*.json) filter='del(.last_applied_time)' ;;
+            .app-configs/.config/monique/settings.json) filter='del(.active_profile)' ;;
+        esac
+        if [[ -n "$filter" && -f "$file" ]] && git cat-file -e "HEAD:$file" 2>/dev/null; then
+            # Ignore runtime state when comparing; leave the application's files intact.
+            previous=$(git show "HEAD:$file" | jq -Sc "$filter")
+            current=$(jq -Sc "$filter" "$file")
+            [[ "$previous" == "$current" ]] && continue
+        fi
+        files+=("$file")
+    done < <(
+        git diff --name-only --no-renames -z HEAD -- .app-configs/
+        git ls-files --others --exclude-standard -z -- .app-configs/
+    )
+
+    if (( ${#files[@]} == 0 )); then
+        printf 'No application configuration changes.\n'
+    elif $preview; then
+        git --literal-pathspecs status --short --untracked-files=all -- "${files[@]}"
+    else
+        git --literal-pathspecs add --intent-to-add --all -- "${files[@]}"
+        git --literal-pathspecs commit --only -m 'chore(dotfiles): sync application configs' -- "${files[@]}"
+    fi
     if $preview; then
-        git status --short --untracked-files=all -- .app-configs/
         $push && printf 'Would push the current branch, including other pending commits.\n'
         return 0
-    fi
-
-    # Also handle tracked deletions when the directory no longer exists.
-    if [[ -d .app-configs || -n $(git ls-files -- .app-configs/) ]]; then
-        git add --intent-to-add --all -- .app-configs/
-    fi
-    if git diff --quiet HEAD -- .app-configs/; then
-        printf 'No application configuration changes.\n'
-    else
-        git commit --only -m 'chore(dotfiles): sync application configs' -- .app-configs/
     fi
 
     # Retry a previously failed push even when there are no new file changes.

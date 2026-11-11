@@ -33,6 +33,7 @@ arch = [
   "rofi",                   # App launcher
   "scrcpy",                 # Android real-time screencast control tool
   "sddm",                   # Login manager
+  "seahorse",               # Keyring manager and sudo askpass
   "swaylock-effects",       # Lock screen
   "udiskie",                # Automatically mounting
   "wtype",                  # Simulate paste shortcuts

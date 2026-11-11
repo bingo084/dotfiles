@@ -149,6 +149,7 @@ arch = [
   "openai-codex",
   "opencode",
   "python-pywal",
+  { name = "rbw", deps = "rbw-pinentry-keyring" }, # Unlock the SSH agent through the system keyring
   "starship",
   "tldr",
   "trash-cli",

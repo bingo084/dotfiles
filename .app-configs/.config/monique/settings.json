@@ -3,5 +3,5 @@
   "hypr_config_format": "lua",
   "monitor_config_name": "generated/monitors",
   "pinned_profile": null,
-  "update_sddm": true
+  "update_sddm": false
 }
